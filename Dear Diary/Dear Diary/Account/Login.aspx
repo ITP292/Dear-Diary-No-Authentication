@@ -8,8 +8,7 @@
     <%--</div>--%>
 
     <asp:Label runat="server" Text="Log in to your account. "></asp:Label>
-    <hr class="text-center"/> 
-
+    <hr />
     <%--Email--%>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Label Font-Size="20px" ID="Label2" runat="server" Text="Email"></asp:Label>
