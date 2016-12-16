@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\" />
-    <Folder Include="Friends\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -153,6 +152,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Friends\addFriend.aspx" />
+    <Content Include="Friends\addFriendRedir.aspx" />
+    <Content Include="Friends\requestFriend.aspx" />
+    <Content Include="Friends\viewFriend.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -223,6 +226,34 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\addFriend.aspx.cs">
+      <DependentUpon>addFriend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\addFriend.aspx.designer.cs">
+      <DependentUpon>addFriend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\addFriendRedir.aspx.cs">
+      <DependentUpon>addFriendRedir.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\addFriendRedir.aspx.designer.cs">
+      <DependentUpon>addFriendRedir.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\requestFriend.aspx.cs">
+      <DependentUpon>requestFriend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\requestFriend.aspx.designer.cs">
+      <DependentUpon>requestFriend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\viewFriend.aspx.cs">
+      <DependentUpon>viewFriend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\viewFriend.aspx.designer.cs">
+      <DependentUpon>viewFriend.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
