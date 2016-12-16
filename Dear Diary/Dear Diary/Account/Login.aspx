@@ -5,15 +5,46 @@
     <%--<div style="font-size: 30px">--%>
     <asp:Label Font-Size="30px" ID="Label1" runat="server" Text="Log in. "></asp:Label>
     <br />
-
     <%--</div>--%>
 
     <asp:Label runat="server" Text="Log in to your account. "></asp:Label>
-    <hr />
+    <hr class="text-center"/> 
+
+    <%--Email--%>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Label Font-Size="20px" ID="Label2" runat="server" Text="Email"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px"></asp:TextBox>
+    <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px" TextMode="Email"></asp:TextBox>
+    <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
+        CssClass="text-danger" ErrorMessage="The email field is required." />
+
     <br />
-    
+    <br />
+
+    <%--Password--%>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label Font-Size="20px" ID="Label3" runat="server" Text="Password"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:TextBox ID="TextBox2" runat="server" Height="30px" Width="180px" TextMode="Password"></asp:TextBox>
+    <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox2" 
+        CssClass="text-danger" ErrorMessage="The password field is required." />
+    <br />
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:CheckBox ID="CheckBox1" runat="server" Text="      Remember Me?" />
+
+    <%--Login Button--%>
+    &nbsp;&nbsp;&nbsp;&nbsp;<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="Button1" runat="server" BackColor="#999999" Text="Log in" />
+
+    <br />
+    <br />
+    <%--Insert link of /Account/Register (register page) here--%>
+    <a href="#">Register as a new user</a>
+    <br />
+    <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
+    <a href="#">Forgot password</a>
+
 </asp:Content>
