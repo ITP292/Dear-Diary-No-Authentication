@@ -10,8 +10,10 @@
 
     <asp:Label runat="server" Text="Log in to your account. "></asp:Label>
     <hr />
-    <asp:Label ID="Label2" runat="server" Text="Email"></asp:Label>
-    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label Font-Size="20px" ID="Label2" runat="server" Text="Email"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px"></asp:TextBox>
     <br />
     
 </asp:Content>
