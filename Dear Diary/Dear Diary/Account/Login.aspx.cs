@@ -13,5 +13,12 @@ namespace Dear_Diary.Account
         {
 
         }
+
+        protected void Login_Click(object sender, EventArgs e)
+        {
+            //Add in codes to redirect to 2FA first
+            //Then redirect to account page 
+            //Take USERNAME put at top right hand corner (Hello _____) 
+        }
     }
 }
