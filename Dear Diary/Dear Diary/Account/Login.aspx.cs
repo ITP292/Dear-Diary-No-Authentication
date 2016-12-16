@@ -16,6 +16,11 @@ namespace Dear_Diary.Account
 
         protected void Login_Click(object sender, EventArgs e)
         {
+            //Testing - redirect AccountPage
+            Response.Redirect("/Account/AccountPage.aspx");
+            //DATABASE
+            //Pull out and compare
+
             //Add in codes to redirect to 2FA first
             //Then redirect to account page 
             //Take USERNAME put at top right hand corner (Hello _____) 

@@ -15,6 +15,11 @@ namespace Dear_Diary.Account
         }
         protected void Register_Click(object sender, EventArgs e)
         {
+            //Testing - redirect to SuccessfulRegistration Page
+            Response.Redirect("/Account/SuccessfulRegistration.aspx");
+            //DATABASE
+            //Insert into database
+
             //Add codes to redirect to message Successful Registration Page
             //Telling them that their account has been successfully made and click HERE (link) to login
             //HERE hyperlink redirects to Login Page
