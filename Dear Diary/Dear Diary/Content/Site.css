@@ -29,3 +29,18 @@ textarea {
         padding: 0;
     }
 }
+
+@font-face {
+    font-family:precursive;
+    src:url('../Precursive_1_FREE.otf');
+}
+
+#Logo {
+    font-family:precursive;
+    font-size:25px;
+    padding-top:2px;
+}
+
+h1 {
+    font-family:precursive;
+}

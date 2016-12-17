@@ -10,6 +10,6 @@
 namespace Dear_Diary {
     
     
-    public partial class About {
+    public partial class Privacy {
     }
 }

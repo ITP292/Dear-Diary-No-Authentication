@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Dear Diary</a>
+                    <a class="navbar-brand" runat="server" href="~/" id="Logo">Dear Diary</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -67,7 +67,13 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Joanne Programming </p>
+                <p>&copy; <%: DateTime.Now.Year %> - Joanne Programming</p>
+                <p><a runat="server" href="~/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/About.aspx">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/Contact.aspx">Contact</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/Privacy.aspx">Privacy Policy</a></p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
             </footer>
         </div>
 
