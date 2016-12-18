@@ -10,8 +10,25 @@
     <br />
 
 
-    <asp:Label Font-Size="20px" ID="Label3" runat="server" Text="Password"></asp:Label>
+    <asp:Label Font-Size="20px" ID="Label3" runat="server" Text="New Password: "></asp:Label>
+    <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px" TextMode="Password"></asp:TextBox>
+    <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
+        CssClass="text-danger" ErrorMessage="The password field is required." />
+
+
+    <br />
+
+
+    <asp:Label Font-Size="20px" ID="Label4" runat="server" Text="Confirm Password: "></asp:Label>
     <asp:TextBox ID="TextBox2" runat="server" Height="30px" Width="180px" TextMode="Password"></asp:TextBox>
+    <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox2"
+        CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required." />
+    <asp:CompareValidator runat="server" ControlToCompare="TextBox1" ControlToValidate="TextBox2"
+        CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
+
+    <br />
+    <br />
+    <asp:Button ID="Button1" runat="server" Text="Reset" />
     
 
 </asp:Content>
