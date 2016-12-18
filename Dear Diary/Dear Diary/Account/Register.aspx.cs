@@ -40,6 +40,7 @@ namespace Dear_Diary.Account
                 myConnection.Open();
                 //this part in the brackets put all the columns of database? - NEVER INSERT PHOTO AND GENDER
                 string query = "INSERT INTO User (Email_Address, FName, LName, Password, Phone Number)";
+                //string query = "INSERT INTO User (Email_Address, FName, LName, Gender, Profile_Pic, Password, Phone Number)";
                 query += "VALUES (@Email, @FName, @LName, @Password, @PhoneNumber)";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
