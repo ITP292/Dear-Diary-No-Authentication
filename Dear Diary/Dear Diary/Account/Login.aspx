@@ -41,9 +41,9 @@
     <br />
     <br />
     <%--Insert link of /Account/Register (register page) here--%>
-    <a href="#">Register as a new user</a>
+    <a href="/Account/Register">Register as a new user</a>
     <br />
     <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
-    <a href="#">Forgot password</a>
+    <a href="/Account/ForgotPassword">Forgot password</a>
 
 </asp:Content>
