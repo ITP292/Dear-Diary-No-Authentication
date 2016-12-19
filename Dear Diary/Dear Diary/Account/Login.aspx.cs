@@ -23,7 +23,7 @@ namespace Dear_Diary.Account
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
-            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString))
+            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
