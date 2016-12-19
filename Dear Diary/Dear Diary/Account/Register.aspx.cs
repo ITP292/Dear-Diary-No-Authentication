@@ -17,11 +17,9 @@ namespace Dear_Diary.Account
         protected void Register_Click(object sender, EventArgs e)
         {
             //Testing - redirect to SuccessfulRegistration Page
-            Response.Redirect("/Account/SuccessfulRegistration.aspx");
-            //DATABASE
-            //Insert into database
+            //Response.Redirect("/Account/SuccessfulRegistration.aspx");
 
-            //Import System.Data.SqlClient
+
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString))
             {
@@ -48,8 +46,9 @@ namespace Dear_Diary.Account
                 myCommand.Parameters.AddWithValue("@Email", email);
                 myCommand.Parameters.AddWithValue("@FName", fname);
                 myCommand.Parameters.AddWithValue("@LName", lname);
-                myCommand.Parameters.AddWithValue("@Password", passwordhash);
-
+                myCommand.Parameters.AddWithValue("@Password", password);
+                //myCommand.Parameters.AddWithValue("@Password", passwordhash);
+                myCommand.Parameters.AddWithValue("@PhoneNumber", phonenumber);
             }
 
             //Add codes to redirect to message Successful Registration Page
