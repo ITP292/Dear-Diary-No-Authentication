@@ -16,14 +16,12 @@ namespace Dear_Diary.Account
         }
         protected void Register_Click(object sender, EventArgs e)
         {
-            //Testing - redirect to SuccessfulRegistration Page
-            //Response.Redirect("/Account/SuccessfulRegistration.aspx");
-
+            Response.Redirect("/Account/SuccessfulRegistration");
 
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                Byte[] sale = new byte[8];
+                Byte[] salt = new byte[8];
 
                 string fname = TextBox1.Text;
                 string lname = TextBox2.Text;

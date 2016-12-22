@@ -18,8 +18,6 @@ namespace Dear_Diary.Account
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            //Testing - redirect AccountPage
-            Response.Redirect("/Account/AccountPage.aspx");
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
@@ -46,6 +44,7 @@ namespace Dear_Diary.Account
                 myCommand.CommandType = CommandType.Text;
                 myCommand1.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
+                
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
@@ -53,6 +52,39 @@ namespace Dear_Diary.Account
                 String dbPassword = "";
                 String dbrandomNo = "";
                 String dbMobile = "";
+
+                //read data from db
+                if (reader.Read())
+                {
+                    dbEmail = reader["Email_Address"].ToString();
+                    dbPassword = reader["Password"].ToString();
+                    dbrandomNo = reader["randomNo"].ToString();
+                    dbMobile = reader["Phone_Number"].ToString();
+
+                }
+
+                myConnection.Close();
+                myConnection.Open();
+
+                myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+                myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+                myCommand1.ExecuteNonQuery();
+
+                //bool hashresult = SimpleHash.VerifyHash(inputpassword, "SHA512", dbPassword);
+
+                //Session
+                
+                if (dbEmail.Equals(inputemail) && dbPassword.Equals(inputpassword))
+                {
+                    String url = "www.google.com";
+                    System.Diagnostics.Process.Start(url);
+                    
+                    //Response.Redirect("/Account/AccountPage.aspx");
+                }
+                else
+                {
+                    Label4.Text = "No such user. Please try again.";
+                }
 
                 //Stop here
 
