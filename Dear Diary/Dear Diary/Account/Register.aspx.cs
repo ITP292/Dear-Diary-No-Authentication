@@ -36,19 +36,20 @@ namespace Dear_Diary.Account
                 //change string phone number to integer to store in database
 
                 myConnection.Open();
-                //this part in the brackets put all the columns of database? - NEVER INSERT PHOTO AND GENDER
-                string query = "INSERT INTO User (Email_Address, FName, LName, Profile_Pic, Password, Phone Number)";
-                //string query = "INSERT INTO User (Email_Address, FName, LName, Profile_Pic, Password, Phone Number)";
-                query += " VALUES (@Email, @FName, @LName, @Picture, @Password, @PhoneNumber)";
+                string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number)";
+                query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber)";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                 //To prevent sql injection
-                myCommand.Parameters.AddWithValue("@Email", email);
-                myCommand.Parameters.AddWithValue("@FName", fname);
-                myCommand.Parameters.AddWithValue("@LName", lname);
-                myCommand.Parameters.AddWithValue("@Password", password);
+                myCommand.Parameters.AddWithValue("Email", email);
+                myCommand.Parameters.AddWithValue("FName", fname);
+                myCommand.Parameters.AddWithValue("LName", lname);
+                //myCommand.Parameters.AddWithValue("@Picture", null);
+                myCommand.Parameters.AddWithValue("Password", password);
                 //myCommand.Parameters.AddWithValue("@Password", passwordhash);
-                myCommand.Parameters.AddWithValue("@PhoneNumber", phonenumber);
+                myCommand.Parameters.AddWithValue("PhoneNumber", phonenumber);
+                myCommand.ExecuteNonQuery();
+
             }
 
             //Add codes to redirect to message Successful Registration Page
