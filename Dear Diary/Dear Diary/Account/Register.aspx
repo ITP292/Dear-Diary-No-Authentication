@@ -33,6 +33,7 @@
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox3"
         CssClass="text-danger" ErrorMessage="The email field is required." />
     <br />
+    <asp:Label ID="Label12" runat="server" CssClass="text-danger"></asp:Label>
     <br />
 
     <%--Password--%>
@@ -52,6 +53,7 @@
     <asp:CompareValidator runat="server" ControlToCompare="TextBox4" ControlToValidate="TextBox5"
         CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
     <br />
+    <asp:Label ID="Label10" runat="server" CssClass="text-danger"></asp:Label>
     <br />
 
     <%--Phone Number--%>
@@ -64,7 +66,6 @@
     <br />
     <asp:Label ID="Label9" runat="server" CssClass="text-danger"></asp:Label>
     <br />
-    <asp:Label ID="Label10" runat="server" CssClass="text-danger"></asp:Label>
     <br />
     <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
     <br />

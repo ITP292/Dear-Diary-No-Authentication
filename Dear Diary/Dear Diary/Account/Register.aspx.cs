@@ -60,14 +60,14 @@ namespace Dear_Diary.Account
                         //If user uses same email and phone number to register again
                         if (email == dbemail && phonenumber == dbphone && result == false)
                         {
-                            Label9.Text = "This account exists.";
+                            Label12.Text = "This account exists.";
                             Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
                         }
 
                         //If user uses same email to register again
                         else if (email == dbemail && phonenumber != dbphone && result == false)
                         {
-                            Label9.Text = "This email has an account already.";
+                            Label12.Text = "This email has an account already.";
                             Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
                         }
 
@@ -80,13 +80,13 @@ namespace Dear_Diary.Account
 
                         else if (email == dbemail && phonenumber == dbphone || result == true)
                         {
-                            Label9.Text = "This account exists.";
+                            Label12.Text = "This account exists.";
                         }
 
                         //If user uses same email to register again
                         else if (email == dbemail && phonenumber != dbphone || result == true)
                         {
-                            Label9.Text = "This email has an account already.";
+                            Label12.Text = "This email has an account already.";
                         }
 
                         //If user uses same phone number to register again
