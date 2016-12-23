@@ -126,9 +126,6 @@ namespace Dear_Diary.Account
                         Response.Redirect("/Account/SuccessfulRegistration");
                     }
                 }
-                //Add codes to redirect to message Successful Registration Page
-                //Telling them that their account has been successfully made and click HERE (link) to login
-                //HERE hyperlink redirects to Login Page
             }
         }
 

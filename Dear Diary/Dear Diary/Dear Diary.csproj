@@ -140,7 +140,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\ResetPassword.aspx" />
-    <Content Include="Account\ResetPasswordSucccess.aspx" />
+    <Content Include="Account\ResetPasswordSuccess.aspx" />
     <Content Include="Account\SuccessfulRegistration.aspx" />
     <Content Include="App_Data\Database.mdf" />
     <Content Include="App_Data\Database_log.ldf">
@@ -256,12 +256,12 @@
     <Compile Include="Account\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\ResetPasswordSucccess.aspx.cs">
-      <DependentUpon>ResetPasswordSucccess.aspx</DependentUpon>
+    <Compile Include="Account\ResetPasswordSuccess.aspx.cs">
+      <DependentUpon>ResetPasswordSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\ResetPasswordSucccess.aspx.designer.cs">
-      <DependentUpon>ResetPasswordSucccess.aspx</DependentUpon>
+    <Compile Include="Account\ResetPasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ResetPasswordSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\SuccessfulRegistration.aspx.cs">
       <DependentUpon>SuccessfulRegistration.aspx</DependentUpon>

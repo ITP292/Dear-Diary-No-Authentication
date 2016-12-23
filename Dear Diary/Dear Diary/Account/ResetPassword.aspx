@@ -27,6 +27,7 @@
         CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
 
     <br />
+    <asp:Label ID="Label5" runat="server" CssClass="text-danger"></asp:Label>
     <br />
     <asp:Button ID="Button1" runat="server" Text="Reset" OnClick="ResetPassword_Click" />
     
