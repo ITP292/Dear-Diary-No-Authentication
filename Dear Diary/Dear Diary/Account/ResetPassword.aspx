@@ -28,7 +28,7 @@
 
     <br />
     <br />
-    <asp:Button ID="Button1" runat="server" Text="Reset" />
+    <asp:Button ID="Button1" runat="server" Text="Reset" OnClick="ResetPassword_Click" />
     
 
 </asp:Content>
