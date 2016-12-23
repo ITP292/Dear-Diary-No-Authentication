@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addFriendRedir.aspx.cs" Inherits="Dear_Diary.Friends.addFriendRedir" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="viewFriendRedir.aspx.cs" Inherits="Dear_Diary.Friends.viewFriendRedir" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Friend Name Here</h2>
 
@@ -7,7 +7,7 @@
             <section id="loginForm">
                 <div class="form-horizontal">
                     <hr />
-                    <div class="form-group">
+                   <div class="form-group">
                         <div class="col-md-10">Profile Picture:</div>
                     </div>
 

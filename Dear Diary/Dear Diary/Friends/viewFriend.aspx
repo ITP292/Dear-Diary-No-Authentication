@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="viewFriend.aspx.cs" Inherits="Dear_Diary.Friends.viewFriend" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Friend Name Here</h2>
+    <h2>View Your Friends!</h2>
 
     <div class="row">
         <div class="col-md-8">
@@ -14,7 +14,7 @@
                     </asp:PlaceHolder>
                     <div class="form-group">
                         <div class="col-md-10">
-                            Profile Data here.</div>
+                            Pull data from database and display here.</div>
                     </div>
                    
                     <div class="form-group">
@@ -22,11 +22,6 @@
                         </div>
                     </div>
                 </div>
-                <p>
-                    <%-- Enable this once you have account confirmation enabled for password reset functionality
-                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
-                </p>
             </section>
         </div>
     </div>

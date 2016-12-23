@@ -158,6 +158,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Friends\viewFriendRedir.aspx" />
     <Content Include="Precursive_1_FREE.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Friends\addFriend.aspx" />
@@ -319,6 +320,13 @@
     </Compile>
     <Compile Include="Friends\viewFriend.aspx.designer.cs">
       <DependentUpon>viewFriend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\viewFriendRedir.aspx.cs">
+      <DependentUpon>viewFriendRedir.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\viewFriendRedir.aspx.designer.cs">
+      <DependentUpon>viewFriendRedir.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
