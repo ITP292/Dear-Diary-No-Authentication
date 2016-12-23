@@ -16,7 +16,6 @@ namespace Dear_Diary.Account
         }
         protected void Register_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Account/SuccessfulRegistration");
 
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
@@ -32,10 +31,12 @@ namespace Dear_Diary.Account
                 string confirmpassword = TextBox5.Text;
                 string phonenumber = TextBox6.Text;
                 //change string phone number to integer to store in database
+                string randomNo = "";
+
 
                 myConnection.Open();
-                string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number)";
-                query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber)";
+                string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number, randomNo)";
+                query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber, @randomNo)";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                 //To prevent sql injection
@@ -46,6 +47,8 @@ namespace Dear_Diary.Account
                 myCommand.Parameters.AddWithValue("Password", password);
                 //myCommand.Parameters.AddWithValue("@Password", passwordhash);
                 myCommand.Parameters.AddWithValue("PhoneNumber", phonenumber);
+                myCommand.Parameters.AddWithValue("randomNo", randomNo);
+
                 myCommand.ExecuteNonQuery();
 
             }
