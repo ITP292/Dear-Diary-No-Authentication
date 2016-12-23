@@ -58,7 +58,7 @@
     <asp:Label Font-Size="20px" ID="Label8" runat="server" Text="Phone Number"></asp:Label>
     <asp:TextBox ID="TextBox6" runat="server" Height="30px" Width="180px" TextMode="Phone"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox6"
-        CssClass="text-danger" ErrorMessage="The Phone Number field is required." />
+        CssClass="text-danger" ErrorMessage="The phone number field is required." />
 
 
     <br />
