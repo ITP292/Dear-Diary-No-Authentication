@@ -32,7 +32,7 @@ namespace Dear_Diary.Account
                 string inputpassword = TextBox2.Text;
                 //string passwordHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
-                string OTPinput = ""; //input the TextBox.Text here after creating 2FA place to input
+                string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 string query1 = "UPDATE [User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
@@ -73,25 +73,30 @@ namespace Dear_Diary.Account
                 //bool hashresult = SimpleHash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
                 //Session
-                
-                if (dbEmail.Equals(inputemail) && dbPassword.Equals(inputpassword))
+
+                if (dbEmail.Equals(inputemail) && dbPassword.Equals(inputpassword)) //&& dbrandomNo.Equals(inputOTP)
                 {
                     String url = "www.google.com";
                     System.Diagnostics.Process.Start(url);
-                    
-                    //Response.Redirect("/Account/AccountPage.aspx");
+                    //Just an example to show that it works, replace with MSG website
+                    //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
+
+                    Response.Redirect("/Account/AccountPage.aspx");
                 }
-                else
+
+                //Condition to search that db has no such email
+                else if (!dbEmail.Equals(inputemail))
                 {
                     Label4.Text = "No such user. Please try again.";
                 }
 
-                //Stop here
-
+                //Either email/password wrong, shows this
+                else if (!dbEmail.Equals(inputemail) || !dbPassword.Equals(inputpassword))
+                {
+                    Label5.Text = "Invalid credentials. Please try again.";
+                }
             }
 
-                //Add in codes to redirect to 2FA first
-                //Then redirect to account page 
                 //Take USERNAME put at top right hand corner (Hello _____) 
             }
 

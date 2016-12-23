@@ -62,6 +62,7 @@
 
 
     <br />
+    <asp:Label ID="Label9" runat="server" CssClass="text-danger"></asp:Label>
     <br />
     <asp:Button ID="Button1" runat="server" Text="Register" OnClick="Register_Click" />
 

@@ -14,10 +14,11 @@
     <asp:Label Font-Size="20px" ID="Label2" runat="server" Text="Email"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px" TextMode="Email"></asp:TextBox>
+
+    <asp:Label ID="Label4" runat="server" CssClass="text-danger"></asp:Label>
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
         CssClass="text-danger" ErrorMessage="The email field is required." />
 
-    <asp:Label ID="Label4" runat="server"></asp:Label>
     <br />
     <br />
 
@@ -29,6 +30,8 @@
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox2" 
         CssClass="text-danger" ErrorMessage="The password field is required." />
     <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label5" runat="server" CssClass="text-danger"></asp:Label>
     <br />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:CheckBox ID="CheckBox1" runat="server" Text="      Remember Me?" />
