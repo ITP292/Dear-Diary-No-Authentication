@@ -11,7 +11,7 @@ namespace Dear_Diary.Friends
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            FriendEmail.Text = addFriend.dbEmail;
         }
     }
 }
