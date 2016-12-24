@@ -13,6 +13,11 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">Email Address:</div>
+                        <asp:TextBox runat="server" ID="FriendEmail" CssClass="form-control" ReadOnly="True" />
+                        <br />
+                        <asp:Button ID="Button1" runat="server" Text="Accept" />
+&nbsp;<asp:Button ID="Button2" runat="server" Text="Deny" />
+                        <br />
                     </div>
                 </div>
             </section>
