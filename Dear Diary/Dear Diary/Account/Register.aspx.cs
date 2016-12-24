@@ -35,6 +35,11 @@ namespace Dear_Diary.Account
                 //change string phone number to integer to store in database
                 //string randomNo = "";
 
+                //For PHONENUMBER
+                string firstDigit = phonenumber.Substring(0, 1);
+                bool phoneresult = IsAllDigits(phonenumber);
+
+
                 myConnection.Open();
 
                 string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email OR Phone_Number = @phonenumber";
@@ -46,8 +51,8 @@ namespace Dear_Diary.Account
 
                 bool result = IsValid(password);
 
-                Label11.Text = result.ToString();
-                //TRUE/FALSE shown
+                Label11.Text = "(PASSWORD REQUIREMENT) " + result.ToString() + ", (PHONE ALL DIGITS?) " + phoneresult.ToString();
+                //TRUE/FALSE shown - if fulfill password requirements = TRUE, if never = FALSE
 
                 //Checking - cannot use same email or phone number to register
                 if (reader.HasRows)
@@ -57,57 +62,30 @@ namespace Dear_Diary.Account
                         string dbemail = reader["Email_Address"].ToString();
                         string dbphone = reader["Phone_Number"].ToString();
 
-                        //If user uses same email and phone number to register again
-                        if (email == dbemail && phonenumber == dbphone && result == false)
+                        //If user uses same email or phone number to register again
+                        if ((email == dbemail || phonenumber == dbphone) && result == false)
                         {
-                            Label12.Text = "This account exists.";
+                            Label12.Text = "This account exists. Phone Number/Email has been registered before.";
                             Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
                         }
 
-                        //If user uses same email to register again
-                        else if (email == dbemail && phonenumber != dbphone && result == false)
+                        else if ((email == dbemail || phonenumber == dbphone) && result == true)
                         {
-                            Label12.Text = "This email has an account already.";
-                            Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
-                        }
-
-                        //If user uses same phone number to register again
-                        else if (phonenumber == dbphone && email != dbemail && result == false)
-                        {
-                            Label9.Text = "This phone number has been used.";
-                            Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
-                        }
-
-                        else if (email == dbemail && phonenumber == dbphone || result == true)
-                        {
-                            Label12.Text = "This account exists.";
-                        }
-
-                        //If user uses same email to register again
-                        else if (email == dbemail && phonenumber != dbphone || result == true)
-                        {
-                            Label12.Text = "This email has an account already.";
-                        }
-
-                        //If user uses same phone number to register again
-                        else if (phonenumber == dbphone && email != dbemail || result == true)
-                        {
-                            Label9.Text = "This phone number has been used.";
+                            Label10.Text = "";
+                            Label12.Text = "This account exists. Phone Number/Email has been registered before.";
                         }
                     }
                 }
 
-                //else, create the new account
+                //else (if there is no existing same account), create the new account
                 else
                 {
                     reader.Close();
 
-                    if (result == false)
+                    if (result == true && (phoneresult == true && phonenumber.Length == 8 && (firstDigit == "9" || firstDigit == "8")))
                     {
-                        Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
-                    }
-                    else
-                    {
+                        Label10.Text = "";
+
                         string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number)";
                         query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber)";
                         SqlCommand myCommand = new SqlCommand(query, myConnection);
@@ -124,6 +102,29 @@ namespace Dear_Diary.Account
 
                         myCommand.ExecuteNonQuery();
                         Response.Redirect("/Account/SuccessfulRegistration");
+                    }
+
+                    else
+                    {
+                        if (result == true && (phoneresult == false || firstDigit != "9" || firstDigit != "8" || phonenumber.Length != 8))
+                        {
+                            Label9.Text = "Phone Number must be 8 digits";
+                            Label10.Text = "";
+                        }
+
+                        else if (result == false && phoneresult == true && phonenumber.Length == 8 && (firstDigit == "9" || firstDigit == "8"))
+                        {
+                            Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                            Label12.Text = "";
+                            Label9.Text = "";
+                        }
+
+                        else if (result == false && phoneresult == false || firstDigit != "9" || firstDigit != "8" || phonenumber.Length != 8)
+                        {
+                            Label9.Text = "Phone Number must be 8 digits";
+                            Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                        } 
+
                     }
                 }
             }
@@ -166,6 +167,17 @@ namespace Dear_Diary.Account
         private static int NonAlphaCount(string Password)
         {
             return Regex.Matches(Password, @"[^0-9a-zA-Z\._]").Count;
+        }
+
+        //to check if phone string is fully digits, no alphabets or special characters.
+        bool IsAllDigits(string s)
+        {
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                    return false;
+            }
+            return true;
         }
     }
 

@@ -33,7 +33,6 @@
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox3"
         CssClass="text-danger" ErrorMessage="The email field is required." />
     <br />
-    <asp:Label ID="Label12" runat="server" CssClass="text-danger"></asp:Label>
     <br />
 
     <%--Password--%>
@@ -66,6 +65,7 @@
     <br />
     <asp:Label ID="Label9" runat="server" CssClass="text-danger"></asp:Label>
     <br />
+    <asp:Label ID="Label12" runat="server" CssClass="text-danger"></asp:Label>
     <br />
     <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
     <br />
