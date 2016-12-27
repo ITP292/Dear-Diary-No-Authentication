@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
-
+using Dear_Diary.Security_API;
 
 namespace Dear_Diary.Account
 {
@@ -24,14 +24,13 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
-                salt = Encoding.ASCII.GetBytes(getSalt());
 
                 string fname = TextBox1.Text;
                 string lname = TextBox2.Text;
                 string email = TextBox3.Text;
                 string password = TextBox4.Text;
                 //string passwordhash = ComputeHash(password, new SHA256CryptoServiceProvider(), salt);
-                string passwordhash = ComputeHash(password, new SHA256CryptoServiceProvider());
+                string passwordhash = Hash.ComputeHash(password, "SHA512", salt);
                 string confirmpassword = TextBox5.Text;
                 string phonenumber = TextBox6.Text;
                 //change string phone number to integer to store in database
@@ -130,52 +129,7 @@ namespace Dear_Diary.Account
             }
         }
 
-        //Hash only - doing this first because salt comparision have problem with login
-        public string ComputeHash(string input, HashAlgorithm algorithm)
-        {
-            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-
-            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
-
-            return BitConverter.ToString(hashedBytes);
-        }
-
-        //Hash + Salt
-        //public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
-        //{
-        //    Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-
-        //    // Combine salt and input bytes
-        //    Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
-        //    salt.CopyTo(saltedInput, 0);
-        //    inputBytes.CopyTo(saltedInput, salt.Length);
-
-        //    Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
-
-        //    return BitConverter.ToString(hashedBytes);
-        //}
-
-        //Salt generator
-        // Here is a method to generate a random password salt
-        private static string getSalt()
-            {
-                var random = new RNGCryptoServiceProvider();
-
-                // Maximum length of salt
-                int max_length = 32;
-
-                // Empty salt array
-                byte[] salt = new byte[max_length];
-
-                // Build the random bytes
-                random.GetNonZeroBytes(salt);
-
-                // Return the string encoded salt
-                return Convert.ToBase64String(salt);
-            }
-
-
-            private static int Minimum_Length = 8;
+        private static int Minimum_Length = 8;
         private static int Upper_Case_length = 1;
         private static int Lower_Case_length = 1;
         private static int NonAlpha_length = 1;

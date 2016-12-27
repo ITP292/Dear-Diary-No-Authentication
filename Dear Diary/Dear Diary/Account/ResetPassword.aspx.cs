@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
+using Dear_Diary.Security_API;
 
 namespace Dear_Diary.Account
 {
@@ -22,9 +23,11 @@ namespace Dear_Diary.Account
         {
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                Byte[] salt = new byte[8];
+
                 string email = "limruoqijoanne54@gmail.com";
                 string inputpassword = TextBox1.Text;
-                string hashpassword = ComputeHash(inputpassword, new SHA256CryptoServiceProvider());
+                string hashpassword = Hash.ComputeHash(inputpassword, "SHA512", salt);
 
                 myConnection.Open();
                 string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
