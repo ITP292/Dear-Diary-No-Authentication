@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace Dear_Diary.Account
 {
@@ -21,35 +22,60 @@ namespace Dear_Diary.Account
         {
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-
+                string email = "limruoqijoanne54@gmail.com";
                 string inputpassword = TextBox1.Text;
-                bool result = IsValid(inputpassword);
+                string hashpassword = ComputeHash(inputpassword, new SHA256CryptoServiceProvider());
 
-                if (result == false)
+                myConnection.Open();
+                string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                myCommand1.Parameters.AddWithValue("@Email", email);
+
+                SqlDataReader reader = myCommand1.ExecuteReader();
+
+                string dbPassword = "";
+                if(reader.Read())
                 {
-                    Label5.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                    dbPassword = reader["Password"].ToString();
                 }
+
+                myConnection.Close();
+
+                //Checking if the new password is the same as the old password
+
+                if (dbPassword.Equals(hashpassword))
+                {
+                    Label5.Text = "You cannot use the same password again. Please change your password.";
+                }
+
                 else
                 {
-                    Label5.Text = "";
-                    //Byte[] salt = new byte[8];
-                    //string pwdHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
-                    string email = "limruoqijoanne54@gmail.com"; //test only - actual is when clicked on link, application should know which EMAIL it is from. 
-                                                                 //ASK: i don't know how to do link 
+                    bool result = IsValid(inputpassword);
 
-                    myConnection.Open();
+                    if (result == false)
+                    {
+                        Label5.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                    }
+                    else
+                    {
+                        Label5.Text = "";
+                        //Byte[] salt = new byte[8];
+                        //string pwdHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
+                        /*string email = "limruoqijoanne54@gmail.com";*/ //test only - actual is when clicked on link, application should know which EMAIL it is from. 
+                                                                         //ASK: i don't know how to do link 
 
-                    string query = "UPDATE [dbo].[User] SET Password=@Password WHERE Email_Address ='" + email + "'";
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                        myConnection.Open();
 
-                    myCommand.Parameters.AddWithValue("@Password", inputpassword);
-                    //delete above because password should be replaced with HASHED password
-                    //myCommand.Parameters.AddWithValue("@Password", pwdHash);
+                        string query = "UPDATE [dbo].[User] SET Password=@Password WHERE Email_Address ='" + email + "'";
+                        SqlCommand myCommand = new SqlCommand(query, myConnection);
 
-                    myCommand.ExecuteNonQuery();
-                    myConnection.Close();
+                        myCommand.Parameters.AddWithValue("@Password", hashpassword);
 
-                    Response.Redirect("/Account/ResetPasswordSuccess");
+                        myCommand.ExecuteNonQuery();
+                        myConnection.Close();
+
+                        Response.Redirect("/Account/ResetPasswordSuccess");
+                    }
                 }
             }
 
@@ -59,6 +85,15 @@ namespace Dear_Diary.Account
             //Next pull the password from database to compare
         }
 
+        //Hash only - without salt
+        public string ComputeHash(string input, HashAlgorithm algorithm)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+
+            return BitConverter.ToString(hashedBytes);
+        }
 
         private static int Minimum_Length = 8;
         private static int Upper_Case_length = 1;
