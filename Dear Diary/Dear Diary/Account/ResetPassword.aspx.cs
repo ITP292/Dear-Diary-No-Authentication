@@ -25,9 +25,9 @@ namespace Dear_Diary.Account
             {
                 Byte[] salt = new byte[8];
 
-                string email = "limruoqijoanne54@gmail.com";
+                string email = "xjt@gmail.com";
                 string inputpassword = TextBox1.Text;
-                //string hashpassword = Hash.ComputeHash(inputpassword, "SHA512", salt);
+                string hashpassword = Hash.ComputeHash(inputpassword, "SHA512", salt);
 
                 myConnection.Open();
                 string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
@@ -46,10 +46,10 @@ namespace Dear_Diary.Account
 
                 //Checking if the new password is the same as the old password
 
-                //bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
+                bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
-                if (dbPassword.Equals(inputpassword))
-                //if (hashresult == true)
+                //if (dbPassword.Equals(inputpassword))
+                if (hashresult == true)
                 {
                     Label5.Text = "You cannot use the same password again. Please change your password.";
                 }
@@ -76,7 +76,7 @@ namespace Dear_Diary.Account
                         string query = "UPDATE [dbo].[User] SET Password=@Password WHERE Email_Address ='" + email + "'";
                         SqlCommand myCommand = new SqlCommand(query, myConnection);
 
-                        myCommand.Parameters.AddWithValue("@Password", inputpassword);
+                        myCommand.Parameters.AddWithValue("@Password", hashpassword);
 
                         myCommand.ExecuteNonQuery();
                         myConnection.Close();
