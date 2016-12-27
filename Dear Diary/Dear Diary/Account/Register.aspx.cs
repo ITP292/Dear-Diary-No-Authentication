@@ -29,7 +29,6 @@ namespace Dear_Diary.Account
                 string lname = TextBox2.Text;
                 string email = TextBox3.Text;
                 string password = TextBox4.Text;
-                //string passwordhash = ComputeHash(password, new SHA256CryptoServiceProvider(), salt);
                 string passwordhash = Hash.ComputeHash(password, "SHA512", salt);
                 string confirmpassword = TextBox5.Text;
                 string phonenumber = TextBox6.Text;
