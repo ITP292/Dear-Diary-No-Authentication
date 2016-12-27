@@ -199,6 +199,8 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Security API\Testing Files\testAES.aspx" />
+    <Content Include="Security API\Testing Files\testHash.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -347,6 +349,22 @@
       <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security API\AES.cs" />
+    <Compile Include="Security API\Hash.cs" />
+    <Compile Include="Security API\Testing Files\testAES.aspx.cs">
+      <DependentUpon>testAES.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Security API\Testing Files\testAES.aspx.designer.cs">
+      <DependentUpon>testAES.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Security API\Testing Files\testHash.aspx.cs">
+      <DependentUpon>testHash.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Security API\Testing Files\testHash.aspx.designer.cs">
+      <DependentUpon>testHash.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
