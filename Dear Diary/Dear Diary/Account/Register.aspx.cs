@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+
 
 namespace Dear_Diary.Account
 {
@@ -18,18 +20,18 @@ namespace Dear_Diary.Account
         }
         protected void Register_Click(object sender, EventArgs e)
         {
-            //Captcha?
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
+                salt = Encoding.ASCII.GetBytes(getSalt());
 
                 string fname = TextBox1.Text;
                 string lname = TextBox2.Text;
                 string email = TextBox3.Text;
                 string password = TextBox4.Text;
-                //string passwordhash = SimpleHash.ComputeHash(password, "SHA512", salt);
-                string passwordhash = ""; //after confirmation, delete this
+                //string passwordhash = ComputeHash(password, new SHA256CryptoServiceProvider(), salt);
+                string passwordhash = ComputeHash(password, new SHA256CryptoServiceProvider());
                 string confirmpassword = TextBox5.Text;
                 string phonenumber = TextBox6.Text;
                 //change string phone number to integer to store in database
@@ -94,9 +96,7 @@ namespace Dear_Diary.Account
                         myCommand.Parameters.AddWithValue("Email", email);
                         myCommand.Parameters.AddWithValue("FName", fname);
                         myCommand.Parameters.AddWithValue("LName", lname);
-                        //myCommand.Parameters.AddWithValue("@Picture", null);
-                        myCommand.Parameters.AddWithValue("Password", password);
-                        //myCommand.Parameters.AddWithValue("@Password", passwordhash);
+                        myCommand.Parameters.AddWithValue("Password", passwordhash);
                         myCommand.Parameters.AddWithValue("PhoneNumber", phonenumber);
                         //myCommand.Parameters.AddWithValue("randomNo", randomNo);
 
@@ -130,11 +130,56 @@ namespace Dear_Diary.Account
             }
         }
 
-        private static int Minimum_Length = 8;
+        //Hash only - doing this first because salt comparision have problem with login
+        public string ComputeHash(string input, HashAlgorithm algorithm)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+
+            return BitConverter.ToString(hashedBytes);
+        }
+
+        //Hash + Salt
+        //public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
+        //{
+        //    Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+        //    // Combine salt and input bytes
+        //    Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+        //    salt.CopyTo(saltedInput, 0);
+        //    inputBytes.CopyTo(saltedInput, salt.Length);
+
+        //    Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+        //    return BitConverter.ToString(hashedBytes);
+        //}
+
+        //Salt generator
+        // Here is a method to generate a random password salt
+        private static string getSalt()
+            {
+                var random = new RNGCryptoServiceProvider();
+
+                // Maximum length of salt
+                int max_length = 32;
+
+                // Empty salt array
+                byte[] salt = new byte[max_length];
+
+                // Build the random bytes
+                random.GetNonZeroBytes(salt);
+
+                // Return the string encoded salt
+                return Convert.ToBase64String(salt);
+            }
+
+
+            private static int Minimum_Length = 8;
         private static int Upper_Case_length = 1;
         private static int Lower_Case_length = 1;
         private static int NonAlpha_length = 1;
-        private static int Numeric_length = 1;
+        //private static int Numeric_length = 1;
 
         public static bool IsValid(string Password)
         {

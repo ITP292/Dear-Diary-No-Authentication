@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Dear_Diary.Account
 {
@@ -26,11 +28,13 @@ namespace Dear_Diary.Account
                 string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
                 Byte[] salt = new byte[8];
+                salt = Encoding.ASCII.GetBytes(getSalt());
 
                 //get email and password input
                 string inputemail = TextBox1.Text;
                 string inputpassword = TextBox2.Text;
                 //string passwordHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
+                string passwordHash = ComputeHash(inputpassword, new SHA256CryptoServiceProvider());
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
 
@@ -74,7 +78,7 @@ namespace Dear_Diary.Account
 
                 //Session
 
-                if (dbEmail.Equals(inputemail) && dbPassword.Equals(inputpassword)) //&& dbrandomNo.Equals(inputOTP)
+                if (dbEmail.Equals(inputemail) && dbPassword.Equals(passwordHash)) //&& dbrandomNo.Equals(inputOTP)
                 {
                     String url = "www.google.com";
                     System.Diagnostics.Process.Start(url);
@@ -91,7 +95,7 @@ namespace Dear_Diary.Account
                 }
 
                 //Either email/password wrong, shows this
-                else if (!dbEmail.Equals(inputemail) || !dbPassword.Equals(inputpassword))
+                else if (!dbEmail.Equals(inputemail) || !dbPassword.Equals(passwordHash))
                 {
                     Label5.Text = "Invalid credentials. Please try again.";
                 }
@@ -117,6 +121,49 @@ namespace Dear_Diary.Account
             }
 
             return sOTP;
+        }
+
+        //Hash only - without salt
+        public string ComputeHash(string input, HashAlgorithm algorithm)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+
+            return BitConverter.ToString(hashedBytes);
+        }
+
+        //public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
+        //{
+        //    Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+        //    // Combine salt and input bytes
+        //    Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+        //    salt.CopyTo(saltedInput, 0);
+        //    inputBytes.CopyTo(saltedInput, salt.Length);
+
+        //    Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+        //    return BitConverter.ToString(hashedBytes);
+        //}
+
+        //Salt generator
+        // Here is a method to generate a random password salt
+        private static string getSalt()
+        {
+            var random = new RNGCryptoServiceProvider();
+
+            // Maximum length of salt
+            int max_length = 32;
+
+            // Empty salt array
+            byte[] salt = new byte[max_length];
+
+            // Build the random bytes
+            random.GetNonZeroBytes(salt);
+
+            // Return the string encoded salt
+            return Convert.ToBase64String(salt);
         }
     }
 }
