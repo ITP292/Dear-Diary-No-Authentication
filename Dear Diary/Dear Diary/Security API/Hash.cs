@@ -15,9 +15,7 @@ namespace Dear_Diary.Security_API
         /// randomly generated salt to the plain text, and stores this salt appended
         /// to the result.
 
-        public static string ComputeHash(string plainText,
-                                         string hashAlgorithm,
-                                         byte[] saltBytes)
+        public static string ComputeHash(string plainText, string hashAlgorithm, byte[] saltBytes)
         {
             // If salt is not specified, generate it on the fly.
             if (saltBytes == null)
