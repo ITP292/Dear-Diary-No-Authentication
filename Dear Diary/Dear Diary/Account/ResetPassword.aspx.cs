@@ -62,6 +62,7 @@ namespace Dear_Diary.Account
                     if (result == false)
                     {
                         Label5.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                        Label5.Text = "";
                     }
                     else
                     {
