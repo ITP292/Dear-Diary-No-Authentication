@@ -38,6 +38,9 @@ namespace Dear_Diary.Account
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
 
+                //-ADDED THIS FOR LOCKOUT- 
+                int counter = 0;
+
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 string query1 = "UPDATE [User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
                 //CHECK THESE 2 QUERIES AGAIN
@@ -48,7 +51,11 @@ namespace Dear_Diary.Account
                 myCommand.CommandType = CommandType.Text;
                 myCommand1.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
-                
+
+                //-ADDED THIS FOR LOCKOUT-
+                string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
+                SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                myCommand2.CommandType = CommandType.Text;
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
@@ -70,6 +77,7 @@ namespace Dear_Diary.Account
                 myConnection.Close();
                 myConnection.Open();
 
+                //updating the database with the generated randomNo
                 myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
                 myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
                 myCommand1.ExecuteNonQuery();
@@ -89,20 +97,36 @@ namespace Dear_Diary.Account
                 }
 
                 //Condition to search that db has no such email
-                else if (!dbEmail.Equals(inputemail))
-                {
-                    Label4.Text = "No such user. Please try again.";
-                }
+                //else if (!dbEmail.Equals(inputemail))
+                //{
+                //    Label4.Text = "No such user. Please try again.";
+                //    counter++;
+                //    //For every failed attempt, add 1 to counter
+                //}
 
                 //Either email/password wrong, shows this
                 else if (!dbEmail.Equals(inputemail) || hashresult==false)
                 {
                     Label5.Text = "Invalid credentials. Please try again.";
+                    counter++; //-ADDED THIS FOR LOCKOUT
                 }
+
+                //-ADDED THIS FOR LOCKOUT- 
+                //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
+
+                myConnection.Close();
+
+                myConnection.Open();
+                myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                myCommand2.Parameters.AddWithValue("@counter", counter);
+                myCommand2.ExecuteNonQuery();
+                //myConnection.Close();
+                
+
             }
 
-                //Take USERNAME put at top right hand corner (Hello _____) 
-            }
+            //Take USERNAME put at top right hand corner (Hello _____) 
+        }
 
         //generate otp code method
         private string GenerateRandomOTP(int iOTPLength, string[] saAllowedCharacters)
