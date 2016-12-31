@@ -17,14 +17,14 @@ namespace Dear_Diary.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             //Unsure of session
-            if (Session["email"] == null)
-            {
-                Response.Redirect("/Account/Login.aspx");
-            }
-            else if (Session["email"].ToString() == TextBox1.Text)
-            {
+            //if (Session["email"] == null)
+            //{
+            //    Response.Redirect("/Account/Login.aspx");
+            //}
+            //else if (Session["email"].ToString() == TextBox1.Text)
+            //{
 
-            }
+            //}
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -137,6 +137,40 @@ namespace Dear_Diary.Account
             }
 
             //Take USERNAME put at top right hand corner (Hello _____) 
+        }
+
+        //Verify user code input is the same as the one in the database
+        protected void Button_Confirm(object sender, EventArgs e)
+        {
+            SqlConnection myConnection;
+            string inputemail = "xjt@gmail.com"; //testing
+            string dbRandomNo = "";
+
+            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                string query = "SELECT randomNo FROM [User] WHERE [Email_Address] = @email";
+                SqlCommand myCommand = new SqlCommand(query, myConnection);
+                myConnection.Open();
+                myCommand.CommandType = CommandType.Text;
+                myCommand.Parameters.AddWithValue("@email", inputemail);
+                SqlDataReader reader = myCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    dbRandomNo = reader["randomNo"].ToString();
+                }
+
+                string inputNo = TextBox4.Text;
+
+                if (inputNo.Equals(dbRandomNo))
+                {
+                    Label6.Text = "Success";
+                }
+                else if (!inputNo.Equals(dbRandomNo))
+                {
+                    Label6.Text = "Failed";
+                }
+            }
         }
 
         //generate otp code method

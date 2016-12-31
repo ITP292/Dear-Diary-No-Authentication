@@ -52,13 +52,17 @@
     <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
     <a href="/Account/ForgotPassword">Forgot password</a>
 
-<%--    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    
+<%--    <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>--%>
     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
-        popupcontrolid="Panel1" targetcontrolid="Button1" cancelcontrolid="Button2" backgroundcssclass="modalBackground"></ajaxToolkit:ModalPopupExtender>
+        PopupControlID="Panel1" TargetControlID="Button1" CancelControlID="Button2" BackgroundCssClass="modalBackground">
+    </ajaxToolkit:ModalPopupExtender>
     <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
-        <asp:TextBox ID="TextBox3" runat="server" CssClass="box" placeholder="enter text"></asp:TextBox>
+        <asp:TextBox ID="TextBox4" runat="server" CssClass="box" placeholder="Enter Code"></asp:TextBox>
         <br />
-        <asp:Button ID="Button2" runat="server" Text="Close" CssClass="buttonClose" />
-        <asp:Button ID="Button3" runat="server" Text="Button" OnClick="Button_Confirm" />
-    </asp:Panel>--%>
+        <asp:Button ID="Button2" runat="server" Text="Close" CssClass="buttonClose"/>
+        <asp:Button ID="Button3" runat="server" Text="Confirm" OnClick="Button_Confirm"/>
+        <asp:Label ID="Label6" runat="server" Text="Results"></asp:Label>
+<%--        <asp:Button ID="Button4" runat="server" Text="Re-send Code" />--%>
+    </asp:Panel>
 </asp:Content>
