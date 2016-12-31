@@ -38,8 +38,7 @@ namespace Dear_Diary.Account
 
                     if (!inputemail.Equals(dbemail))
                     {
-                        //Label4.Text = "This account does not exist.";
-                        Label5.Text = "This account does not exist.";
+                        Label4.Text = "This account does not exist.";
                     }
                     else if (inputemail == dbemail)
                     {

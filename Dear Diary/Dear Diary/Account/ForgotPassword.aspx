@@ -13,9 +13,6 @@
         CssClass="text-danger" ErrorMessage="The email field is required." />
 
     <br />
-    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
-
-    <br />
     <br />
     <asp:Button ID="Button1" runat="server" Text="Email me" Width="98px" OnClick="EmailMe_Click" />
 

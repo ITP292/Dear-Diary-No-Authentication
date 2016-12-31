@@ -44,7 +44,6 @@ namespace Dear_Diary.Account
                 //get email and password input
                 string inputemail = TextBox1.Text;
                 string inputpassword = TextBox2.Text;
-                //string passwordHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
                 string passwordHash = Hash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
@@ -63,6 +62,11 @@ namespace Dear_Diary.Account
                 myCommand.CommandType = CommandType.Text;
                 myCommand1.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
+                //updating the database with the generated randomNo
+                myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+                myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+                myCommand1.ExecuteNonQuery();
+
 
                 //-ADDED THIS FOR LOCKOUT-
                 string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
@@ -89,10 +93,7 @@ namespace Dear_Diary.Account
                 myConnection.Close();
                 myConnection.Open();
 
-                //updating the database with the generated randomNo
-                myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
-                myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-                myCommand1.ExecuteNonQuery();
+                
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
@@ -137,7 +138,12 @@ namespace Dear_Diary.Account
                     //ModalPopupExtender1.Hide(); //doesn't work
 
                     Label5.Text = "Invalid credentials. Please try again.";
-                    counter++; //-ADDED THIS FOR LOCKOUT
+                    counter++; //-ADDED THIS FOR LOCKOUT                
+                    myConnection.Close();
+                    myConnection.Open();
+                    myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                    myCommand2.Parameters.AddWithValue("@counter", counter);
+                    myCommand2.ExecuteNonQuery();
                 }
                 //else if (inputemail == "" || hashresult == false)
                 //{
@@ -147,12 +153,8 @@ namespace Dear_Diary.Account
 
                 //-ADDED THIS FOR LOCKOUT- 
                 //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
-                myConnection.Close();
 
-                myConnection.Open();
-                myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
-                myCommand2.Parameters.AddWithValue("@counter", counter);
-                myCommand2.ExecuteNonQuery();
+                
                 //myConnection.Close();
 
 
