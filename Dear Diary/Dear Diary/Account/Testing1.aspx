@@ -46,15 +46,26 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
             <asp:Button ID="Button1" runat="server" Text="Show ajax modal"/>
+            <asp:Label ID="Label1" runat="server" Text="Answer"></asp:Label>
+
+            <br />
+            <br />
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="2FA answer: "></asp:Label>
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <br />
+            <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Confirm" />
 
             <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" 
                 PopupControlID="Panel1" TargetControlID="Button1" CancelControlID="Button2" BackgroundCssClass="modalBackground">
             </ajaxToolkit:ModalPopupExtender>
             <br />
+            <asp:Label ID="Label3" runat="server" Text="Results"></asp:Label>
+            <br />
             <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" style = "display:none">
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="box"></asp:TextBox> <br />
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="box" placeholder ="enter text"></asp:TextBox> <br />
                 <asp:Button ID="Button2" runat="server" Text="Close" CssClass="buttonClose"/>
-                <asp:Button ID="Button3" runat="server" Text="Button"/>
+                <asp:Button ID="Button3" runat="server" Text="Button" OnClick="Button_Confirm"/>
             </asp:Panel>
         </div>
     </form>
