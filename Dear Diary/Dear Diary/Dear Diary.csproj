@@ -166,6 +166,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Friends\viewFriendRedir.aspx" />
+    <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Friends\addFriend.aspx" />
@@ -173,7 +174,7 @@
     <Content Include="Friends\requestFriend.aspx" />
     <Content Include="Friends\viewFriend.aspx" />
     <Content Include="Privacy.aspx" />
-    <Content Include="Profile\WebForm1.aspx" />
+    <Content Include="Profile\Profile.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -369,12 +370,12 @@
     <Compile Include="Privacy.aspx.designer.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Profile\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Profile\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Profile\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security API\AES.cs" />
