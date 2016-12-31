@@ -16,11 +16,22 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Unsure of session
+            if (Session["email"] == null)
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }
+            else if (Session["email"].ToString() == TextBox1.Text)
+            {
 
+            }
         }
 
         protected void Login_Click(object sender, EventArgs e)
         {
+            //Added session (check if correct)
+            Session["email"] = TextBox1.Text;
+
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;

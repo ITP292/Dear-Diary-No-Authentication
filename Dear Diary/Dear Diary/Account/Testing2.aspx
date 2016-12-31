@@ -19,6 +19,17 @@
     <br />
     <asp:Label ID="Label3" runat="server" Text="Time"></asp:Label>
     <br />
+    <br />
+    <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Generate Code" />
+&nbsp;<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+    <br />
+    <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Confirm code" />
+&nbsp;<asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
+    <br />
+    <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="Time Difference" />
+    <br />
+    <asp:Label ID="Label4" runat="server" Text="Answer"></asp:Label>
+    <br />
 
 
 </asp:Content>
