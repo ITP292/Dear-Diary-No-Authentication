@@ -45,9 +45,10 @@ namespace Dear_Diary.Account
                 string inputemail = TextBox1.Text;
                 string inputpassword = TextBox2.Text;
                 //string passwordHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
-                string passwordHash = Hash.ComputeHash(inputpassword,"SHA512", salt);
+                string passwordHash = Hash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
+                //string inputOTP = TextBox4.Text;
 
                 //-ADDED THIS FOR LOCKOUT- 
                 int counter = 0;
@@ -97,12 +98,27 @@ namespace Dear_Diary.Account
 
                 //Session
 
-                if (dbEmail.Equals(inputemail) && hashresult==true) //&& dbrandomNo.Equals(inputOTP)
+                if (dbEmail.Equals(inputemail) && hashresult == true)
                 {
+                    //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
+
+                    //ModalPopupExtender1.Show(); //doesnt work
+
+                    //if (dbrandomNo.Equals(inputOTP))
+                    //{
                     String url = "www.google.com";
                     System.Diagnostics.Process.Start(url);
                     //Just an example to show that it works, replace with MSG website
                     //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
+
+                    //    ModalPopupExtender1.Hide();
+                    //    Response.Redirect("/Account/AccountPage.aspx");
+                    //}
+                    //else
+                    //{
+                    //    TextBox4.Text = "";
+                    //    Label6.Text = "Invalid Code.";
+                    //}
 
                     Response.Redirect("/Account/AccountPage.aspx");
                 }
@@ -116,15 +132,21 @@ namespace Dear_Diary.Account
                 //}
 
                 //Either email/password wrong, shows this
-                else if (!dbEmail.Equals(inputemail) || hashresult==false)
+                else if (!dbEmail.Equals(inputemail) || hashresult == false)
                 {
+                    //ModalPopupExtender1.Hide(); //doesn't work
+
                     Label5.Text = "Invalid credentials. Please try again.";
                     counter++; //-ADDED THIS FOR LOCKOUT
                 }
+                //else if (inputemail == "" || hashresult == false)
+                //{
+                //    //if empty
+                //    ModalPopupExtender1.Hide(); //doesn't work
+                //}
 
                 //-ADDED THIS FOR LOCKOUT- 
                 //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
-
                 myConnection.Close();
 
                 myConnection.Open();
@@ -132,45 +154,11 @@ namespace Dear_Diary.Account
                 myCommand2.Parameters.AddWithValue("@counter", counter);
                 myCommand2.ExecuteNonQuery();
                 //myConnection.Close();
-                
+
 
             }
 
             //Take USERNAME put at top right hand corner (Hello _____) 
-        }
-
-        //Verify user code input is the same as the one in the database
-        protected void Button_Confirm(object sender, EventArgs e)
-        {
-            SqlConnection myConnection;
-            string inputemail = "xjt@gmail.com"; //testing
-            string dbRandomNo = "";
-
-            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-            {
-                string query = "SELECT randomNo FROM [User] WHERE [Email_Address] = @email";
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@email", inputemail);
-                SqlDataReader reader = myCommand.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    dbRandomNo = reader["randomNo"].ToString();
-                }
-
-                string inputNo = TextBox4.Text;
-
-                if (inputNo.Equals(dbRandomNo))
-                {
-                    Label6.Text = "Success";
-                }
-                else if (!inputNo.Equals(dbRandomNo))
-                {
-                    Label6.Text = "Failed";
-                }
-            }
         }
 
         //generate otp code method

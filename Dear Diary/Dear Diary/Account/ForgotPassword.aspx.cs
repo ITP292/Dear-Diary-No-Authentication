@@ -36,9 +36,10 @@ namespace Dear_Diary.Account
                 {
                     string dbemail = reader["Email_Address"].ToString();
 
-                    if (inputemail != dbemail)
+                    if (!inputemail.Equals(dbemail))
                     {
-                        Label4.Text = "This account does not exist.";
+                        //Label4.Text = "This account does not exist.";
+                        Label5.Text = "This account does not exist.";
                     }
                     else if (inputemail == dbemail)
                     {
