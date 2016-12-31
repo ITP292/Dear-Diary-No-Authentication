@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Dear_Diary.Account.Login" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <%--<div style="font-size: 30px">--%>
@@ -50,4 +52,13 @@
     <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
     <a href="/Account/ForgotPassword">Forgot password</a>
 
+<%--    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
+        popupcontrolid="Panel1" targetcontrolid="Button1" cancelcontrolid="Button2" backgroundcssclass="modalBackground"></ajaxToolkit:ModalPopupExtender>
+    <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
+        <asp:TextBox ID="TextBox3" runat="server" CssClass="box" placeholder="enter text"></asp:TextBox>
+        <br />
+        <asp:Button ID="Button2" runat="server" Text="Close" CssClass="buttonClose" />
+        <asp:Button ID="Button3" runat="server" Text="Button" OnClick="Button_Confirm" />
+    </asp:Panel>--%>
 </asp:Content>
