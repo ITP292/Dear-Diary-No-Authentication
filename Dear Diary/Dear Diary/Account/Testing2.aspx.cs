@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Timers;
 
 namespace Dear_Diary.Account
 {
@@ -87,9 +88,53 @@ namespace Dear_Diary.Account
         protected void Button5_Click(object sender, EventArgs e)
         {
             TimeSpan difference = t2 - t1;
-            Label4.Text = difference.ToString();
+            Label4.Text = difference.ToString();        //The difference i keep getting 0 :(
+
         }
 
-        //The difference i keep getting 0 :(
+        //Concept:
+        //user enters email, system checks accountStatus, if accountStatus = locked, then disables the textbox until time's up then enabled again
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            SqlConnection myConnection;
+            string inputemail = TextBox2.Text;
+            string dbStatus = "";
+
+            System.Timers.Timer Timer1 = new System.Timers.Timer();
+            Timer1.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            Timer1.Interval = 5000; //5 seconds
+            Timer1.Enabled = true;
+
+            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                string query = "SELECT accountStatus FROM [User] WHERE [Email_Address] = @email";
+                SqlCommand myCommand = new SqlCommand(query, myConnection);
+                myConnection.Open();
+                myCommand.CommandType = CommandType.Text;
+                myCommand.Parameters.AddWithValue("@email", inputemail);
+                SqlDataReader reader = myCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    dbStatus = reader["accountStatus"].ToString();
+                }
+
+                if (dbStatus.Equals("locked"))
+                {
+                    TextBox2.Enabled = false;
+                }
+                else
+                {
+                    TextBox2.Text = "Good";
+                }
+            }
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            //Specify what you want to happen when the Elapsed event is raised.
+        }
+
     }
 }
