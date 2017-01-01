@@ -93,7 +93,7 @@ namespace Dear_Diary.Account
                 myConnection.Close();
                 myConnection.Open();
 
-                
+
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
@@ -124,14 +124,6 @@ namespace Dear_Diary.Account
                     Response.Redirect("/Account/AccountPage.aspx");
                 }
 
-                //Condition to search that db has no such email
-                //else if (!dbEmail.Equals(inputemail))
-                //{
-                //    Label4.Text = "No such user. Please try again.";
-                //    counter++;
-                //    //For every failed attempt, add 1 to counter
-                //}
-
                 //Either email/password wrong, shows this
                 else if (!dbEmail.Equals(inputemail) || hashresult == false)
                 {
@@ -145,7 +137,7 @@ namespace Dear_Diary.Account
                     myCommand2.Parameters.AddWithValue("@counter", counter);
                     myCommand2.ExecuteNonQuery();
                 }
-                //else if (inputemail == "" || hashresult == false)
+                //else if (inputemail == "" || inputpassword == "")
                 //{
                 //    //if empty
                 //    ModalPopupExtender1.Hide(); //doesn't work
@@ -154,7 +146,7 @@ namespace Dear_Diary.Account
                 //-ADDED THIS FOR LOCKOUT- 
                 //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
 
-                
+
                 //myConnection.Close();
 
 
