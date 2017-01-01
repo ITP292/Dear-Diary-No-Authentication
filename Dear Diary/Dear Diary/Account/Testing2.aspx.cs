@@ -63,32 +63,32 @@ namespace Dear_Diary.Account
 
 
 
-        string timeA;
-        string timeB;
-
-        DateTime t1;
-        DateTime t2;
+        private DateTime t1;
+        private DateTime t2;
+        
         //Button - Generate Code
         protected void Button3_Click(object sender, EventArgs e)
         {
             //Test - time when click to generate code 
-            timeA = DateTime.Now.ToString("h:mm:ss tt");
-            t1 = Convert.ToDateTime(timeA);
-            Label5.Text = timeA;
+            //timeA = DateTime.Now.ToString("h:mm:ss tt");
+            //t1 = Convert.ToDateTime(timeA);
+            t1 = DateTime.Now;
+            Label5.Text = t1.ToString();
         }
         //Button - Confirm Code
         protected void Button4_Click(object sender, EventArgs e)
         {
             //Test - time when click to confirm code
-            timeB = DateTime.Now.ToString("h:mm:ss tt");
-            t2 = Convert.ToDateTime(timeB);
-            Label6.Text = timeB;
+            //timeB = DateTime.Now.ToString("h:mm:ss tt");
+            //t2 = Convert.ToDateTime(timeB);
+            t2 = DateTime.Now;
+            Label6.Text = t2.ToString();
         }
         //Button - See time difference
         protected void Button5_Click(object sender, EventArgs e)
         {
-            TimeSpan difference = t2 - t1;
-            Label4.Text = difference.ToString();        //The difference i keep getting 0 :(
+            TimeSpan difference = t2.Subtract(t1);
+            Label4.Text = difference.Seconds.ToString();        //The difference i keep getting 0 :(
 
         }
 
