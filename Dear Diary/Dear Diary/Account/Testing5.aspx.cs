@@ -13,6 +13,7 @@ namespace Dear_Diary.Account
         {
         }
 
+        //Testing ModalPopupExtender which still does not work
         public static Boolean result = true;
         protected void btnShow_Click(object sender, EventArgs e)
         {
@@ -21,10 +22,12 @@ namespace Dear_Diary.Account
             if (result)
             {
                 ModalPopupExtender1.Show();
+                //Panel1.Visible = true; 
             }
             else
             {
                 ModalPopupExtender1.Hide();
+                //Panel1.Visible = false;
             }
 
             result = !result;

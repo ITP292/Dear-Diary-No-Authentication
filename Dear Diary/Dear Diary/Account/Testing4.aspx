@@ -6,8 +6,7 @@
     <br />
     <br />
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:Timer ID="Timer1" runat="server" Interval ="1000">
+    <asp:Timer ID="Timer1" runat="server" Interval ="5000">
     </asp:Timer>
 
 </asp:Content>
