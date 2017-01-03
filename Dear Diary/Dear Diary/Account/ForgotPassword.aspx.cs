@@ -57,7 +57,6 @@ namespace Dear_Diary.Account
                         smtp.Send("joanne855902@gmail.com", inputemail, "Reset your password", "Click on this link below to reset your password " + link);
                         //format - From, To, Subject, Body
 
-                        myConnection.Close();
 
                     }
                 }
