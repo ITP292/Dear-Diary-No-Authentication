@@ -12,8 +12,11 @@ namespace Dear_Diary.Account
 {
     public partial class Testing1 : System.Web.UI.Page
     {
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label4.Text = "HHHH";
 
         }
 
@@ -85,6 +88,26 @@ namespace Dear_Diary.Account
                     Label3.Text = "Failed";
                 }
             }
+        }
+
+
+        Boolean result = true;
+
+
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            if (result == true)
+            {
+                ModalPopupExtender1.Show();
+            }
+            else
+                ModalPopupExtender1.Hide();
+
+
+            result = !result;
+            Label4.Text = "Hello world";
         }
     }
 }

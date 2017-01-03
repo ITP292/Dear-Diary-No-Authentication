@@ -45,8 +45,11 @@
         <div>
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-            <asp:Button ID="Button1" runat="server" Text="Show ajax modal"/>
+            <asp:Button ID="Button1" runat="server" Text="Show ajax modal" OnClick="Button1_Click"/>
             <asp:Label ID="Label1" runat="server" Text="Answer"></asp:Label>
+
+            <br />
+            <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
 
             <br />
             <br />

@@ -105,16 +105,16 @@ namespace Dear_Diary.Account
 
                     //ModalPopupExtender1.Show(); //doesnt work
 
-                    //if (dbrandomNo.Equals(inputOTP))
-                    //{
-                    String url = "www.google.com";
-                    System.Diagnostics.Process.Start(url);
-                    //Just an example to show that it works, replace with MSG website
-                    //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
+                    if (dbrandomNo.Equals(inputOTP))
+                    {
+                        String url = "www.google.com";
+                        System.Diagnostics.Process.Start(url);
+                        //Just an example to show that it works, replace with MSG website
+                        //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
 
-                    //    ModalPopupExtender1.Hide();
-                    //    Response.Redirect("/Account/AccountPage.aspx");
-                    //}
+                        //ModalPopupExtender1.Hide();
+                        Response.Redirect("/Account/AccountPage.aspx");
+                    }
                     //else
                     //{
                     //    TextBox4.Text = "";
@@ -137,11 +137,11 @@ namespace Dear_Diary.Account
                     myCommand2.Parameters.AddWithValue("@counter", counter);
                     myCommand2.ExecuteNonQuery();
                 }
-                //else if (inputemail == "" || inputpassword == "")
-                //{
-                //    //if empty
-                //    ModalPopupExtender1.Hide(); //doesn't work
-                //}
+                else if (inputemail == "" || inputpassword == "")
+                {
+                    //if empty
+                    //ModalPopupExtender1.Hide(); //doesn't work
+                }
 
                 //-ADDED THIS FOR LOCKOUT- 
                 //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
