@@ -39,10 +39,11 @@ namespace Dear_Diary.Account
                     if (!inputemail.Equals(dbemail))
                     {
                         Label4.Text = "This account does not exist.";
+
                     }
                     else if (inputemail == dbemail)
                     {
-                        string link = "test";
+                        string link = "www.google.com.sg";
                         //generate link here to be sent to email to reset password
 
                         var smtp = new System.Net.Mail.SmtpClient();
@@ -54,9 +55,12 @@ namespace Dear_Diary.Account
                             smtp.EnableSsl = true;
                             smtp.Timeout = 20000;
                         }
-                        smtp.Send("joanne855902@gmail.com", inputemail, "Reset your password", "Click on this link below to reset your password " + link);
+                        smtp.Send("joanne855902@gmail.com", inputemail, "Reset your password", 
+                            "Dear User, \n \n Please Reset your password by following the instructions. " + 
+                            "\n Click on this link below to reset your password. \n " + link + "\n \n Thank You.");
                         //format - From, To, Subject, Body
 
+                        Response.Redirect("/Account/ForgetPasswordEmailSent.aspx");
 
                     }
                 }
