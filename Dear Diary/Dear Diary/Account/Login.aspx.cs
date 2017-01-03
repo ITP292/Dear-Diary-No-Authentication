@@ -67,18 +67,13 @@ namespace Dear_Diary.Account
                 myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
                 myCommand1.ExecuteNonQuery();
 
-
-                //-ADDED THIS FOR LOCKOUT-
-                string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
-                SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
-                myCommand2.CommandType = CommandType.Text;
-
                 SqlDataReader reader = myCommand.ExecuteReader();
 
                 String dbEmail = "";
                 String dbPassword = "";
                 String dbrandomNo = "";
                 String dbMobile = "";
+                //String dbCount = "";
 
                 //read data from db
                 if (reader.Read())
@@ -87,13 +82,11 @@ namespace Dear_Diary.Account
                     dbPassword = reader["Password"].ToString();
                     dbrandomNo = reader["randomNo"].ToString();
                     dbMobile = reader["Phone_Number"].ToString();
-
+                    //dbCount = reader["counter"].ToString();
                 }
 
                 myConnection.Close();
                 myConnection.Open();
-
-
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
