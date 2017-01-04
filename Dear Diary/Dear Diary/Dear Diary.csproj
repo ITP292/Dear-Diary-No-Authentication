@@ -138,6 +138,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Account\2FA_Input.aspx" />
     <Content Include="Account\AccountPage.aspx" />
     <Content Include="Account\ForgetPasswordEmailSent.aspx" />
     <Content Include="Account\ForgotPassword.aspx" />
@@ -229,6 +230,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\2FA_Input.aspx.cs">
+      <DependentUpon>2FA_Input.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\2FA_Input.aspx.designer.cs">
+      <DependentUpon>2FA_Input.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\AccountPage.aspx.cs">
       <DependentUpon>AccountPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -21,17 +21,18 @@ namespace Dear_Diary.Account
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (count >= 0 && count <5)
-            {
-                count++;
+            int i = 1;
+            //if (count >= 0 && count <5)
+            //{
+                count += i;
                 Label1.Text = count.ToString();
-            }
-            else if (count == 5)
-            {
-                Label1.Text = count.ToString();
-                Label2.Text = "Counter has reached 5";
+            //}
+            //else if (count == 5)
+            //{
+            //    Label1.Text = count.ToString();
+            //    Label2.Text = "Counter has reached 5";
 
-            }
+            //}
         }
     }
 }

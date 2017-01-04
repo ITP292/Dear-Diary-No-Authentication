@@ -69,6 +69,7 @@ namespace Dear_Diary.Account
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
+
                 String dbEmail = "";
                 String dbPassword = "";
                 String dbrandomNo = "";
@@ -89,6 +90,7 @@ namespace Dear_Diary.Account
                 myConnection.Open();
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
+                string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
 
                 //Session
 
@@ -125,6 +127,8 @@ namespace Dear_Diary.Account
                     Label5.Text = "Invalid credentials. Please try again.";
                     counter++; //-ADDED THIS FOR LOCKOUT                
                     myConnection.Close();
+                    SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                    myCommand2.CommandType = CommandType.Text;
                     myConnection.Open();
                     myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
                     myCommand2.Parameters.AddWithValue("@counter", counter);
@@ -166,5 +170,6 @@ namespace Dear_Diary.Account
 
             return sOTP;
         }
+
     }
 }

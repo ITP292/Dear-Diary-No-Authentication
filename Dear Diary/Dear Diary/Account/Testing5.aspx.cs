@@ -21,12 +21,14 @@ namespace Dear_Diary.Account
 
             if (result)
             {
-                ModalPopupExtender1.Show();
+                //ModalPopupExtender1.Show();
+                ModalPopupExtender1.TargetControlID = "btnShow";
                 //Panel1.Visible = true; 
             }
             else
             {
-                ModalPopupExtender1.Hide();
+                //ModalPopupExtender1.Hide();
+                ModalPopupExtender1.TargetControlID = "btnClose";
                 //Panel1.Visible = false;
             }
 
