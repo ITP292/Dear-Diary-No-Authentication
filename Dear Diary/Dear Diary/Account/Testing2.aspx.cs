@@ -91,7 +91,7 @@ namespace Dear_Diary.Account
         //Button - See time difference
         protected void Button5_Click(object sender, EventArgs e)
         {
-            TimeSpan difference = t2.Subtract(t1);
+            TimeSpan difference = t2-t1;
             Label4.Text = difference.Seconds.ToString();        //The difference i keep getting 0 :(
         }
 
