@@ -154,6 +154,7 @@
     <Content Include="Account\Testing4.aspx" />
     <Content Include="Account\Testing5.aspx" />
     <Content Include="Account\Testing6.aspx" />
+    <Content Include="Account\Timer1.aspx" />
     <Content Include="App_Data\Database.mdf" />
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="Account\Testing6.aspx.designer.cs">
       <DependentUpon>Testing6.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Timer1.aspx.cs">
+      <DependentUpon>Timer1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Timer1.aspx.designer.cs">
+      <DependentUpon>Timer1.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

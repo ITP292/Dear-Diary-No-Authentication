@@ -34,6 +34,7 @@
         <br />
         <asp:Button ID="btnClose" runat="server" Text="Close" />
     </asp:Panel>
+
     <br />
     <br />
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

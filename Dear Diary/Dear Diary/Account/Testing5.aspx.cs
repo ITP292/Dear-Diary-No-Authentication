@@ -11,28 +11,31 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label1.Text = "Hello";
         }
 
         //Testing ModalPopupExtender which still does not work
         public static Boolean result = true;
+
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            Label1.Text = result.ToString();
+            
 
-            if (result)
-            {
-                //ModalPopupExtender1.Show();
-                ModalPopupExtender1.TargetControlID = "btnShow";
-                //Panel1.Visible = true; 
-            }
-            else
-            {
-                //ModalPopupExtender1.Hide();
-                ModalPopupExtender1.TargetControlID = "btnClose";
-                //Panel1.Visible = false;
-            }
+            //if (result)
+            //{
+            //    //ModalPopupExtender1.Show();
+            //    ModalPopupExtender1.TargetControlID = "btnShow";
+            //    //Panel1.Visible = true; 
+            //}
+            //else
+            //{
+            //    //ModalPopupExtender1.Hide();
+            //    ModalPopupExtender1.TargetControlID = "btnClose";
+            //    //Panel1.Visible = false;
+            //}
 
             result = !result;
+            Label1.Text = result.ToString();
         }
     }
 }

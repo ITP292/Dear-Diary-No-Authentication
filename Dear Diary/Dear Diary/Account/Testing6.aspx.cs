@@ -9,14 +9,9 @@ namespace Dear_Diary.Account
 {
     public partial class Testing6 : System.Web.UI.Page
     {
-        int count = 0;
-        int i = 1;
+        public static int count = 0;
         protected void Page_Load(object sender, EventArgs e)
-        {
-            //if (!IsPostBack)
-            //    Label1.Text = count.ToString();
-        
-
+        { 
         }
 
     

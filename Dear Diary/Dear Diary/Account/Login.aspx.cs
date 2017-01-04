@@ -9,6 +9,8 @@ using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using Dear_Diary.Security_API;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Dear_Diary.Account
 {
@@ -16,22 +18,11 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Unsure of session
-            //if (Session["email"] == null)
-            //{
-            //    Response.Redirect("/Account/Login.aspx");
-            //}
-            //else if (Session["email"].ToString() == TextBox1.Text)
-            //{
 
-            //}
         }
 
         protected void Login_Click(object sender, EventArgs e)
-        {
-            //Added session (check if correct)
-            Session["email"] = TextBox1.Text;
-
+        { 
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
@@ -47,10 +38,19 @@ namespace Dear_Diary.Account
                 string passwordHash = Hash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
-                //string inputOTP = TextBox4.Text;
+                                      //string inputOTP = TextBox4.Text;
+                //Stopwatch stopwatch = new Stopwatch();
+
+                String dbEmail = "";
+                String dbPassword = "";
+                String dbrandomNo = "";
+                String dbMobile = "";
+                //String dbCount = "";
 
                 //-ADDED THIS FOR LOCKOUT- 
-                int counter = 0;
+                //int counter = 0;
+
+                myConnection.Open();
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 string query1 = "UPDATE [User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
@@ -58,7 +58,6 @@ namespace Dear_Diary.Account
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-                myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
                 myCommand1.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
@@ -70,11 +69,6 @@ namespace Dear_Diary.Account
                 SqlDataReader reader = myCommand.ExecuteReader();
 
 
-                String dbEmail = "";
-                String dbPassword = "";
-                String dbrandomNo = "";
-                String dbMobile = "";
-                //String dbCount = "";
 
                 //read data from db
                 if (reader.Read())
@@ -87,36 +81,41 @@ namespace Dear_Diary.Account
                 }
 
                 myConnection.Close();
-                myConnection.Open();
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
-                string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
+                //string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
 
                 //Session
 
                 if (dbEmail.Equals(inputemail) && hashresult == true)
                 {
+                    Session["email"] = TextBox1.Text;
+                    
+
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
                     //ModalPopupExtender1.Show(); //doesnt work
 
-                    if (dbrandomNo.Equals(inputOTP))
-                    {
-                        String url = "www.google.com";
-                        System.Diagnostics.Process.Start(url);
-                        //Just an example to show that it works, replace with MSG website
-                        //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
+                    //if (dbrandomNo.Equals(inputOTP))
+                    //{
+                    //    String url = "www.google.com";
+                    //    System.Diagnostics.Process.Start(url);
+                    //Just an example to show that it works, replace with MSG website
+                    //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
 
-                        //ModalPopupExtender1.Hide();
-                        Response.Redirect("/Account/AccountPage.aspx");
-                    }
+                    //ModalPopupExtender1.Hide();
+                    //    Response.Redirect("/Account/AccountPage.aspx");
+                    //}
                     //else
                     //{
                     //    TextBox4.Text = "";
                     //    Label6.Text = "Invalid Code.";
                     //}
 
-                    Response.Redirect("/Account/AccountPage.aspx");
+                    Response.Redirect("/Account/2FA_Input.aspx");
+                    //if the inputs are true, I start the countdown
+                    //stopwatch.Start();
+                    //Thread.Sleep(6000);
                 }
 
                 //Either email/password wrong, shows this
@@ -125,28 +124,18 @@ namespace Dear_Diary.Account
                     //ModalPopupExtender1.Hide(); //doesn't work
 
                     Label5.Text = "Invalid credentials. Please try again.";
-                    counter++; //-ADDED THIS FOR LOCKOUT                
-                    myConnection.Close();
-                    SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
-                    myCommand2.CommandType = CommandType.Text;
-                    myConnection.Open();
-                    myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
-                    myCommand2.Parameters.AddWithValue("@counter", counter);
-                    myCommand2.ExecuteNonQuery();
+                    //counter++; //-ADDED THIS FOR LOCKOUT                
+                    //SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                    //myCommand2.CommandType = CommandType.Text;
+                    //myConnection.Open();
+                    //myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                    //myCommand2.Parameters.AddWithValue("@counter", counter);
+                    //myCommand2.ExecuteNonQuery();
                 }
                 else if (inputemail == "" || inputpassword == "")
                 {
                     //if empty
-                    //ModalPopupExtender1.Hide(); //doesn't work
                 }
-
-                //-ADDED THIS FOR LOCKOUT- 
-                //KEEP HAVING PROBLEMS WITH CONNECTION OPEN/CLOSE
-
-
-                //myConnection.Close();
-
-
             }
 
             //Take USERNAME put at top right hand corner (Hello _____) 
