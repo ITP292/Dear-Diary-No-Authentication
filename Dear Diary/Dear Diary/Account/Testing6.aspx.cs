@@ -9,23 +9,25 @@ namespace Dear_Diary.Account
 {
     public partial class Testing6 : System.Web.UI.Page
     {
-
+        int count = 0;
+        int i = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
-        Label1.Text = count.ToString();
+            //if (!IsPostBack)
+            //    Label1.Text = count.ToString();
+        
 
         }
 
-        int count = 0;
-
+    
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int i = 1;
             //if (count >= 0 && count <5)
             //{
-                count += i;
-                Label1.Text = count.ToString();
+            count++;
+            Label1.Text = count.ToString();
+
             //}
             //else if (count == 5)
             //{

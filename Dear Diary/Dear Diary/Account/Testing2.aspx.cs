@@ -14,7 +14,11 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Session["StartTime"] = t1;
+                Session["EndTime"] = t2;
+            }
         }
         //Enter 2FA input and check if the input and number in database is the same
         //Pulling from database and check with user input
@@ -89,7 +93,6 @@ namespace Dear_Diary.Account
         {
             TimeSpan difference = t2.Subtract(t1);
             Label4.Text = difference.Seconds.ToString();        //The difference i keep getting 0 :(
-
         }
 
         //Concept:

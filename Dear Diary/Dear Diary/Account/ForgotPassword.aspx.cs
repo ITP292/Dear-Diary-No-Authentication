@@ -19,6 +19,8 @@ namespace Dear_Diary.Account
 
         protected void EmailMe_Click(object sender, EventArgs e)
         {
+            string dbemail = "";
+
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -34,14 +36,9 @@ namespace Dear_Diary.Account
 
                 while (reader.Read())
                 {
-                    string dbemail = reader["Email_Address"].ToString();
+                    dbemail = reader["Email_Address"].ToString();
 
-                    if (!inputemail.Equals(dbemail))
-                    {
-                        Label4.Text = "This account does not exist.";
-
-                    }
-                    else if (inputemail == dbemail)
+                    if (inputemail == dbemail)
                     {
                         string link = "www.google.com.sg";
                         //generate link here to be sent to email to reset password
@@ -63,6 +60,12 @@ namespace Dear_Diary.Account
                         Response.Redirect("/Account/ForgetPasswordEmailSent.aspx");
 
                     }
+                }
+
+                if (!inputemail.Equals(dbemail))
+                {
+                    Label4.Text = "This account does not exist.";
+
                 }
 
 
