@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
-using Dear_Diary.Security_API;
 using System.Threading;
 using System.Diagnostics;
 
@@ -36,12 +35,10 @@ namespace Dear_Diary.Account
             {
                 string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
-                Byte[] salt = new byte[8];
 
                 //get email and password input
                 string inputemail = TextBox1.Text;
                 string inputpassword = TextBox2.Text;
-                string passwordHash = Hash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
 
                 String dbEmail = "";
@@ -49,6 +46,7 @@ namespace Dear_Diary.Account
                 String dbrandomNo = "";
                 String dbMobile = "";
                 String dbCount = "";
+                String dbSalt = "";
 
                 //-ADDED THIS FOR LOCKOUT- 
                 //int counter = 0;
@@ -71,13 +69,16 @@ namespace Dear_Diary.Account
                     dbrandomNo = reader["randomNo"].ToString();
                     dbMobile = reader["Phone_Number"].ToString();
                     dbCount = reader["counter"].ToString();
+                    dbSalt = reader["salt"].ToString();
+
                 }
+
+                string passwordHash = ComputeHash(inputpassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
 
                 myConnection.Close();
 
-                bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
-                if (dbEmail.Equals(inputemail) && hashresult == true)
+                if (dbEmail.Equals(inputemail) && dbPassword.Equals(passwordHash))
                 {
                     Session["email"] = TextBox1.Text;
 
@@ -98,7 +99,7 @@ namespace Dear_Diary.Account
                 }
 
                 //Either email/password wrong, shows this
-                else if (dbEmail.Equals(inputemail) && hashresult == false)
+                else if (dbEmail.Equals(inputemail) && !dbPassword.Equals(passwordHash))
                 {
                     if (Convert.ToInt32(dbCount) >= 0 && Convert.ToInt32(dbCount) < 5)
                     {
@@ -135,20 +136,19 @@ namespace Dear_Diary.Account
                         Label5.Text = "Invalid credentials. Please try again.";
                         myConnection.Close();
                     }
+                    Label5.Text = "Invalid credentials. Please try again.";
+
                 }
 
-                else if (!dbEmail.Equals(inputemail) || hashresult == false)
+                else if (!dbEmail.Equals(inputemail) || !dbPassword.Equals(passwordHash))
                 {
                     Label5.Text = "Invalid credentials. Please try again.";
                 }
-
             }
         }
 
         protected void Timer_Tick(object sender, EventArgs e)
         {
-            //aTimer = new System.Timers.Timer(1000);
-
             timeCounter++;
             if (timeCounter >= 1)
             {
@@ -157,8 +157,6 @@ namespace Dear_Diary.Account
                 Timer1.Enabled = false;
                 Label5.Text = "";
             }
-
-
         }
 
         //generate otp code method
@@ -179,6 +177,18 @@ namespace Dear_Diary.Account
 
             return sOTP;
         }
+        public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
 
+            // Combine salt and input bytes
+            Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+            salt.CopyTo(saltedInput, 0);
+            inputBytes.CopyTo(saltedInput, salt.Length);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+            return BitConverter.ToString(hashedBytes);
+        }
     }
 }

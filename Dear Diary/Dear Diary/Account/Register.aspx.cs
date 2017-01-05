@@ -23,7 +23,7 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
-                salt = GetSalt(8);
+                salt = GenerateSalt(salt);
 
                 string fname = TextBox1.Text;
                 string lname = TextBox2.Text;
@@ -85,8 +85,8 @@ namespace Dear_Diary.Account
                     {
                         Label10.Text = "";
 
-                        string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number, salt)";
-                        query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber, @Salt)";
+                        string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number, salt, counter)";
+                        query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber, @Salt, @Counter)";
                         SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                         //To prevent sql injection
@@ -95,7 +95,8 @@ namespace Dear_Diary.Account
                         myCommand.Parameters.AddWithValue("LName", lname);
                         myCommand.Parameters.AddWithValue("Password", passwordhash);
                         myCommand.Parameters.AddWithValue("PhoneNumber", phonenumber);
-                        myCommand.Parameters.AddWithValue("Salt", salt);
+                        myCommand.Parameters.AddWithValue("Salt", Convert.ToBase64String(salt));
+                        myCommand.Parameters.AddWithValue("Counter", 0);
 
                         myCommand.ExecuteNonQuery();
                         Response.Redirect("/Account/SuccessfulRegistration");
@@ -191,13 +192,21 @@ namespace Dear_Diary.Account
             return BitConverter.ToString(hashedBytes);
         }
 
-        private static byte[] GetSalt(int maximumSaltLength)
+        //private static byte[] GetSalt(int maximumSaltLength)
+        //{
+        //    var salt = new byte[maximumSaltLength];
+        //    using (var random = new RNGCryptoServiceProvider())
+        //    {
+        //        random.GetNonZeroBytes(salt);
+        //    }
+
+        //    return salt;
+        //}
+
+        public static byte[] GenerateSalt(byte[] salt)
         {
-            var salt = new byte[maximumSaltLength];
-            using (var random = new RNGCryptoServiceProvider())
-            {
-                random.GetNonZeroBytes(salt);
-            }
+            RNGCryptoServiceProvider rncCsp = new RNGCryptoServiceProvider();
+            rncCsp.GetBytes(salt);
 
             return salt;
         }
