@@ -16,12 +16,16 @@ namespace Dear_Diary.Account
 {
     public partial class Login : System.Web.UI.Page
     {
+        public static int count = 0;
+        public static int timeCounter = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //SqlConnection myConnection;
+            //using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            //{
+            //}
         }
-
-        public static int counter = 0;
 
         protected void Login_Click(object sender, EventArgs e)
         {             
@@ -52,18 +56,10 @@ namespace Dear_Diary.Account
                 myConnection.Open();
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
-                string query1 = "UPDATE [User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
-                //CHECK THESE 2 QUERIES AGAIN
-
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
-                SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
                 myCommand.CommandType = CommandType.Text;
-                myCommand1.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
-                //updating the database with the generated randomNo
-                myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
-                myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-                myCommand1.ExecuteNonQuery();
+
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
@@ -84,52 +80,85 @@ namespace Dear_Diary.Account
                 if (dbEmail.Equals(inputemail) && hashresult == true)
                 {
                     Session["email"] = TextBox1.Text;
-                    
+
+                    myConnection.Open();
+                    string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
+                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                    myCommand1.CommandType = CommandType.Text;
+                    myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+                    myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+                    myCommand1.ExecuteNonQuery();
+                    myConnection.Close();
+                    Response.Redirect("/Account/2FA_Input.aspx");
 
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
                     Response.Redirect("/Account/2FA_Input.aspx");
-                    //if the inputs are true, I start the countdown
-                    //stopwatch.Start();
-                    //Thread.Sleep(6000);
+
                 }
+
                 //Either email/password wrong, shows this
                 else if (dbEmail.Equals(inputemail) && hashresult == false)
                 {
-                    myConnection.Open();
+                    if (Convert.ToInt32(dbCount) >= 0 && Convert.ToInt32(dbCount) < 5)
+                    {
+                        myConnection.Open();
+                        count++;
+                        string query2 = "UPDATE [dbo].[User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
+                        SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                        myCommand2.CommandType = CommandType.Text;
+                        myCommand2.Parameters.AddWithValue("@counter", count);
+                        myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                        myCommand2.ExecuteNonQuery();
+                        //Label1.Text = count.ToString();
+                    }
 
                     //Read counter from database, check if its 5. If 5, then don't allow login. 
-                    if (Convert.ToInt32(dbCount)>=5)
+                    else if (Convert.ToInt32(dbCount) == 5)
                     {
-                        //Disable TextBox
-                        //Start countdown timer
-                        //change status to locked
-                        //Message: your account has been locked, please try again __ minutes later
-                        Label5.Text = "Your account has been locked, please try again ___ minutes later. ";
+                        TextBox1.Enabled = false;
+                        TextBox2.Enabled = false;
+                        Label2.Text = "Your account has been locked";
+                        //Label1.Text = count.ToString();
+                        Timer1.Enabled = true;
+                        timeCounter = 0;
+                        Label5.Text = "Your account has been locked. Please try again later.";
+
                     }
                     else if (Convert.ToInt32(dbCount)<5)
                     {
-                        counter++;
+                        count++;
                         string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
                         SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
                         myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
-                        myCommand2.Parameters.AddWithValue("@counter", counter);
+                        myCommand2.Parameters.AddWithValue("@counter", count);
                         Label5.Text = "Invalid credentials. Please try again.";
                         myConnection.Close();
                     }
                 }
+
                 else if (!dbEmail.Equals(inputemail) || hashresult == false)
                 {
                     Label5.Text = "Invalid credentials. Please try again.";
                 }
-                else if (inputemail == "" || inputpassword == "")
-                {
-                    //if empty
-                }
 
             }
+        }
 
-            //Take USERNAME put at top right hand corner (Hello _____) 
+        protected void Timer_Tick(object sender, EventArgs e)
+        {
+            //aTimer = new System.Timers.Timer(1000);
+
+            timeCounter++;
+            if (timeCounter >= 1)
+            {
+                TextBox1.Enabled = true;
+                TextBox2.Enabled = true;
+                Timer1.Enabled = false;
+                Label5.Text = "";
+            }
+
+
         }
 
         //generate otp code method

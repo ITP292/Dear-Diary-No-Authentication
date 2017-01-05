@@ -13,8 +13,11 @@ namespace Dear_Diary.Account
     public partial class Testing6 : System.Web.UI.Page
     {
         public static int count = 0;
+        public static int timeCounter = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
         }
         //Take this as Login Button
         //1. Once click, check if inputs are correct/wrong 
@@ -73,7 +76,7 @@ namespace Dear_Diary.Account
                 }
                 else if (dbEmail.Equals(inputemail) && !dbPassword.Equals(passwordHash))
                 {
-                    if (Convert.ToInt32(dbCount)>=0 && Convert.ToInt32(dbCount)<5)
+                    if (Convert.ToInt32(dbCount) >= 0 && Convert.ToInt32(dbCount) < 5)
                     {
                         myConnection.Open();
                         count++;
@@ -87,13 +90,14 @@ namespace Dear_Diary.Account
 
 
                     }
-                    else if (Convert.ToInt32(dbCount)==5)
+                    else if (Convert.ToInt32(dbCount) == 5)
                     {
                         TextBox1.Enabled = false;
                         TextBox2.Enabled = false;
                         Label2.Text = "Your account has been locked";
                         Label1.Text = count.ToString();
-
+                        Timer1.Enabled = true;
+                        timeCounter = 0;
                     }
 
                     Label1.Text = count.ToString();
@@ -114,7 +118,23 @@ namespace Dear_Diary.Account
                     Label2.Text = "Invalid inputs";
                 }
             }
-            
+
+        }
+
+
+        protected void Timer_Tick(object sender, EventArgs e)
+        {
+            //aTimer = new System.Timers.Timer(1000);
+
+            timeCounter++;
+            if (timeCounter >= 1)
+            {
+                TextBox1.Enabled = true;
+                TextBox2.Enabled = true;
+                Timer1.Enabled = false;
+            }
+
+
         }
         private string GenerateRandomOTP(int iOTPLength, string[] saAllowedCharacters)
 
