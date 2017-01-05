@@ -21,8 +21,10 @@ namespace Dear_Diary.Account
 
         }
 
+        public static int counter = 0;
+
         protected void Login_Click(object sender, EventArgs e)
-        { 
+        {             
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
@@ -37,15 +39,12 @@ namespace Dear_Diary.Account
                 string inputpassword = TextBox2.Text;
                 string passwordHash = Hash.ComputeHash(inputpassword, "SHA512", salt);
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
-                string inputOTP = ""; //input the TextBox.Text here after creating 2FA place to input
-                                      //string inputOTP = TextBox4.Text;
-                //Stopwatch stopwatch = new Stopwatch();
 
                 String dbEmail = "";
                 String dbPassword = "";
                 String dbrandomNo = "";
                 String dbMobile = "";
-                //String dbCount = "";
+                String dbCount = "";
 
                 //-ADDED THIS FOR LOCKOUT- 
                 //int counter = 0;
@@ -68,8 +67,6 @@ namespace Dear_Diary.Account
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
-
-
                 //read data from db
                 if (reader.Read())
                 {
@@ -77,15 +74,12 @@ namespace Dear_Diary.Account
                     dbPassword = reader["Password"].ToString();
                     dbrandomNo = reader["randomNo"].ToString();
                     dbMobile = reader["Phone_Number"].ToString();
-                    //dbCount = reader["counter"].ToString();
+                    dbCount = reader["counter"].ToString();
                 }
 
                 myConnection.Close();
 
                 bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
-                //string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
-
-                //Session
 
                 if (dbEmail.Equals(inputemail) && hashresult == true)
                 {
@@ -94,48 +88,45 @@ namespace Dear_Diary.Account
 
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
-                    //ModalPopupExtender1.Show(); //doesnt work
-
-                    //if (dbrandomNo.Equals(inputOTP))
-                    //{
-                    //    String url = "www.google.com";
-                    //    System.Diagnostics.Process.Start(url);
-                    //Just an example to show that it works, replace with MSG website
-                    //Ask: HOW TO CLOSE THE OPENED BROWSER IMMEDIATELY
-
-                    //ModalPopupExtender1.Hide();
-                    //    Response.Redirect("/Account/AccountPage.aspx");
-                    //}
-                    //else
-                    //{
-                    //    TextBox4.Text = "";
-                    //    Label6.Text = "Invalid Code.";
-                    //}
-
                     Response.Redirect("/Account/2FA_Input.aspx");
                     //if the inputs are true, I start the countdown
                     //stopwatch.Start();
                     //Thread.Sleep(6000);
                 }
-
                 //Either email/password wrong, shows this
+                else if (dbEmail.Equals(inputemail) && hashresult == false)
+                {
+                    myConnection.Open();
+
+                    //Read counter from database, check if its 5. If 5, then don't allow login. 
+                    if (Convert.ToInt32(dbCount)>=5)
+                    {
+                        //Disable TextBox
+                        //Start countdown timer
+                        //change status to locked
+                        //Message: your account has been locked, please try again __ minutes later
+                        Label5.Text = "Your account has been locked, please try again ___ minutes later. ";
+                    }
+                    else if (Convert.ToInt32(dbCount)<5)
+                    {
+                        counter++;
+                        string query2 = "UPDATE [User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
+                        SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                        myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                        myCommand2.Parameters.AddWithValue("@counter", counter);
+                        Label5.Text = "Invalid credentials. Please try again.";
+                        myConnection.Close();
+                    }
+                }
                 else if (!dbEmail.Equals(inputemail) || hashresult == false)
                 {
-                    //ModalPopupExtender1.Hide(); //doesn't work
-
                     Label5.Text = "Invalid credentials. Please try again.";
-                    //counter++; //-ADDED THIS FOR LOCKOUT                
-                    //SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
-                    //myCommand2.CommandType = CommandType.Text;
-                    //myConnection.Open();
-                    //myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
-                    //myCommand2.Parameters.AddWithValue("@counter", counter);
-                    //myCommand2.ExecuteNonQuery();
                 }
                 else if (inputemail == "" || inputpassword == "")
                 {
                     //if empty
                 }
+
             }
 
             //Take USERNAME put at top right hand corner (Hello _____) 
