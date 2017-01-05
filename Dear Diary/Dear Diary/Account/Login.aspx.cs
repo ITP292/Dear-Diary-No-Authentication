@@ -94,6 +94,17 @@ namespace Dear_Diary.Account
 
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
+                    // - NOTWORKING - 
+                    myConnection.Open();
+                    //count=0;
+                    string query3 = "UPDATE [dbo].[User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
+                    SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
+                    myCommand3.CommandType = CommandType.Text;
+                    myCommand3.Parameters.AddWithValue("@counter", 0);
+                    myCommand3.Parameters.AddWithValue("@inputemail", inputemail);
+                    myCommand3.ExecuteNonQuery();
+                    myConnection.Close();
+                    // - NOTWORKING - 
                     Response.Redirect("/Account/2FA_Input.aspx");
 
                 }
@@ -112,6 +123,7 @@ namespace Dear_Diary.Account
                         myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
                         myCommand2.ExecuteNonQuery();
                         //Label1.Text = count.ToString();
+
                     }
 
                     //Read counter from database, check if its 5. If 5, then don't allow login. 
