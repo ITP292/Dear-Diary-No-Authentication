@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
-using Dear_Diary.Security_API;
 
 namespace Dear_Diary.Account
 {
@@ -24,16 +23,16 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
+                salt = GetSalt(8);
 
                 string fname = TextBox1.Text;
                 string lname = TextBox2.Text;
                 string email = TextBox3.Text;
                 string password = TextBox4.Text;
-                string passwordhash = Hash.ComputeHash(password, "SHA512", salt);
+                string passwordhash = ComputeHash(password, new SHA512CryptoServiceProvider(), salt);
                 string confirmpassword = TextBox5.Text;
                 string phonenumber = TextBox6.Text;
                 //change string phone number to integer to store in database
-                //string randomNo = "";
 
                 //For PHONENUMBER
                 string firstDigit = phonenumber.Substring(0, 1);
@@ -86,8 +85,8 @@ namespace Dear_Diary.Account
                     {
                         Label10.Text = "";
 
-                        string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number)";
-                        query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber)";
+                        string query = "INSERT INTO [dbo].[User](Email_Address, FName, LName, Password, Phone_Number, salt)";
+                        query += " VALUES (@Email, @FName, @LName, @Password, @PhoneNumber, @Salt)";
                         SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                         //To prevent sql injection
@@ -96,7 +95,7 @@ namespace Dear_Diary.Account
                         myCommand.Parameters.AddWithValue("LName", lname);
                         myCommand.Parameters.AddWithValue("Password", passwordhash);
                         myCommand.Parameters.AddWithValue("PhoneNumber", phonenumber);
-                        //myCommand.Parameters.AddWithValue("randomNo", randomNo);
+                        myCommand.Parameters.AddWithValue("Salt", salt);
 
                         myCommand.ExecuteNonQuery();
                         Response.Redirect("/Account/SuccessfulRegistration");
@@ -121,7 +120,7 @@ namespace Dear_Diary.Account
                         {
                             Label9.Text = "Phone Number must be 8 digits";
                             Label10.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
-                        } 
+                        }
 
                     }
                 }
@@ -177,6 +176,31 @@ namespace Dear_Diary.Account
             }
             return true;
         }
-    }
 
+        public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            // Combine salt and input bytes
+            Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+            salt.CopyTo(saltedInput, 0);
+            inputBytes.CopyTo(saltedInput, salt.Length);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+            return BitConverter.ToString(hashedBytes);
+        }
+
+        private static byte[] GetSalt(int maximumSaltLength)
+        {
+            var salt = new byte[maximumSaltLength];
+            using (var random = new RNGCryptoServiceProvider())
+            {
+                random.GetNonZeroBytes(salt);
+            }
+
+            return salt;
+        }
+
+    }
 }
