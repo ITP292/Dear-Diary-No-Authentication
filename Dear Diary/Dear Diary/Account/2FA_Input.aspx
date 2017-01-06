@@ -18,5 +18,5 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="Button2" runat="server" Text="Resend code" OnClick="Button2_Click" />
 &nbsp;
-
+    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="10000"></asp:Timer>
 </asp:Content>

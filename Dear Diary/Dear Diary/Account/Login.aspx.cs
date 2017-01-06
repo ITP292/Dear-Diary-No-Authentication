@@ -16,14 +16,11 @@ namespace Dear_Diary.Account
     public partial class Login : System.Web.UI.Page
     {
         public static int count = 0;
-        public static int timeCounter = 0;
+        public static int timeCounter = 0; //Timer countdown for lockout
+        //public static int timeCounter1 = 0; //Timer countdown for 2FA code
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SqlConnection myConnection;
-            //using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-            //{
-            //}
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -82,7 +79,7 @@ namespace Dear_Diary.Account
                 {
                     Session["email"] = TextBox1.Text;
 
-                    // - NOTWORKING - 
+                    //When successful login, counter reset to 0
                     myConnection.Open();
                     count=0;
                     string query3 = "UPDATE [dbo].[User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
@@ -92,8 +89,8 @@ namespace Dear_Diary.Account
                     myCommand3.Parameters.AddWithValue("@inputemail", inputemail);
                     myCommand3.ExecuteNonQuery();
                     myConnection.Close();
-                    // - NOTWORKING - 
 
+                    //Generate a random no (2FA code) and update the database
                     myConnection.Open();
                     string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
                     SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
@@ -106,9 +103,11 @@ namespace Dear_Diary.Account
 
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
-                    
-                    Response.Redirect("/Account/2FA_Input.aspx");
 
+                    Response.Redirect("/Account/2FA_Input.aspx");
+                    //Start the Timer2 for 2FA code
+                    //Timer2.Enabled = true;
+                    //timeCounter1 = 0;
                 }
 
                 //Either email/password wrong, shows this
@@ -125,6 +124,8 @@ namespace Dear_Diary.Account
                         myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
                         myCommand2.ExecuteNonQuery();
                         //Label1.Text = count.ToString();
+                        Label7.Text = (5 - count).ToString() + " tries left.";
+
 
                     }
 
@@ -133,11 +134,10 @@ namespace Dear_Diary.Account
                     {
                         TextBox1.Enabled = false;
                         TextBox2.Enabled = false;
-                        Label2.Text = "Your account has been locked";
                         //Label1.Text = count.ToString();
                         Timer1.Enabled = true;
                         timeCounter = 0;
-                        Label5.Text = "Your account has been locked. Please try again later.";
+                        Label5.Text = "Your account has been locked. Please try again 5 minutes later.";
 
                     }
                     else if (Convert.ToInt32(dbCount)<5)
@@ -161,7 +161,7 @@ namespace Dear_Diary.Account
             }
         }
 
-        protected void Timer_Tick(object sender, EventArgs e)
+        protected void Timer1_Tick(object sender, EventArgs e)
         {
             timeCounter++;
             if (timeCounter >= 1)
@@ -172,6 +172,30 @@ namespace Dear_Diary.Account
                 Label5.Text = "";
             }
         }
+
+        //protected void Timer2_Tick(object sender, EventArgs e)
+        //{
+        //    timeCounter1++;
+        //    if (timeCounter1 >= 1)
+        //    {
+        //        SqlConnection myConnection;
+        //        using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+        //        {
+        //            string inputemail = TextBox1.Text;
+        //            string randomNo = null;
+        //            //set randomNo to null once time is up
+        //            myConnection.Open();
+        //            string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
+        //            SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+        //            myCommand1.CommandType = CommandType.Text;
+        //            myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+        //            myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+        //            myCommand1.ExecuteNonQuery();
+        //            myConnection.Close();
+        //        }
+        //            Timer2.Enabled = false;
+        //    }
+        //}
 
         //generate otp code method
         private string GenerateRandomOTP(int iOTPLength, string[] saAllowedCharacters)

@@ -22,6 +22,11 @@
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
         CssClass="text-danger" ErrorMessage="The email field is required." />
 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label6" runat="server" Text="Login with your email and password. You have"></asp:Label>
+
+    <asp:Label ID="Label7" runat="server" Text=" 5 tries."></asp:Label>
+
     <br />
     <br />
 
@@ -53,5 +58,8 @@
     <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
     <a href="/Account/ForgotPassword">Forgot password</a>
 
-    <asp:Timer ID="Timer1" runat="server" ontick="Timer_Tick" Interval="10000" Enabled="False"></asp:Timer>
+    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="10000" Enabled="False"></asp:Timer>
+    <%-- 1000 = 1 second, 10000 = 10 seconds, 300000 = 5 minutes = 300 seconds --%>
+
+<%--    <asp:Timer ID="Timer2" runat="server" ontick="Timer2_Tick" Interval="1000" Enabled="False"></asp:Timer>--%>
 </asp:Content>
