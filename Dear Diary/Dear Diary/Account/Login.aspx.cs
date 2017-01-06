@@ -96,11 +96,11 @@ namespace Dear_Diary.Account
 
                     // - NOTWORKING - 
                     myConnection.Open();
-                    //count=0;
+                    count=0;
                     string query3 = "UPDATE [dbo].[User] SET [counter] = @counter WHERE [Email_Address] = @inputemail";
                     SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
                     myCommand3.CommandType = CommandType.Text;
-                    myCommand3.Parameters.AddWithValue("@counter", 0);
+                    myCommand3.Parameters.AddWithValue("@counter", count);
                     myCommand3.Parameters.AddWithValue("@inputemail", inputemail);
                     myCommand3.ExecuteNonQuery();
                     myConnection.Close();
