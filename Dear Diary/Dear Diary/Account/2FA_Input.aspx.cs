@@ -148,7 +148,6 @@ namespace Dear_Diary.Account
                     myConnection.Close();
                 }
                     Timer1.Enabled = false;
-
                 
             }
         }
