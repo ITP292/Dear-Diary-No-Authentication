@@ -3,38 +3,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <style type="text/css">
-        .modalBackground {
-            background-color: Black;
-            filter: alpha(opacity=90);
-            opacity: 0.8;
-        }
-
-        .modalPopup {
-            background-color: #FFFFFF;
-            border-width: 3px;
-            border-style: solid;
-            border-color: black;
-            padding-top: 10px;
-            padding-left: 10px;
-            width: 300px;
-            height: 140px;
-            align-content: center;
-        }
-
-        .buttonClose {
-            margin-top: 5px;
-            margin-right: 20px;
-        }
-
-        .buttonPress {
-
-        }
-
-        .box {
-            margin-top:80px;
-        }
-    </style>
 
     <br />
     <%--<div style="font-size: 30px">--%>

@@ -61,7 +61,7 @@ namespace Dear_Diary.Account
             {
                 string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
-                string inputemail = "xjt@gmail.com"; //need help, how to get the input email from login page previously? Is it session?
+                string inputemail = Session["email"].ToString(); 
 
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 //Once resend code, need to update randomNo
