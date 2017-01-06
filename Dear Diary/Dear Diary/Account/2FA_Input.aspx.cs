@@ -11,10 +11,16 @@ namespace Dear_Diary.Account
 {
     public partial class _2FA_Input : System.Web.UI.Page
     {
+        public static int timeCounter = 0;
+        //Timer countdown for 2FA code
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Timer1.Enabled = true;
+            timeCounter = 0;
         }
 
+        //Confirm Code
         protected void Button1_Click(object sender, EventArgs e)
         {
             SqlConnection myConnection;
@@ -42,6 +48,8 @@ namespace Dear_Diary.Account
                 {
                     String url = "www.google.com";
                     System.Diagnostics.Process.Start(url);
+                    Timer1.Enabled = false;
+                    //if Correct code, stop timer. 
                     Response.Redirect("/Account/AccountPage.aspx");
 
                 }
@@ -54,8 +62,12 @@ namespace Dear_Diary.Account
 
         }
 
+        //Resending Code
         protected void Button2_Click(object sender, EventArgs e)
         {
+            Timer1.Enabled = true;
+            timeCounter = 0;
+            //False because new code means new timer start countdown
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -115,6 +127,30 @@ namespace Dear_Diary.Account
             }
 
             return sOTP;
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            timeCounter++;
+            if (timeCounter >= 1)
+            {
+                SqlConnection myConnection;
+                using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                {
+                    string inputemail = Session["email"].ToString();
+                    string randomNo = "1";
+                    myConnection.Open();
+                    string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
+                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                    myCommand1.CommandType = CommandType.Text;
+                    myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+                    myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+                    myConnection.Close();
+                }
+                    Timer1.Enabled = false;
+
+                
+            }
         }
     }
 }
