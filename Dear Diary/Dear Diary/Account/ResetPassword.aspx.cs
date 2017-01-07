@@ -24,8 +24,11 @@ namespace Dear_Diary.Account
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
+                
+                string email = "xjt@gmail.com"; 
+                //string email = Session["email"].ToString();
+                //This is the part of how to get the user's email from LINK in email
 
-                string email = "xjt@gmail.com";
                 string inputpassword = TextBox1.Text;
                 string hashpassword = Hash.ComputeHash(inputpassword, "SHA512", salt);
 
