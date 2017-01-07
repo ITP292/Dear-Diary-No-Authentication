@@ -13,5 +13,12 @@ namespace Dear_Diary.Account
         {
             Label1.Text = Session["email"].ToString();
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("/Account/Login.aspx");
+
+        }
     }
 }
