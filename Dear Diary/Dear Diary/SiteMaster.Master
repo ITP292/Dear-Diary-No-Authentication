@@ -1,0 +1,84 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteMaster.master.cs" Inherits="Dear_Diary.SiteMaster1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    
+    <script src="~/../../Content/js/jquery-1.11.0.min.js"></script>
+    <script src="~/../../Content/js/owl.carousel.min.js"></script>
+    <link href="~/Content/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.theme.default.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%--<form id="form1" runat="server">--%>
+    <div>
+
+        <div class="menu-bar">
+            <div class="name-logo left">
+                <h1><a href="home.aspx">Dear Diary</a></h1>
+            </div>
+            <div class="left home">
+                <h2><a href="home.aspx" style="padding-left: 40px;">Home</a></h2>
+            </div>
+            <div class="icon-list right">
+                <ul>
+                    <li><a href="#Friends List" title="Friends List">
+                        <img src="../Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
+                    <li><a href="#Notification" title="Notification">
+                        <img src="../Content/img/notify.PNG" alt="Notification" title="Notification" /></a></li>
+                    <li><a href="#Add Friends" title="Add Friends">
+                        <img src="../Content/img/frslist.PNG" alt="Add Friends" title="Add Friends" /></a></li>
+                    <li><a href="NewEntry.aspx" title="Add New Entry">
+                        <img src="../Content/img/note.PNG" alt="Add New Entry" title="Add New Entry" /></a></li>
+                    <li><a href="#setting" title="setting">
+                        <img src="../Content/img/setting.png" alt="setting" title="setting" /></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <div class="footer">
+            <a href="#"> &copy; 2017 ALL RIGHT RESERVED </a>
+        </div>
+
+        <script>
+            $("#menu_open").click(function () {
+                $(".menu").toggle(500);
+            });
+            $(".prev").click(function () {
+                $(".owl-prev").click();
+            });
+            $(".next").click(function () {
+                $(".owl-next").click();
+            });
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            })
+        </script>
+
+    </div>
+    <%--</form>--%>
+</body>
+</html>

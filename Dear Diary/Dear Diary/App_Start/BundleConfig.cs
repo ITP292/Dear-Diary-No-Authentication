@@ -34,6 +34,14 @@ namespace Dear_Diary
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                          "~/Content/js/jquery-1.11.0.min.js",
+                          "~/Content/js/owl.carousel.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+                       "~/Content/css/style.css",
+                       "~/Content/css/owl.carousel.min.css"));
+
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition

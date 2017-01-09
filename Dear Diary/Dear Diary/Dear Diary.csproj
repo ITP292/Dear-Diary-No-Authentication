@@ -163,6 +163,29 @@
     <Content Include="Content\AboutStyle.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\owl.carousel.min.css" />
+    <Content Include="Content\css\owl.theme.default.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\img\arrowdown.gif" />
+    <Content Include="Content\img\back.PNG" />
+    <Content Include="Content\img\background.jpg" />
+    <Content Include="Content\img\fr.PNG" />
+    <Content Include="Content\img\frslist.PNG" />
+    <Content Include="Content\img\line.PNG" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\mian_back.png" />
+    <Content Include="Content\img\note.PNG" />
+    <Content Include="Content\img\notify.PNG" />
+    <Content Include="Content\img\setting.png" />
+    <Content Include="Content\img\slider.png" />
+    <Content Include="Content\img\thumb01.jpg" />
+    <Content Include="Content\img\thumb02.jpg" />
+    <Content Include="Content\img\thumb03.jpg" />
+    <Content Include="Content\img\thumb04.jpg" />
+    <Content Include="Content\img\thumb05.jpg" />
+    <Content Include="Content\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\js\owl.carousel.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -172,8 +195,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Friends\viewFriendRedir.aspx" />
+    <Content Include="NewEntry\Home.aspx" />
+    <Content Include="NewEntry\NewEntry.aspx" />
     <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
+    <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Friends\addFriend.aspx" />
     <Content Include="Friends\addFriendRedir.aspx" />
@@ -223,6 +249,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="SiteMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -411,6 +438,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="NewEntry\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewEntry\NewEntry.aspx.cs">
+      <DependentUpon>NewEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\NewEntry.aspx.designer.cs">
+      <DependentUpon>NewEntry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -455,6 +496,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMaster.Master.cs">
+      <DependentUpon>SiteMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMaster.Master.designer.cs">
+      <DependentUpon>SiteMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
