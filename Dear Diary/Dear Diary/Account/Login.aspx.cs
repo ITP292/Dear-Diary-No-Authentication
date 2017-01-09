@@ -134,10 +134,10 @@ namespace Dear_Diary.Account
                     {
                         TextBox1.Enabled = false;
                         TextBox2.Enabled = false;
-                        //Label1.Text = count.ToString();
+                        //Label1.Text = count.ToString();                        
+                        Label8.Text = "Your account has been locked. Please try again 5 minutes later.";
                         Timer1.Enabled = true;
                         timeCounter = 0;
-                        Label5.Text = "Your account has been locked. Please try again 5 minutes later.";
 
                     }
                     else if (Convert.ToInt32(dbCount)<5)
@@ -170,6 +170,7 @@ namespace Dear_Diary.Account
                 TextBox2.Enabled = true;
                 Timer1.Enabled = false;
                 Label5.Text = "";
+                Label8.Text = "";
             }
         }
 

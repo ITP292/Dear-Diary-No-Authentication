@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
-using Dear_Diary.Security_API;
 
 namespace Dear_Diary.Account
 {
@@ -24,10 +23,12 @@ namespace Dear_Diary.Account
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 Byte[] salt = new byte[8];
+                
+                string email = "xjt@gmail.com"; 
+                //string email = Session["email"].ToString();
+                //This is the part of how to get the user's email from LINK in email
 
-                string email = "xjt@gmail.com";
                 string inputpassword = TextBox1.Text;
-                string hashpassword = Hash.ComputeHash(inputpassword, "SHA512", salt);
 
                 myConnection.Open();
                 string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
@@ -37,25 +38,28 @@ namespace Dear_Diary.Account
                 SqlDataReader reader = myCommand1.ExecuteReader();
 
                 string dbPassword = "";
+                string dbSalt = "";
+
                 if(reader.Read())
                 {
                     dbPassword = reader["Password"].ToString();
+                    dbSalt = reader["salt"].ToString();
                 }
 
                 myConnection.Close();
+                string hashpassword = ComputeHash(inputpassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
 
                 //Checking if the new password is the same as the old password
 
-                bool hashresult = Hash.VerifyHash(inputpassword, "SHA512", dbPassword);
 
                 //if (dbPassword.Equals(inputpassword))
-                if (hashresult == true)
+                if (dbPassword.Equals(hashpassword))
                 {
                     Label5.Text = "You cannot use the same password again. Please change your password.";
                 }
 
                 //if hashresult == false, then means the new password is different from the old password, hence can change password
-                else
+                else if (!dbPassword.Equals(hashpassword))
                 {
 
                     bool result = IsValid(inputpassword);
@@ -95,12 +99,16 @@ namespace Dear_Diary.Account
             //Next pull the password from database to compare
         }
 
-        //Hash only - without salt
-        public string ComputeHash(string input, HashAlgorithm algorithm)
+        public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
         {
             Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
 
-            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+            // Combine salt and input bytes
+            Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+            salt.CopyTo(saltedInput, 0);
+            inputBytes.CopyTo(saltedInput, salt.Length);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
 
             return BitConverter.ToString(hashedBytes);
         }
