@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace Dear_Diary.Account
 {
@@ -58,7 +59,6 @@ namespace Dear_Diary.Account
                         //format - From, To, Subject, Body
 
                         Response.Redirect("/Account/ForgetPasswordEmailSent.aspx");
-
                     }
                 }
 
@@ -67,11 +67,59 @@ namespace Dear_Diary.Account
                     Label4.Text = "This account does not exist.";
 
                 }
-
-
             }
-
-
         }
+
+        protected void RegisterUser(object sender, EventArgs e)
+        {
+            string userId = TextBox1.Text;
+            string message = string.Empty;
+            SendActivationEmail(userId);
+ 
+        }
+
+        private void SendActivationEmail(string userId)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            string activationCode = Guid.NewGuid().ToString();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO UserActivation VALUES(@UserId, @ActivationCode)"))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@ActivationCode", activationCode);
+                        cmd.Connection = con;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+            }
+            using (MailMessage mm = new MailMessage("sender@gmail.com", txtEmail.Text))
+            {
+                mm.Subject = "Account Activation";
+                string body = "Hello " + txtUsername.Text.Trim() + ",";
+                body += "<br /><br />Please click the following link to activate your account";
+                body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("CS.aspx", "CS_Activation.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                body += "<br /><br />Thanks";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("sender@gmail.com", "<password>");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+    }
+        }
+
+
     }
 }

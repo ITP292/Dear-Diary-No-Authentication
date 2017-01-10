@@ -13,10 +13,10 @@
     <br />
     <asp:Label ID="Label4" runat="server" CssClass ="text-danger"></asp:Label>
     <br />
+    <asp:Label ID="Label5" runat="server" CssClass ="text-danger"></asp:Label>
+    <br />
     <br />
     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Confirm" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="Button2" runat="server" Text="Resend code" OnClick="Button2_Click" />
-&nbsp;
-    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="10000"></asp:Timer>
 </asp:Content>

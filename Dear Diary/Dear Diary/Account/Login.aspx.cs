@@ -45,9 +45,6 @@ namespace Dear_Diary.Account
                 String dbCount = "";
                 String dbSalt = "";
 
-                //-ADDED THIS FOR LOCKOUT- 
-                //int counter = 0;
-
                 myConnection.Open();
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
@@ -99,15 +96,19 @@ namespace Dear_Diary.Account
                     myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
                     myCommand1.ExecuteNonQuery();
                     myConnection.Close();
-                    Response.Redirect("/Account/2FA_Input.aspx");
-
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
+                    //System.Diagnostics.Process.Start(url);
 
+                    DateTime startTime = DateTime.Now;
+                    myConnection.Open();
+                    string query4 = "UPDATE [dbo].[User] SET [TimeGenerateCode] = @start WHERE [Email_Address] = @inputemail";
+                    SqlCommand myCommand4 = new SqlCommand(query4, myConnection);
+                    myCommand4.CommandType = CommandType.Text;
+                    myCommand4.Parameters.AddWithValue("@inputemail", inputemail);
+                    myCommand4.Parameters.AddWithValue("@start", startTime);
+                    myCommand4.ExecuteNonQuery();
 
                     Response.Redirect("/Account/2FA_Input.aspx");
-                    //Start the Timer2 for 2FA code
-                    //Timer2.Enabled = true;
-                    //timeCounter1 = 0;
                 }
 
                 //Either email/password wrong, shows this
