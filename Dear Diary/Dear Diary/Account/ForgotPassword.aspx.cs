@@ -43,6 +43,7 @@ namespace Dear_Diary.Account
                     {
                         string link = "www.google.com.sg";
                         //generate link here to be sent to email to reset password
+                        //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
                         MailMessage mm = new MailMessage("sender@gmail.com", txtEmail.Text);
 
@@ -58,6 +59,7 @@ namespace Dear_Diary.Account
                             smtp.Port = 587;
                             smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
                             smtp.Credentials = new NetworkCredential("joanne855902@gmail.com", "testing855902");
+                            smtp.UseDefaultCredentials = true;
                             smtp.EnableSsl = true;
                             smtp.Timeout = 20000;
                             smtp.Send(mm);
