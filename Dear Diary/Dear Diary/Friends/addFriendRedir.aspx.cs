@@ -14,6 +14,7 @@ namespace Dear_Diary.Friends
         protected void Page_Load(object sender, EventArgs e)
         {
             FriendEmail.Text = addFriend.dbEmail;
+            Header.Text = addFriend.Name;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -36,8 +37,6 @@ namespace Dear_Diary.Friends
                 myCommand.Parameters.AddWithValue("@Status", "Pending");
                 myCommand.Parameters.AddWithValue("@Read", "false");
                 myCommand.ExecuteNonQuery();
-
-                //Test
 
                 Response.Redirect("addFriend.aspx");
             }

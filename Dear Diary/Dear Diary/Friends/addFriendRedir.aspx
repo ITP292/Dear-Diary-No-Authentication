@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addFriendRedir.aspx.cs" Inherits="Dear_Diary.Friends.addFriendRedir" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Friend Name Here</h2>
+    <h2>
+        <asp:Label ID="Header" runat="server" Text="Friend Name Here"></asp:Label>
+    </h2>
 
     <div class="row">
         <div class="col-md-8">
