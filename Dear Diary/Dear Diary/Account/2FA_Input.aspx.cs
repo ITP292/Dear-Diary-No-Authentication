@@ -11,13 +11,9 @@ namespace Dear_Diary.Account
 {
     public partial class _2FA_Input : System.Web.UI.Page
     {
-        public static int timeCounter = 0;
-        //Timer countdown for 2FA code
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            Timer1.Enabled = true;
-            timeCounter = 0;
+
         }
 
         //Confirm Code
@@ -39,20 +35,30 @@ namespace Dear_Diary.Account
                 SqlDataReader reader = myCommand.ExecuteReader();
 
                 string dbRandomNo = "";
+                DateTime dbstartTime;
+                String dbTime = "";
 
                 if (reader.Read())
                 {
                     dbRandomNo = reader["randomNo"].ToString();
+                    dbTime = reader["TimeGenerateCode"].ToString();
+
                 }
 
                 if (inputCode.Equals(dbRandomNo))
                 {
-                    String url = "www.google.com";
-                    System.Diagnostics.Process.Start(url);
-                    Timer1.Enabled = false;
-                    //if Correct code, stop timer. 
-                    Response.Redirect("/Account/AccountPage.aspx");
+                    DateTime endTime = DateTime.Now;
+                    dbstartTime = Convert.ToDateTime(dbTime);
 
+                    TimeSpan difference = endTime.Subtract(dbstartTime);
+
+                    if (difference.TotalMinutes < 2)
+                    {
+                        Response.Redirect("/Account/AccountPage.aspx");
+                    }
+                    else
+                        Label5.Text = "Your code has expired. Please request for another code.";
+                    
                 }
                 else if (!inputCode.Equals(dbRandomNo))
                 {
@@ -66,9 +72,6 @@ namespace Dear_Diary.Account
         //Resending Code
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Timer1.Enabled = true;
-            timeCounter = 0;
-            //False because new code means new timer start countdown
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -103,7 +106,7 @@ namespace Dear_Diary.Account
                 }
 
                 //Send new message
-                //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbPhone + "&Message=" + "Your OTP is: " + dbRandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
+                //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbPhone + "&Message=" + "Your OTP is: " + dbRandomNo + ". Your code will expire after 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
                 String url = "www.google.com.sg";
                 System.Diagnostics.Process.Start(url);
 
@@ -130,27 +133,20 @@ namespace Dear_Diary.Account
             return sOTP;
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            timeCounter++;
-            if (timeCounter >= 1)
-            {
-                SqlConnection myConnection;
-                using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-                {
-                    string inputemail = Session["email"].ToString();
-                    string randomNo = "1";
-                    myConnection.Open();
-                    string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
-                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-                    myCommand1.CommandType = CommandType.Text;
-                    myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-                    myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
-                    myConnection.Close();
-                }
-                    Timer1.Enabled = false;
-                
-            }
         }
     }
-}
+
+//IF TIME's UP
+//SqlConnection myConnection;
+//using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+//{
+//    string inputemail = Session["email"].ToString();
+//    string randomNo = "1";
+//    myConnection.Open();
+//    string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
+//    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+//    myCommand1.CommandType = CommandType.Text;
+//    myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+//    myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
+//    myConnection.Close();
+//}
