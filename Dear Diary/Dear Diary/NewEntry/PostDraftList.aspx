@@ -9,12 +9,27 @@
             <div class="new-entry">
                 <h1>Drafts</h1>
             </div>
-             <asp:Repeater ID="rptPostList" runat="server">
+            <asp:Repeater ID="rptPostList" runat="server" OnItemCommand="rptPostList_ItemCommand">
                 <ItemTemplate>
-            <div class="draft-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet laoreet elit. Aliquam commodo lacus elit, nec faucibus purus ullamcorper eget. Vestibulum aliquam, nibh eget laoreet tempor, arcu nunc posuere nisl, eget elementum est enim eu leo. In vitae faucibus velit. Nunc augue leo, pretium quis orci nec, sollicitudin finibus ante. Maecenas velit purus, ornare a suscipit vitae, scelerisque nec arcu. Cras in nunc at lorem commodo vestibulum. Nullam nibh lacus, pulvinar vel nisi sit amet, tempus ultrices nisi. Phasellus sollicitudin sollicitudin ligula, at ultricies augue euismod a. Maecenas sed mattis lectus. Fusce a blandit nibh. Vivamus ac erat id nulla dignissim mattis. Vivamus faucibus, lacus quis facilisis cursus, libero orci rutrum ex, fermentum tincidunt nibh lorem sit amet dolor. </p>
-            </div>
-            </ItemTemplate>
+                    <a class="draft-post-link" href="NewEntry.aspx?Post_Id=<%# Eval("Post_Id") %>">
+                        <div class="main_dtaft">
+                            <div class="img_draft left">
+                                <asp:Image ImageUrl='<%# Eval("Picture") %>' ID="img" runat="server" />
+                            </div>
+                            <div class="draft-content right">
+                                <p>
+                                    <asp:Label ID="lblposttext" runat="server" Text='<%# Eval("Post_Text") %>' />
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </a>
+                    <div class="post-footer">
+                        Save as Draft on :
+                        <asp:Label ID="lblPostDraftOn" runat="server" Text='<%# Eval("Date_Added","{0:dd MMM yyyy}") %>' />
+                        <asp:LinkButton CssClass="draft-post-delete" CommandName="Delete" CommandArgument='<%# Eval("Post_Id") %>' Text="Delete Post" ID="lnkDraftDelete" runat="server" />
+                    </div>
+                </ItemTemplate>
             </asp:Repeater>
         </div>
     </form>

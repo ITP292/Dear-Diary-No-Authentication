@@ -44,14 +44,14 @@ namespace Dear_Diary.Account
                         string link = "www.google.com.sg";
                         //generate link here to be sent to email to reset password
 
-                        MailMessage mm = new MailMessage("sender@gmail.com", txtEmail.Text);
+                        MailMessage mm = new MailMessage("sender@gmail.com", "");
 
                         var smtp = new System.Net.Mail.SmtpClient();
                         {
                             mm.Subject = "Reset Password";
                             string body = "Dear User, \n \n Please Reset your password by following the instructions. ";
                             body += "\n \n Please click the following link to reset your password.";
-                            body += "<a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "ResetPassword.aspx?ActivationCode=" + resetCode) + "'>Click here to reset your password.</a>";
+                            body += "<a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "ResetPassword.aspx?ActivationCode=" + "") + "'>Click here to reset your password.</a>";
                             body += "\n Thank you.";
                             mm.Body = body;
                             smtp.Host = "smtp.gmail.com";

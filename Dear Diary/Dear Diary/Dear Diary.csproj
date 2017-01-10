@@ -171,6 +171,7 @@
     <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\fr.PNG" />
     <Content Include="Content\img\frslist.PNG" />
+    <Content Include="Content\img\line-draft.png" />
     <Content Include="Content\img\line.PNG" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\mian_back.png" />
@@ -199,6 +200,7 @@
     <Content Include="NewEntry\NewEntry.aspx" />
     <Content Include="NewEntry\PostDraftList.aspx" />
     <Content Include="Notification.aspx" />
+    <Content Include="Pictures\default-thumbnail.jpg" />
     <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />

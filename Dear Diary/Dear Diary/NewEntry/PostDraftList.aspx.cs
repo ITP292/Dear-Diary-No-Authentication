@@ -34,5 +34,27 @@ namespace Dear_Diary.NewEntry
                 return dt;
             }
         }
+        protected void rptPostList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                var id = e.CommandArgument.ToString();
+                String query = "Delete FROM [Post] WHERE [Post_Id] = " + id;
+
+                SqlConnection myConnection;
+                using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                {
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    myConnection.Open();
+                    myCommand.CommandType = CommandType.Text;
+                    myCommand.ExecuteNonQuery();
+                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Post deleted successfully.');", true);
+
+                rptPostList.DataSource = GetPostDetails(0);
+                rptPostList.DataBind();
+            }
+        }
     }
 }
