@@ -15,7 +15,21 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string resetCode = Guid.NewGuid().ToString();
+            //string link = Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "/Account/ResetPassword.aspx?ActivationCode=" + resetCode);
 
+            //SqlConnection myConnection;
+            //using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            //{
+            //    myConnection.Open();
+
+            //    string query1 = "UPDATE [dbo].[User] SET [resetCode] = @resetCode WHERE [Email_Address] = @inputemail";
+            //    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+            //    myCommand1.Parameters.AddWithValue("@inputemail", "limruoqijoanne54@gmail"); //test email
+            //    myCommand1.Parameters.AddWithValue("@resetCode", resetCode);
+            //    myCommand1.ExecuteNonQuery();
+            //    myConnection.Close();
+            //}
         }
 
         protected void ResetPassword_Click(object sender, EventArgs e)
