@@ -8,15 +8,16 @@
                 <div class="form-horizontal">
                     <hr />
                     <div class="form-group">
-                        <div class="col-md-10">Profile Picture:</div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">Email Address:</div>
+                        <asp:Label runat="server" CssClass="col-md-2 control-label">Email Address:</asp:Label>
                         <asp:TextBox runat="server" ID="FriendEmail" CssClass="form-control" ReadOnly="True" />
                         <br />
-                        <asp:Button ID="Button1" runat="server" Text="Accept" />
-&nbsp;<asp:Button ID="Button2" runat="server" Text="Deny" />
+                         <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <asp:Button runat="server" Text="Accept" CssClass="btn btn-default" OnClick="Button1_Click" />
+                            &nbsp;
+                            <asp:Button runat="server" Text="Deny" CssClass="btn btn-default" OnClick="Button2_Click" />
+                        </div>
+                    </div>
                         <br />
                     </div>
                 </div>

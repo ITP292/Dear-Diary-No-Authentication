@@ -7,10 +7,6 @@
             <section id="loginForm">
                 <div class="form-horizontal">
                     <hr />
-                   <div class="form-group">
-                        <div class="col-md-10">Profile Picture:</div>
-                    </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">Email Address:</div>
                     </div>

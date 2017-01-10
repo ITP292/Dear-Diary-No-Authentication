@@ -40,8 +40,6 @@ namespace Dear_Diary.Friends
                 if (reader.Read())
                 {
                     dbEmail = reader["Email_Address"].ToString();
-                    dbProfilePic = reader["Profile_Pic"].ToString();
-
                 }
 
                 Response.Redirect("addFriendRedir");
