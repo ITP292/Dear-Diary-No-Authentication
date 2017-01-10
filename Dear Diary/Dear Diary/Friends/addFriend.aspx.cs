@@ -13,6 +13,7 @@ namespace Dear_Diary.Friends
     {
         public static String dbEmail = "";
         public static String dbProfilePic = "";
+        public static String Name = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,8 @@ namespace Dear_Diary.Friends
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                String dbFName;
+                String dbLName;
                 String query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
@@ -40,8 +43,9 @@ namespace Dear_Diary.Friends
                 if (reader.Read())
                 {
                     dbEmail = reader["Email_Address"].ToString();
-                    dbProfilePic = reader["Profile_Pic"].ToString();
-
+                    dbFName = reader["FName"].ToString();
+                    dbLName = reader["LName"].ToString();
+                    Name = dbFName + " " + dbLName;
                 }
 
                 Response.Redirect("addFriendRedir");
