@@ -37,6 +37,8 @@ namespace Dear_Diary.Friends
                 myCommand.Parameters.AddWithValue("@Read", "false");
                 myCommand.ExecuteNonQuery();
 
+                //Test
+
                 Response.Redirect("addFriend.aspx");
             }
         }
