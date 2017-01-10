@@ -26,9 +26,18 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 string inputemail = TextBox1.Text;
+                string resetCode = Guid.NewGuid().ToString();
 
                 myConnection.Open();
 
+                string query1 = "UPDATE [dbo].[User] SET [resetCode] = @resetCode WHERE [Email_Address] = @inputemail";
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
+                myCommand1.Parameters.AddWithValue("@resetCode", resetCode);
+                myCommand1.ExecuteNonQuery();
+                myConnection.Close();
+
+                myConnection.Open();
                 string query = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myCommand.Parameters.AddWithValue("@Email", inputemail);
@@ -41,27 +50,29 @@ namespace Dear_Diary.Account
 
                     if (inputemail == dbemail)
                     {
-                        string link = "www.google.com.sg";
+                        string link = "http://localhost:14371/Account/ResetPassword";
+                        //string link = Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "/Account/ResetPassword.aspx?ActivationCode=" + resetCode);
                         //generate link here to be sent to email to reset password
                         //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
-                        MailMessage mm = new MailMessage("sender@gmail.com", txtEmail.Text);
 
                         var smtp = new System.Net.Mail.SmtpClient();
                         {
+                            MailMessage mm = new MailMessage("joanne855902@gmail.com", inputemail);
+
                             mm.Subject = "Reset Password";
                             string body = "Dear User, \n \n Please Reset your password by following the instructions. ";
-                            body += "\n \n Please click the following link to reset your password.";
-                            body += "<a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "ResetPassword.aspx?ActivationCode=" + resetCode) + "'>Click here to reset your password.</a>";
-                            body += "\n Thank you.";
+                            body += "\n \nPlease click the following link to reset your password. \n";
+                            body += link;
+                            body += "\n \nThank you.";
                             mm.Body = body;
                             smtp.Host = "smtp.gmail.com";
                             smtp.Port = 587;
                             smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
                             smtp.Credentials = new NetworkCredential("joanne855902@gmail.com", "testing855902");
-                            smtp.UseDefaultCredentials = true;
+                            //smtp.UseDefaultCredentials = true;
                             smtp.EnableSsl = true;
-                            smtp.Timeout = 20000;
+                            //smtp.Timeout = 20000;
                             smtp.Send(mm);
                         }
 
