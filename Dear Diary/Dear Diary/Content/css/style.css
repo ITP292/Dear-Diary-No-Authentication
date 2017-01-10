@@ -650,5 +650,27 @@ body{
     }
 }
 
+.draft{
+      background: #262626;
+}
+.draft-content{
+      background:#ABACB2;
+      margin:0 auto;
+      width:90%;
+      height: 125px;
+      background-image: url('../img/line-draft.png');
+      margin-bottom: 20px;
+}
+.draft-content p{
+      text-indent: 50px;
+      margin:0px 25px 0px 30px;
+      line-height: 24.5px;
+      font-size: 18px;
+      padding-top: 2px;
+      overflow: hidden;
+      max-height: 100%;
+      text-align: justify;
+}
+
 /* Diary.html */
 

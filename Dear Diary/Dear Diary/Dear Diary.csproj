@@ -197,6 +197,7 @@
     <Content Include="Friends\viewFriendRedir.aspx" />
     <Content Include="NewEntry\Home.aspx" />
     <Content Include="NewEntry\NewEntry.aspx" />
+    <Content Include="NewEntry\PostDraftList.aspx" />
     <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
@@ -451,6 +452,13 @@
     </Compile>
     <Compile Include="NewEntry\NewEntry.aspx.designer.cs">
       <DependentUpon>NewEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewEntry\PostDraftList.aspx.cs">
+      <DependentUpon>PostDraftList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\PostDraftList.aspx.designer.cs">
+      <DependentUpon>PostDraftList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>

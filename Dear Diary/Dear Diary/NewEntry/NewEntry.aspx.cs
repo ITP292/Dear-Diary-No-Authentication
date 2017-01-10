@@ -36,7 +36,7 @@ namespace Dear_Diary.NewEntry
 
         protected void btnDraftList_Click(object sender, EventArgs e)
         {
-            DataTable dt = GetPostDetails(false);
+            Response.Redirect("~/NewEntry/PostDraftList.aspx");
         }
 
         protected void ddlSetting_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -54,8 +54,7 @@ namespace Dear_Diary.NewEntry
                 string query = "INSERT INTO [dbo].[Post](Author_Email, Date_Added, Picture, Post_Text, Permission_Status, IsPostEntry)";
                 query += " VALUES (@Author_Email, @Date_Added, @Picture, @Post_Text, @Permission_Status, @IsPostEntry)";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
-
-                //To prevent sql injection
+                
                 myCommand.Parameters.AddWithValue("@Author_Email", loginEmail);
                 myCommand.Parameters.AddWithValue("@Date_Added", DateTime.Now.ToString());
                 myCommand.Parameters.AddWithValue("@Picture", picture);
