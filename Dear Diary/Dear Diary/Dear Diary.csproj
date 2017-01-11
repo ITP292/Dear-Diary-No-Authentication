@@ -195,6 +195,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Friends\error.aspx" />
     <Content Include="Friends\viewFriendRedir.aspx" />
     <Content Include="NewEntry\Home.aspx" />
     <Content Include="NewEntry\NewEntry.aspx" />
@@ -417,6 +418,13 @@
     </Compile>
     <Compile Include="Friends\addFriendRedir.aspx.designer.cs">
       <DependentUpon>addFriendRedir.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Friends\requestFriend.aspx.cs">
       <DependentUpon>requestFriend.aspx</DependentUpon>
