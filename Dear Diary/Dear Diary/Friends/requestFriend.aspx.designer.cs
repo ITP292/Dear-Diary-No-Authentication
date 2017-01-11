@@ -11,5 +11,23 @@ namespace Dear_Diary.Friends {
     
     
     public partial class requestFriend {
+        
+        /// <summary>
+        /// Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Header;
+        
+        /// <summary>
+        /// FriendEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FriendEmail;
     }
 }

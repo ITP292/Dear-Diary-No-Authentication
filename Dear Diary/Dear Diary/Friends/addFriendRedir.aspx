@@ -15,9 +15,9 @@
                         <br />
                          <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" Text="Accept" CssClass="btn btn-default" OnClick="Button1_Click" />
+                            <asp:Button runat="server" Text="Send Request" CssClass="btn btn-default" OnClick="Button1_Click" />
                             &nbsp;
-                            <asp:Button runat="server" Text="Deny" CssClass="btn btn-default" OnClick="Button2_Click" />
+                            <asp:Button runat="server" Text="Cancel" CssClass="btn btn-default" OnClick="Button2_Click" />
                         </div>
                     </div>
                         <br />

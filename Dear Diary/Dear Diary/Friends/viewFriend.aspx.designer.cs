@@ -31,13 +31,13 @@ namespace Dear_Diary.Friends {
         protected global::System.Web.UI.WebControls.Literal FailureText;
         
         /// <summary>
-        /// rptTable control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptTable;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// SqlDataSource1 control.

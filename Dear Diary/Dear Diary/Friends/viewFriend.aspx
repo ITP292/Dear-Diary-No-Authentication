@@ -14,21 +14,15 @@
                     </asp:PlaceHolder>
                     <div class="form-group">
                         <div class="col-md-10">
-                            Pull data from database and display here.<asp:Repeater ID="rptTable" runat="server">
-    <HeaderTemplate>
-        <table class="table">
-    </HeaderTemplate>
-    <ItemTemplate>
-        <tr>
-            <td width="50%"><%# Eval("identifier") %></td>
-            <td width="*"><%# Eval("value") %></td>
-        </tr>
-    </ItemTemplate>
-    <FooterTemplate>
-        </table>
-    </FooterTemplate>
-</asp:Repeater>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:localdbConnectionString1 %>" DeleteCommand="DELETE FROM [Friendship] WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email" InsertCommand="INSERT INTO [Friendship] ([User1_Email], [User2_Email], [Date_Added]) VALUES (@User1_Email, @User2_Email, @Date_Added)" SelectCommand="SELECT [User1_Email], [User2_Email], [Date_Added] FROM [Friendship]" UpdateCommand="UPDATE [Friendship] SET [Date_Added] = @Date_Added WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email">
+                            &nbsp;<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." Width="770px" DataKeyNames="User2_Email" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                                <Columns>
+                                    <asp:BoundField DataField="User2_Email" HeaderText="Email Address" SortExpression="User2_Email" />
+                                    <asp:BoundField DataField="Date_Added" HeaderText="Date Added" SortExpression="Date_Added" />
+                                    <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                                    <asp:ButtonField Text="Select" CommandName="Select" />
+                                </Columns>
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:localdbConnectionString1 %>" DeleteCommand="DELETE FROM [Friendship] WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email" InsertCommand="INSERT INTO [Friendship] ([User1_Email], [User2_Email], [Date_Added], [Status], [Read]) VALUES (@User1_Email, @User2_Email, @Date_Added, @Status, @Read)" SelectCommand="SELECT [User2_Email], [Date_Added], [Status] FROM [Friendship] WHERE User1_Email = @email" UpdateCommand="UPDATE [Friendship] SET [Date_Added] = @Date_Added, [Status] = @Status, [Friendship_id] = @Friendship_id, [Read] = @Read WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email">
                                 <DeleteParameters>
                                     <asp:Parameter Name="User1_Email" Type="String" />
                                     <asp:Parameter Name="User2_Email" Type="String" />
@@ -36,10 +30,18 @@
                                 <InsertParameters>
                                     <asp:Parameter Name="User1_Email" Type="String" />
                                     <asp:Parameter Name="User2_Email" Type="String" />
-                                    <asp:Parameter DbType="Date" Name="Date_Added" />
+                                    <asp:Parameter Name="Date_Added" Type="String" />
+                                    <asp:Parameter Name="Status" Type="String" />
+                                    <asp:Parameter Name="Read" Type="String" />
                                 </InsertParameters>
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="email" SessionField="email" />
+                                </SelectParameters>
                                 <UpdateParameters>
-                                    <asp:Parameter DbType="Date" Name="Date_Added" />
+                                    <asp:Parameter Name="Date_Added" Type="String" />
+                                    <asp:Parameter Name="Status" Type="String" />
+                                    <asp:Parameter Name="Friendship_id" Type="Int32" />
+                                    <asp:Parameter Name="Read" Type="String" />
                                     <asp:Parameter Name="User1_Email" Type="String" />
                                     <asp:Parameter Name="User2_Email" Type="String" />
                                 </UpdateParameters>

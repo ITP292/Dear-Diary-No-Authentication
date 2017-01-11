@@ -11,35 +11,16 @@ namespace Dear_Diary.Friends
 {
     public partial class viewFriend : System.Web.UI.Page
     {
-        String dbUser1Email;
-        String dbUser2Email;
+        public static String FriendEmail;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection myConnection;
-            using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-            {
-                String query = "SELECT * FROM [Friendship] WHERE [User1_Email] = @email || [User2_Email] = @email";
+            Session["email"] = "lrh@gmail.com";
+        }
 
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-
-                SqlDataReader reader = myCommand.ExecuteReader();
-                SqlDataAdapter sda = new SqlDataAdapter(myCommand);
-                DataSet ds = new DataSet();
-                sda.Fill(ds);
-                rptTable.DataSource = ds;
-                rptTable.DataBind();
-
-                if (reader.Read())
-                {
-                    dbUser1Email = reader["User1_Email"].ToString();
-                    dbUser2Email = reader["User2_Email"].ToString();
-
-                }
-
-                Response.Redirect("addFriendRedir");
-            }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FriendEmail = GridView1.SelectedRow.Cells[0].Text;
+            Response.Redirect("viewFriendRedir.aspx");
         }
     }
 }
