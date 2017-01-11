@@ -10,6 +10,7 @@ namespace Dear_Diary
 {
     public partial class Notification : System.Web.UI.Page
     {
+        //this is going to be used to store the related information for the notification
         private string s;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +36,8 @@ namespace Dear_Diary
                 anchor.InnerText = s;
                 li.Controls.Add(anchor);
             }
+            //Things that need to be solved, count the number of notifications pulled from the database and use that number
+            //to make the list.
         }
     }
 }
