@@ -8,7 +8,7 @@
                 <div class="form-horizontal">
                     <hr />
                     <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-md-2 control-label">Our hamsters have detected that the person that you searched for is already in your friends list!</asp:Label>
+                        <asp:Label runat="server">Our hamsters have detected that the person that you searched for is already in your friends list!</asp:Label>
                     </div>
                    
                     <div class="form-group">
