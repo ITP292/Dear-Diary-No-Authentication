@@ -26,19 +26,42 @@ namespace Dear_Diary.Friends
                 String UserEmail = "lrh@gmail.com";
                 DateTime today = DateTime.Today;
                 String Date = today.ToString("dd/MM/yyyy");
-                String query = "INSERT INTO Friendship VALUES (@UserEmail, @FriendEmail, @Date, @Status, @Read)";
+                String query = "SELECT * FROM Friendship WHERE User2_Email = @FriendEMail";
+                String dbEmail = "";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@UserEmail", UserEmail);
                 myCommand.Parameters.AddWithValue("@FriendEmail", FriendEmail.Text);
-                myCommand.Parameters.AddWithValue("@Date", Date);
-                myCommand.Parameters.AddWithValue("@Status", "Pending");
-                myCommand.Parameters.AddWithValue("@Read", "false");
-                myCommand.ExecuteNonQuery();
 
-                Response.Redirect("addFriend.aspx");
+                SqlDataReader reader = myCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    dbEmail = reader["User2_Email"].ToString();
+                }
+                reader.Close();
+
+                if (FriendEmail.Text.Equals(dbEmail))
+                {
+                    Response.Redirect("error.aspx");
+                }
+                else
+                {
+                    String query1 = "INSERT INTO Friendship VALUES (@UserEmail, @FriendEmail, @Date, @Status, @Read)";
+
+                    SqlCommand myCommand1 = new SqlCommand(query, myConnection);
+                    //myConnection.Open();
+                    myCommand1.CommandType = CommandType.Text;
+                    myCommand1.Parameters.AddWithValue("@UserEmail", UserEmail);
+                    myCommand1.Parameters.AddWithValue("@FriendEmail", FriendEmail.Text);
+                    myCommand1.Parameters.AddWithValue("@Date", Date);
+                    myCommand1.Parameters.AddWithValue("@Status", "Pending");
+                    myCommand1.Parameters.AddWithValue("@Read", "false");
+                    myCommand1.ExecuteNonQuery();
+                    //myConnection.Close();
+
+                    Response.Redirect("addFriend.aspx");
+                }
             }
         }
 
