@@ -10,6 +10,12 @@
                 <div class="form-horizontal">
                     <hr />
                     <div class="form-group">
+                        <asp:Label runat="server" CssClass="col-md-2 control-label">Profile Picture:</asp:Label>
+                        <%--Insert Picture Here --%>
+                        <br />
+                    </div>
+
+                    <div class="form-group">
                         <asp:Label runat="server" CssClass="col-md-2 control-label">Email Address:</asp:Label>
                         <asp:TextBox runat="server" ID="FriendEmail" CssClass="form-control" ReadOnly="True" />
                         <br />
