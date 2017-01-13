@@ -10,4 +10,5 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="Label3" runat="server" Text="No Error"></asp:Label>
 </asp:Content>
