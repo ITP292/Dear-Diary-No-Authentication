@@ -6,7 +6,8 @@
             <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="10000">
             </asp:Timer>
             <asp:Label ID="Label1" runat="server" Text="Panel not refreshed yet."></asp:Label>
-            <ul class="dropdown" runat="server" id="tabs"></ul>
+            <ul class="dropdown" runat="server" id="tabs">
+            </ul>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
