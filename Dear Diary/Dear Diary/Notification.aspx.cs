@@ -21,27 +21,19 @@ namespace Dear_Diary
         protected void Page_Load(object sender, EventArgs e)
         {
             Label2.Text = "Page loaded at: " + DateTime.Now.ToLongTimeString();
-            makeList(displayList());
+            makeList(retrieveFriends());
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             Label1.Text = "Page refreshed at: " + DateTime.Now.ToLongTimeString();
-            makeList(displayList());
+            makeList(retrieveFriends());
         }
 
         protected void makeList(ArrayList s)
         {
-            //for(int i = 0; i <= s.Count; i++)
-            //{
-            //    HtmlGenericControl li = new HtmlGenericControl("li");
-            //    tabs.Controls.Add(li);
-            //    HtmlGenericControl anchor = new HtmlGenericControl("a");
-            //    anchor.Attributes.Add("href", "#");
-            //    anchor.InnerText = s[i].ToString();
-            //    li.Controls.Add(anchor);
-            //}
-
+            //Remove existing list on the page and replace it with the new one
+            tabs.Controls.Clear();
             foreach(var item in s)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -53,13 +45,6 @@ namespace Dear_Diary
             }
             //Things that need to be solved, count the number of notifications pulled from the database and use that number
             //to make the list.
-        }
-
-        protected ArrayList displayList()
-        {
-            sfList = new ArrayList();
-            sfList = retrieveFriends();
-            return sfList;
         }
 
         protected ArrayList retrieveFriends()
