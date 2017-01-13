@@ -20,7 +20,7 @@ namespace Dear_Diary.NewEntry
         public DataTable GetPostDetails(int IsPosted)
         {
             DataTable dt = new DataTable();
-            String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = " + IsPosted;
+            String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = @isposted";
 
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
@@ -28,6 +28,7 @@ namespace Dear_Diary.NewEntry
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
+                myCommand.Parameters.AddWithValue("@isposted", IsPosted);
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
 
@@ -39,7 +40,7 @@ namespace Dear_Diary.NewEntry
             if (e.CommandName == "Delete")
             {
                 var id = e.CommandArgument.ToString();
-                String query = "Delete FROM [Post] WHERE [Post_Id] = " + id;
+                String query = "Delete FROM [Post] WHERE [Post_Id] = @id";
 
                 SqlConnection myConnection;
                 using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
@@ -47,6 +48,7 @@ namespace Dear_Diary.NewEntry
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();
                     myCommand.CommandType = CommandType.Text;
+                    myCommand.Parameters.AddWithValue("@id", id);
                     myCommand.ExecuteNonQuery();
                 }
 

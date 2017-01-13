@@ -32,13 +32,23 @@ namespace Dear_Diary
 
         protected void makeList(ArrayList s)
         {
-            for(int i = 0; i <= s.Count; i++)
+            //for(int i = 0; i <= s.Count; i++)
+            //{
+            //    HtmlGenericControl li = new HtmlGenericControl("li");
+            //    tabs.Controls.Add(li);
+            //    HtmlGenericControl anchor = new HtmlGenericControl("a");
+            //    anchor.Attributes.Add("href", "#");
+            //    anchor.InnerText = s[i].ToString();
+            //    li.Controls.Add(anchor);
+            //}
+
+            foreach(var item in s)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 tabs.Controls.Add(li);
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
                 anchor.Attributes.Add("href", "#");
-                anchor.InnerText = s[i].ToString();
+                anchor.InnerText = item.ToString();
                 li.Controls.Add(anchor);
             }
             //Things that need to be solved, count the number of notifications pulled from the database and use that number
@@ -48,14 +58,7 @@ namespace Dear_Diary
         protected ArrayList displayList()
         {
             sfList = new ArrayList();
-            try
-            {
-                sfList = retrieveFriends();
-            }
-            catch (Exception)
-            {
-                Label3.Text = "There was something wrong with the database";
-            }
+            sfList = retrieveFriends();
             return sfList;
         }
 
@@ -66,12 +69,15 @@ namespace Dear_Diary
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 String User2_Email;
-                String query = "SELECT * FROM [Friendship] WHERE read = @read";
+                //String User1_Email = Session["email"].ToString();
+                String User1_Email = "lrh@gmail.com";
+                String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User1_Email = @user1email";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@read", "false");
+                myCommand.Parameters.AddWithValue("@seen", "false");
+                myCommand.Parameters.AddWithValue("@user1email", User1_Email);
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
