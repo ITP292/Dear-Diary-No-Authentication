@@ -52,7 +52,7 @@ namespace Dear_Diary.Account
 
                     TimeSpan difference = endTime.Subtract(dbstartTime);
 
-                    if (difference.TotalMinutes < 2)
+                    if (difference.TotalSeconds < 10) //10 seconds for testing
                     {
                         Response.Redirect("/Account/AccountPage.aspx");
                     }
@@ -109,8 +109,17 @@ namespace Dear_Diary.Account
                 //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbPhone + "&Message=" + "Your OTP is: " + dbRandomNo + ". Your code will expire after 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
                 String url = "www.google.com.sg";
                 System.Diagnostics.Process.Start(url);
+                myConnection.Close();
 
-
+                DateTime startTime = DateTime.Now;
+                myConnection.Open();
+                string query2 = "UPDATE [dbo].[User] SET [TimeGenerateCode] = @start WHERE [Email_Address] = @inputemail";
+                SqlCommand myCommand2 = new SqlCommand(query2, myConnection);
+                myCommand2.CommandType = CommandType.Text;
+                myCommand2.Parameters.AddWithValue("@inputemail", inputemail);
+                myCommand2.Parameters.AddWithValue("@start", startTime);
+                myCommand2.ExecuteNonQuery();
+                myConnection.Close();
             }
         }
 

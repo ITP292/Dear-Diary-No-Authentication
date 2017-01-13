@@ -29,7 +29,6 @@ namespace Dear_Diary.Account
                 string resetCode = Guid.NewGuid().ToString();
 
                 myConnection.Open();
-
                 string query1 = "UPDATE [dbo].[User] SET [resetCode] = @resetCode WHERE [Email_Address] = @inputemail";
                 SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
                 myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
@@ -50,10 +49,8 @@ namespace Dear_Diary.Account
 
                     if (inputemail == dbemail)
                     {
-                        string link = "http://localhost:14371/Account/ResetPassword";
-                        //string link = Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "/Account/ResetPassword.aspx?ActivationCode=" + resetCode);
+                        string link = Request.Url.AbsoluteUri.Replace("ForgotPassword", "ResetPassword.aspx?ActivationCode=" + resetCode);
                         //generate link here to be sent to email to reset password
-                        //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
 
 
                         var smtp = new System.Net.Mail.SmtpClient();
@@ -65,6 +62,15 @@ namespace Dear_Diary.Account
                             body += "\n \nPlease click the following link to reset your password. \n";
                             body += link;
                             body += "\n \nThank you.";
+                            body += "\n \nProject Dear Diary";
+                            body += "\nJoanne Programming Pte Ltd.";
+                            body += "\n53 Ubi Avenue 1";
+                            body += "\nPaya Ubi Industrial Park";
+                            body += "\nSingapore 408934";
+                            body += "\n \nEmail: joanne855902@gmail.com";
+                            body += "\n \nTel No.: +6598521467";
+                            body += "\n \nOperating Hours (Mon - Fri): 9am - 9pm";
+
                             mm.Body = body;
                             smtp.Host = "smtp.gmail.com";
                             smtp.Port = 587;
@@ -75,11 +81,6 @@ namespace Dear_Diary.Account
                             //smtp.Timeout = 20000;
                             smtp.Send(mm);
                         }
-
-                        //smtp.Send("joanne855902@gmail.com", inputemail, "Reset your password",
-                        //    "Dear User, \n \n Please Reset your password by following the instructions. " +
-                        //    "\n Click on this link below to reset your password. \n " + link + "\n \n Thank You.");
-                        //format - From, To, Subject, Body
 
                         Response.Redirect("/Account/ForgetPasswordEmailSent.aspx");
                     }

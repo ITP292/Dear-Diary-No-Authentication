@@ -15,21 +15,26 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string resetCode = Guid.NewGuid().ToString();
-            //string link = Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "/Account/ResetPassword.aspx?ActivationCode=" + resetCode);
+            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                string a = Request.QueryString["ActivationCode"];
 
-            //SqlConnection myConnection;
-            //using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-            //{
-            //    myConnection.Open();
+                myConnection.Open();
+                string query1 = "SELECT Email_Address FROM [dbo].[User] WHERE resetCode = @code";
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                myCommand1.Parameters.AddWithValue("@code", a);
 
-            //    string query1 = "UPDATE [dbo].[User] SET [resetCode] = @resetCode WHERE [Email_Address] = @inputemail";
-            //    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-            //    myCommand1.Parameters.AddWithValue("@inputemail", "limruoqijoanne54@gmail"); //test email
-            //    myCommand1.Parameters.AddWithValue("@resetCode", resetCode);
-            //    myCommand1.ExecuteNonQuery();
-            //    myConnection.Close();
-            //}
+                SqlDataReader reader = myCommand1.ExecuteReader();
+
+                string dbUser = "";
+
+                if (reader.Read())
+                {
+                    dbUser = reader["Email_Address"].ToString();
+                }
+
+                Session["email"] = dbUser;
+            }
         }
 
         protected void ResetPassword_Click(object sender, EventArgs e)
@@ -38,7 +43,7 @@ namespace Dear_Diary.Account
             {
                 Byte[] salt = new byte[8];
                 
-                string email = "xjt@gmail.com"; 
+                string email = Session["email"].ToString(); 
                 //string email = Session["email"].ToString();
                 //This is the part of how to get the user's email from LINK in email
 
