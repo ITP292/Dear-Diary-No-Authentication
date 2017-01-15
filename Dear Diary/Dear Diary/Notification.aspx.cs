@@ -9,6 +9,7 @@ using System.Collections;
 using System.Data.SqlClient;
 using System.Data;
 
+//Author: Aidil Irfan (153297Z)
 namespace Dear_Diary
 {
     public partial class Notification : System.Web.UI.Page
@@ -38,7 +39,6 @@ namespace Dear_Diary
                 tabs.Controls.Add(li);
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
                 anchor.Attributes.Add("href", "#");
-                //anchor.InnerText = item.ToString();
                 anchor.InnerText = Server.HtmlEncode(item.ToString());
                 li.Controls.Add(anchor);
             }
@@ -48,8 +48,6 @@ namespace Dear_Diary
 
         protected ArrayList retrieveFriends()
         {
-            try
-            {
                 //fList stores information retrieved from Friends table
                 ArrayList fList = new ArrayList();
                 using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
@@ -74,12 +72,6 @@ namespace Dear_Diary
                     }
                     return fList;
                 }
-            }
-            catch (Exception)
-            {
-                Label3.Text = "Database Error";
-            }
-            return null;
         }
     }
 }
