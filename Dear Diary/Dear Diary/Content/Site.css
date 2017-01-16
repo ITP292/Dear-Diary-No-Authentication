@@ -38,7 +38,8 @@ textarea {
 #Logo {
     font-family:precursive;
     font-size:25px;
-    padding-top:2px;
+    margin-bottom:10px;
+    display:inline-block;
 }
 
 h1 {
