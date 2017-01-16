@@ -16,6 +16,9 @@
         <br />
         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick ="Save" />
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="Cancel" />
+        <br />
+        <br />
+        <asp:TextBox ID="TextBox1" runat="server" Height="200px" OnTextChanged="TextBox1_TextChanged" ReadOnly="True" TextMode="MultiLine" Width="1500px"></asp:TextBox>
     </asp:Panel>
 
 </asp:Content>
