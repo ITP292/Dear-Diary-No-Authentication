@@ -38,8 +38,6 @@ namespace Dear_Diary.Friends
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
-                //FIND OUT HOW TO STORE AND RETRIEVE PICTURE
-
                 if (reader.Read())
                 {
                     dbEmail = reader["Email_Address"].ToString();
