@@ -26,7 +26,7 @@ namespace Dear_Diary.Friends
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@email", requestEmail);
+                myCommand.Parameters.AddWithValue("@user2email", requestEmail);
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
@@ -48,7 +48,7 @@ namespace Dear_Diary.Friends
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 //Modify the row in the sql database such that the status is accepted
-                String query = "UPDATE [Relationship] SET [Seen] = @seen, [Status] = @status WHERE [User2_Email] = @email";
+                String query = "UPDATE [Friendship] SET [Seen] = @seen, [Status] = @status WHERE [User2_Email] = @email";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
