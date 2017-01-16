@@ -192,7 +192,7 @@
     <Content Include="Content\js\owl.carousel.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\Site.css" />
-    <Content Include="Errors\Error.aspx" />
+    <Content Include="Errors\404.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -422,12 +422,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Errors\Error.aspx.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
+    <Compile Include="Errors\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Errors\Error.aspx.designer.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
+    <Compile Include="Errors\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
     </Compile>
     <Compile Include="Friends\addFriend.aspx.cs">
       <DependentUpon>addFriend.aspx</DependentUpon>
