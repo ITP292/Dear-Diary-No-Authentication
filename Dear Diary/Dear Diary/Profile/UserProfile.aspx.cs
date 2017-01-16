@@ -47,8 +47,7 @@ namespace Dear_Diary.Profile
                     dbLName = reader["LName"].ToString();
                     Name = dbFName + " " + dbLName;
                 }
-
-
+            }
             }
 
         protected void btnUpload_Click(object sender, EventArgs e)
