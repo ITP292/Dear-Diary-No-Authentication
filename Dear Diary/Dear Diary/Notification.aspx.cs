@@ -38,7 +38,7 @@ namespace Dear_Diary
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 tabs.Controls.Add(li);
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "#");
+                anchor.Attributes.Add("href", "~/Friends/requestFriend.aspx");
                 anchor.InnerText = Server.HtmlEncode(item.ToString());
                 li.Controls.Add(anchor);
             }
