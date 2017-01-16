@@ -38,8 +38,8 @@ namespace Dear_Diary
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 tabs.Controls.Add(li);
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "~/Friends/requestFriend.aspx");
-                anchor.InnerText = Server.HtmlEncode(item.ToString());
+                anchor.Attributes.Add("href", "/Friends/requestFriend.aspx?User2Email=" +item.ToString());
+                anchor.InnerText = Server.HtmlEncode(item.ToString() + " wants to be your friend");
                 li.Controls.Add(anchor);
             }
             //Things that need to be solved, count the number of notifications pulled from the database and use that number
@@ -68,7 +68,8 @@ namespace Dear_Diary
                     if (reader.Read())
                     {
                         User2_Email = reader["User2_Email"].ToString();
-                        fList.Add(User2_Email + " wants to add you as a friend!");
+                        fList.Add(User2_Email);
+                        //fList.Add(User2_Email + " wants to add you as a friend!");
                     }
                     return fList;
                 }
