@@ -206,8 +206,6 @@
     <Content Include="NewEntry\NewEntry.aspx" />
     <Content Include="NewEntry\PostDraftList.aspx" />
     <Content Include="Notification.aspx" />
-    <Content Include="Pictures\default-thumbnail.jpg" />
-    <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
