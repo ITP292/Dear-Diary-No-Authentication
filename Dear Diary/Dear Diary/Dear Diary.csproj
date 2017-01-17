@@ -208,6 +208,16 @@
     <Content Include="NewEntry\PostDraftList.aspx" />
     <Content Include="NewEntry\PostEntryList.aspx" />
     <Content Include="Notification.aspx" />
+    <Content Include="Pictures\5.png" />
+    <Content Include="Pictures\6.png" />
+    <Content Include="Pictures\9.png" />
+    <Content Include="Pictures\beautiful-white-cat-kitten-wallpaper-free-download-close-cat.jpg" />
+    <Content Include="Pictures\default-thumbnail.jpg" />
+    <Content Include="Pictures\IMG-20160715-WA0044.jpg" />
+    <Content Include="Pictures\IMG-20161201-WA0000.jpg" />
+    <Content Include="Pictures\IMG_20160529_144153.jpg" />
+    <Content Include="Pictures\PJ.PNG" />
+    <Content Include="Pictures\profile-empty-head.gif" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
     <Content Include="NewEntry.zip" />
