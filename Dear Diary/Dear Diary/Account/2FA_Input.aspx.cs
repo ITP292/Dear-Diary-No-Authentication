@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dear_Diary.ServiceReference1;
+using System.Net;
 
 namespace Dear_Diary.Account
 {
@@ -25,8 +26,10 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 string inputCode = TextBox1.Text;
-                string inputemail = Session["email"].ToString(); 
+                //string inputemail = Session["email"].ToString(); 
                 //need help, how to get the input email from login page previously? Is it session?
+
+                String inputemail = WebUtility.HtmlEncode(Login.inputemail);
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
