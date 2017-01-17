@@ -101,11 +101,7 @@ namespace Dear_Diary.Account
                     myConnection.Close();
 
                     string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                    sms.sendMessage("AS1", "637337", dbMobile, message);
-
-                    //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
-                    //System.Diagnostics.Process.Start(url);
-
+                    //sms.sendMessage("AS1", "637337", dbMobile, message);
                     DateTime startTime = DateTime.Now;
                     myConnection.Open();
                     string query4 = "UPDATE [dbo].[User] SET [TimeGenerateCode] = @start WHERE [Email_Address] = @inputemail";

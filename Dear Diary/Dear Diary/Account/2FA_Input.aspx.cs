@@ -110,12 +110,8 @@ namespace Dear_Diary.Account
                 }
 
                 //Send new message
-                //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbPhone + "&Message=" + "Your OTP is: " + dbRandomNo + ". Your code will expire after 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
-                //String url = "www.google.com.sg";
-                //System.Diagnostics.Process.Start(url);
-
                 string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                sms.sendMessage("AS1", "637337", dbMobile, message);
+                //sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;
