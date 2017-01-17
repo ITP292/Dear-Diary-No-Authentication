@@ -61,7 +61,7 @@
                                 <h2 class="cust-menu-h2"><a href="/NewEntry/MainPage.aspx" style="padding-left: 40px;">Home</a></h2>
                                 <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
                                 <h2 class="cust-menu-h2"><a href="/Contact.aspx" style="padding-left: 20px;">Contact</a></h2>
-                                <h2 class="cust-menu-h2"><a href="/NewEntry/PostEntryList.aspx" style="padding-left: 20px;">MyPostEntry</a></h2>
+                                <h2 class="cust-menu-h2"><a href="/NewEntry/PostEntryList.aspx" style="padding-left: 20px;">My Posts</a></h2>
                             </div>
                             <div class="icon-list right">
                                 <ul>
@@ -138,7 +138,7 @@
                                         </div>
                                     </li>
 
-                                    <li><a href="#Add Friends" title="Add Friends">
+                                    <li><a href="/Friends/addFriend.aspx" title="Add Friends">
                                         <img src="/Content/img/frslist.PNG" alt="Add Friends" title="Add Friends" /></a></li>
                                     <li><a href="/NewEntry/NewEntry.aspx" title="Add New Entry">
                                         <img src="/Content/img/note.PNG" alt="Add New Entry" title="Add New Entry" /></a></li>
@@ -171,7 +171,7 @@
 
                 <div class="footer">
                     <%--<a href="#">&copy; 2017 ALL RIGHT RESERVED </a>--%>
-                    <p>&copy; <%: DateTime.Now.Year %> - Joanne Programming</p>
+                    <p>Joanne Programming &copy; <%: DateTime.Now.Year %></p>
                     <p><a class="cust-footer-color" runat="server" href="~/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/About.aspx">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/Contact.aspx">Contact</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/Privacy.aspx">Privacy Policy</a></p>
                 </div>
             </footer>

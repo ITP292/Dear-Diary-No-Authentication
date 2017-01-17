@@ -1953,7 +1953,8 @@ pre code {
     width: 75%;
   }
   .col-md-8 {
-    width: 66.66666667%;
+    width: 90%;
+    padding: 0px 0px 0px 100px;
   }
   .col-md-7 {
     width: 58.33333333%;
@@ -2552,7 +2553,7 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
+  width: 80%;
   height: 40px;
   padding: 8px 12px;
   font-size: 16px;
