@@ -252,13 +252,13 @@
     <Content Include="Global.asax" />
     <Content Include="Security API\Testing Files\testAES.aspx" />
     <Content Include="Security API\Testing Files\testHash.aspx" />
-    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.SMS.datasource">
+    <Content Include="Service References\smsservice\Dear_Diary.smsservice.SMS.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\ServiceReference1\Sms.disco" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
+    <None Include="Service References\smsservice\Sms.disco" />
+    <None Include="Service References\smsservice\configuration91.svcinfo" />
+    <None Include="Service References\smsservice\configuration.svcinfo" />
+    <None Include="Service References\smsservice\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -271,7 +271,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="SiteMaster.Master" />
-    <None Include="Service References\ServiceReference1\Sms.wsdl" />
+    <None Include="Service References\smsservice\Sms.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -540,7 +540,7 @@
     <Compile Include="Security API\Testing Files\testHash.aspx.designer.cs">
       <DependentUpon>testHash.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
+    <Compile Include="Service References\smsservice\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -575,7 +575,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <WCFMetadataStorage Include="Service References\smsservice\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
