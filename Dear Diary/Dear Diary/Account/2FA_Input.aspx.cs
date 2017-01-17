@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using Dear_Diary.smsservice;
+using Dear_Diary.ServiceReference1;
 
 namespace Dear_Diary.Account
 {
@@ -74,8 +74,7 @@ namespace Dear_Diary.Account
         //Resending Code
         protected void Button2_Click(object sender, EventArgs e)
         {
-            //Dear_Diary.smsservice.SMSServiceSoapClient sms = new SMSServiceSoapClient();
-
+            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -115,8 +114,8 @@ namespace Dear_Diary.Account
                 //String url = "www.google.com.sg";
                 //System.Diagnostics.Process.Start(url);
 
-                //string message = "Your OTP is: " + dbRandomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                //sms.sendMessage(dbMobile, message, "AS1", "637337");
+                string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
+                sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;
