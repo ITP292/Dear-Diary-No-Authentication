@@ -29,7 +29,7 @@ namespace Dear_Diary.Account
                 //string inputemail = Session["email"].ToString(); 
                 //need help, how to get the input email from login page previously? Is it session?
 
-                String inputemail = WebUtility.HtmlEncode(Login.inputemail);
+                String inputemail = Login.inputemail;
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
