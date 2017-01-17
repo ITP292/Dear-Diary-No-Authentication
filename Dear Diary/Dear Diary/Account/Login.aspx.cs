@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
-using Dear_Diary.smsservice;
+using Dear_Diary.ServiceReference1;
 
 namespace Dear_Diary.Account
 {
@@ -25,7 +25,7 @@ namespace Dear_Diary.Account
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            Dear_Diary.smsservice.SMSServiceSoapClient sms = new SMSServiceSoapClient();
+            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
 
             //DATABASE
             //Pull out and compare
@@ -62,7 +62,7 @@ namespace Dear_Diary.Account
                 {
                     dbEmail = reader["Email_Address"].ToString();
                     dbPassword = reader["Password"].ToString();
-                    dbrandomNo = reader["randomNo"].ToString();
+                    //dbrandomNo = reader["randomNo"].ToString();
                     dbMobile = reader["Phone_Number"].ToString();
                     dbCount = reader["counter"].ToString();
                     dbSalt = reader["salt"].ToString();
@@ -100,8 +100,8 @@ namespace Dear_Diary.Account
                     myCommand1.ExecuteNonQuery();
                     myConnection.Close();
 
-                    string message = "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                    sms.sendMessage(dbMobile, message,  "AS1", "637337");
+                    string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
+                    sms.sendMessage("AS1", "637337", dbMobile, message);
 
                     //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
                     //System.Diagnostics.Process.Start(url);

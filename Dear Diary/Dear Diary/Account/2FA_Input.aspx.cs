@@ -54,7 +54,7 @@ namespace Dear_Diary.Account
 
                     TimeSpan difference = endTime.Subtract(dbstartTime);
 
-                    if (difference.TotalSeconds < 10) //10 seconds for testing
+                    if (difference.TotalSeconds < 60) //10 seconds for testing
                     {
                         Response.Redirect("/Account/AccountPage.aspx");
                     }
