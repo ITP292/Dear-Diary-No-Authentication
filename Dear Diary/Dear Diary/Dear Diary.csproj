@@ -202,12 +202,15 @@
     </Content>
     <Content Include="Friends\error.aspx" />
     <Content Include="Friends\viewFriendRedir.aspx" />
-    <Content Include="NewEntry\Home.aspx" />
+    <Content Include="NewEntry\MainPage.aspx" />
     <Content Include="NewEntry\NewEntry.aspx" />
+    <Content Include="NewEntry\PostDetails.aspx" />
     <Content Include="NewEntry\PostDraftList.aspx" />
+    <Content Include="NewEntry\PostEntryList.aspx" />
     <Content Include="Notification.aspx" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
+    <Content Include="NewEntry.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Friends\addFriend.aspx" />
     <Content Include="Friends\addFriendRedir.aspx" />
@@ -481,12 +484,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="NewEntry\Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="NewEntry\MainPage.aspx.cs">
+      <DependentUpon>MainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewEntry\Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="NewEntry\MainPage.aspx.designer.cs">
+      <DependentUpon>MainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewEntry\NewEntry.aspx.cs">
       <DependentUpon>NewEntry.aspx</DependentUpon>
@@ -495,12 +498,26 @@
     <Compile Include="NewEntry\NewEntry.aspx.designer.cs">
       <DependentUpon>NewEntry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NewEntry\PostDetails.aspx.cs">
+      <DependentUpon>PostDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\PostDetails.aspx.designer.cs">
+      <DependentUpon>PostDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NewEntry\PostDraftList.aspx.cs">
       <DependentUpon>PostDraftList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NewEntry\PostDraftList.aspx.designer.cs">
       <DependentUpon>PostDraftList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewEntry\PostEntryList.aspx.cs">
+      <DependentUpon>PostEntryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\PostEntryList.aspx.designer.cs">
+      <DependentUpon>PostEntryList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Notification.aspx.cs">
       <DependentUpon>Notification.aspx</DependentUpon>
