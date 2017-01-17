@@ -131,7 +131,6 @@ namespace Dear_Diary.Account
                         //Label1.Text = count.ToString();
                         Label7.Text = (5 - count).ToString() + " tries left.";
 
-
                     }
 
                     //Read counter from database, check if its 5. If 5, then don't allow login. 

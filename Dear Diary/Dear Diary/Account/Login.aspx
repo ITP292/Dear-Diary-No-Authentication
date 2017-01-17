@@ -10,6 +10,7 @@
     <asp:Label runat="server" Text="Log in to your account. "></asp:Label>
     <br />
     <asp:Label ID="Label6" runat="server" Text="Login with your credential."></asp:Label>
+    <br />
     <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
     <br />
 
@@ -58,7 +59,6 @@
 
             <div class="form-group">
                 <div class="col-xs-8 col-xs-offset-3">
-                   --Insert link of /Account/Register (register page) here--%>
     <a href="/Account/Register">Register as a new user</a>
     <br />
     <%--Insert link of /Account/ForgotPassword (forgot password page) here--%>
