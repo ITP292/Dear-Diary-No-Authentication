@@ -65,7 +65,7 @@
                             </div>
                             <div class="icon-list right">
                                 <ul>
-                                    <li><a href="#Friends List" title="Friends List">
+                                    <li><a href="/Friends/viewFriend.aspx" title="Friends List">
                                         <img src="/Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
                                     <li class="notification-view"><a href="#Notification" title="Notification">
                                         <img src="/Content/img/notify.PNG" alt="Notification" title="Notification" /></a>
