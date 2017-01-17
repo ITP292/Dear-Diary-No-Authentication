@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System;
+using System.Net;
 
 namespace Dear_Diary.Friends
 {
@@ -13,8 +15,8 @@ namespace Dear_Diary.Friends
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FriendEmail.Text = addFriend.dbEmail;
-            Header.Text = addFriend.Name;
+            FriendEmail.Text = WebUtility.HtmlEncode(addFriend.dbEmail);
+            Header.Text = WebUtility.HtmlEncode(addFriend.Name);
         }
 
         protected void Button1_Click(object sender, EventArgs e)

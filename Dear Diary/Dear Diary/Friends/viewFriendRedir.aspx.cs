@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net;
 
 namespace Dear_Diary.Friends
 {
@@ -14,7 +15,7 @@ namespace Dear_Diary.Friends
         protected void Page_Load(object sender, EventArgs e)
         {
             //Use global variable from previous page and modify the header and textbox
-            String friendemail = viewFriend.FriendEmail;
+            String friendemail = WebUtility.HtmlEncode(viewFriend.FriendEmail);
 
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
