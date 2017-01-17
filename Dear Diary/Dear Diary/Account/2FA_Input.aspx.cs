@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dear_Diary.ServiceReference1;
 
 namespace Dear_Diary.Account
 {
@@ -19,6 +20,7 @@ namespace Dear_Diary.Account
         //Confirm Code
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -52,7 +54,7 @@ namespace Dear_Diary.Account
 
                     TimeSpan difference = endTime.Subtract(dbstartTime);
 
-                    if (difference.TotalSeconds < 10) //10 seconds for testing
+                    if (difference.TotalSeconds < 60) //10 seconds for testing
                     {
                         Response.Redirect("/Account/AccountPage.aspx");
                     }
@@ -72,6 +74,7 @@ namespace Dear_Diary.Account
         //Resending Code
         protected void Button2_Click(object sender, EventArgs e)
         {
+            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -98,17 +101,17 @@ namespace Dear_Diary.Account
 
                 string dbPhone = "";
                 string dbRandomNo = "";
-
+                string dbMobile = "";
                 if (reader.Read())
                 {
                     dbPhone = reader["Phone_Number"].ToString();
                     dbRandomNo = reader["randomNo"].ToString();
+                    dbMobile = reader["Phone_Number"].ToString();
                 }
 
                 //Send new message
-                //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbPhone + "&Message=" + "Your OTP is: " + dbRandomNo + ". Your code will expire after 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
-                String url = "www.google.com.sg";
-                System.Diagnostics.Process.Start(url);
+                string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
+                //sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;

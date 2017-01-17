@@ -9,81 +9,74 @@
 //------------------------------------------------------------------------------
 
 namespace Dear_Diary.ServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org/SMSWebService/SMSService", ConfigurationName="ServiceReference1.SMSServiceSoap")]
-    public interface SMSServiceSoap {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/sendMessage", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string sendMessage(string MobileNo, string Message, string SMSAccount, string SMSPassword);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/sendMessage", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> sendMessageAsync(string MobileNo, string Message, string SMSAccount, string SMSPassword);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/receiveMessage", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Dear_Diary.ServiceReference1.SMS[] receiveMessage(string SMSAccount, string SMSPassword);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/receiveMessage", ReplyAction="*")]
-        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.SMS[]> receiveMessageAsync(string SMSAccount, string SMSPassword);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/setMessagesStatusToUnread", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string setMessagesStatusToUnread(string SMSAccount, string SMSPassword);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SMSWebService/SMSService/setMessagesStatusToUnread", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> setMessagesStatusToUnreadAsync(string SMSAccount, string SMSPassword);
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/SMSWebService/SMSService")]
-    public partial class SMS : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SMSData", Namespace="WS")]
+    [System.SerializableAttribute()]
+    public partial class SMSData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        private string messageField;
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private string originatorField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
         
-        private string dateReceivedField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OriginatorField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string message {
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DateReceivedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
-                return this.messageField;
+                return this.extensionDataField;
             }
             set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
+                this.extensionDataField = value;
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string originator {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Message {
             get {
-                return this.originatorField;
+                return this.MessageField;
             }
             set {
-                this.originatorField = value;
-                this.RaisePropertyChanged("originator");
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string dateReceived {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Originator {
             get {
-                return this.dateReceivedField;
+                return this.OriginatorField;
             }
             set {
-                this.dateReceivedField = value;
-                this.RaisePropertyChanged("dateReceived");
+                if ((object.ReferenceEquals(this.OriginatorField, value) != true)) {
+                    this.OriginatorField = value;
+                    this.RaisePropertyChanged("Originator");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string DateReceived {
+            get {
+                return this.DateReceivedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateReceivedField, value) != true)) {
+                    this.DateReceivedField = value;
+                    this.RaisePropertyChanged("DateReceived");
+                }
             }
         }
         
@@ -98,54 +91,365 @@ namespace Dear_Diary.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface SMSServiceSoapChannel : Dear_Diary.ServiceReference1.SMSServiceSoap, System.ServiceModel.IClientChannel {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="WS", ConfigurationName="ServiceReference1.SMSSoap")]
+    public interface SMSSoap {
+        
+        // CODEGEN: Generating message contract since element name SMSAccount from namespace WS is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="WS/sendMessage", ReplyAction="*")]
+        Dear_Diary.ServiceReference1.sendMessageResponse sendMessage(Dear_Diary.ServiceReference1.sendMessageRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="WS/sendMessage", ReplyAction="*")]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.sendMessageResponse> sendMessageAsync(Dear_Diary.ServiceReference1.sendMessageRequest request);
+        
+        // CODEGEN: Generating message contract since element name SMSAccount from namespace WS is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="WS/receiveMessage", ReplyAction="*")]
+        Dear_Diary.ServiceReference1.receiveMessageResponse receiveMessage(Dear_Diary.ServiceReference1.receiveMessageRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="WS/receiveMessage", ReplyAction="*")]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.receiveMessageResponse> receiveMessageAsync(Dear_Diary.ServiceReference1.receiveMessageRequest request);
+        
+        // CODEGEN: Generating message contract since element name SMSAccount from namespace WS is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="WS/setMessagesStatusToUnread", ReplyAction="*")]
+        Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse setMessagesStatusToUnread(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="WS/setMessagesStatusToUnread", ReplyAction="*")]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse> setMessagesStatusToUnreadAsync(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SMSServiceSoapClient : System.ServiceModel.ClientBase<Dear_Diary.ServiceReference1.SMSServiceSoap>, Dear_Diary.ServiceReference1.SMSServiceSoap {
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class sendMessageRequest {
         
-        public SMSServiceSoapClient() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="sendMessage", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.sendMessageRequestBody Body;
+        
+        public sendMessageRequest() {
         }
         
-        public SMSServiceSoapClient(string endpointConfigurationName) : 
+        public sendMessageRequest(Dear_Diary.ServiceReference1.sendMessageRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class sendMessageRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SMSAccount;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Pwd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Mobile;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Message;
+        
+        public sendMessageRequestBody() {
+        }
+        
+        public sendMessageRequestBody(string SMSAccount, string Pwd, string Mobile, string Message) {
+            this.SMSAccount = SMSAccount;
+            this.Pwd = Pwd;
+            this.Mobile = Mobile;
+            this.Message = Message;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class sendMessageResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="sendMessageResponse", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.sendMessageResponseBody Body;
+        
+        public sendMessageResponse() {
+        }
+        
+        public sendMessageResponse(Dear_Diary.ServiceReference1.sendMessageResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class sendMessageResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string sendMessageResult;
+        
+        public sendMessageResponseBody() {
+        }
+        
+        public sendMessageResponseBody(string sendMessageResult) {
+            this.sendMessageResult = sendMessageResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class receiveMessageRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="receiveMessage", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.receiveMessageRequestBody Body;
+        
+        public receiveMessageRequest() {
+        }
+        
+        public receiveMessageRequest(Dear_Diary.ServiceReference1.receiveMessageRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class receiveMessageRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SMSAccount;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string SMSPassword;
+        
+        public receiveMessageRequestBody() {
+        }
+        
+        public receiveMessageRequestBody(string SMSAccount, string SMSPassword) {
+            this.SMSAccount = SMSAccount;
+            this.SMSPassword = SMSPassword;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class receiveMessageResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="receiveMessageResponse", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.receiveMessageResponseBody Body;
+        
+        public receiveMessageResponse() {
+        }
+        
+        public receiveMessageResponse(Dear_Diary.ServiceReference1.receiveMessageResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class receiveMessageResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Dear_Diary.ServiceReference1.SMSData[] receiveMessageResult;
+        
+        public receiveMessageResponseBody() {
+        }
+        
+        public receiveMessageResponseBody(Dear_Diary.ServiceReference1.SMSData[] receiveMessageResult) {
+            this.receiveMessageResult = receiveMessageResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class setMessagesStatusToUnreadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="setMessagesStatusToUnread", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequestBody Body;
+        
+        public setMessagesStatusToUnreadRequest() {
+        }
+        
+        public setMessagesStatusToUnreadRequest(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class setMessagesStatusToUnreadRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SMSAccount;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string SMSPassword;
+        
+        public setMessagesStatusToUnreadRequestBody() {
+        }
+        
+        public setMessagesStatusToUnreadRequestBody(string SMSAccount, string SMSPassword) {
+            this.SMSAccount = SMSAccount;
+            this.SMSPassword = SMSPassword;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class setMessagesStatusToUnreadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="setMessagesStatusToUnreadResponse", Namespace="WS", Order=0)]
+        public Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponseBody Body;
+        
+        public setMessagesStatusToUnreadResponse() {
+        }
+        
+        public setMessagesStatusToUnreadResponse(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="WS")]
+    public partial class setMessagesStatusToUnreadResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string setMessagesStatusToUnreadResult;
+        
+        public setMessagesStatusToUnreadResponseBody() {
+        }
+        
+        public setMessagesStatusToUnreadResponseBody(string setMessagesStatusToUnreadResult) {
+            this.setMessagesStatusToUnreadResult = setMessagesStatusToUnreadResult;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface SMSSoapChannel : Dear_Diary.ServiceReference1.SMSSoap, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SMSSoapClient : System.ServiceModel.ClientBase<Dear_Diary.ServiceReference1.SMSSoap>, Dear_Diary.ServiceReference1.SMSSoap {
+        
+        public SMSSoapClient() {
+        }
+        
+        public SMSSoapClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SMSServiceSoapClient(string endpointConfigurationName, string remoteAddress) : 
+        public SMSSoapClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SMSServiceSoapClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SMSSoapClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SMSServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SMSSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public string sendMessage(string MobileNo, string Message, string SMSAccount, string SMSPassword) {
-            return base.Channel.sendMessage(MobileNo, Message, SMSAccount, SMSPassword);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Dear_Diary.ServiceReference1.sendMessageResponse Dear_Diary.ServiceReference1.SMSSoap.sendMessage(Dear_Diary.ServiceReference1.sendMessageRequest request) {
+            return base.Channel.sendMessage(request);
         }
         
-        public System.Threading.Tasks.Task<string> sendMessageAsync(string MobileNo, string Message, string SMSAccount, string SMSPassword) {
-            return base.Channel.sendMessageAsync(MobileNo, Message, SMSAccount, SMSPassword);
+        public string sendMessage(string SMSAccount, string Pwd, string Mobile, string Message) {
+            Dear_Diary.ServiceReference1.sendMessageRequest inValue = new Dear_Diary.ServiceReference1.sendMessageRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.sendMessageRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.Pwd = Pwd;
+            inValue.Body.Mobile = Mobile;
+            inValue.Body.Message = Message;
+            Dear_Diary.ServiceReference1.sendMessageResponse retVal = ((Dear_Diary.ServiceReference1.SMSSoap)(this)).sendMessage(inValue);
+            return retVal.Body.sendMessageResult;
         }
         
-        public Dear_Diary.ServiceReference1.SMS[] receiveMessage(string SMSAccount, string SMSPassword) {
-            return base.Channel.receiveMessage(SMSAccount, SMSPassword);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.sendMessageResponse> Dear_Diary.ServiceReference1.SMSSoap.sendMessageAsync(Dear_Diary.ServiceReference1.sendMessageRequest request) {
+            return base.Channel.sendMessageAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.SMS[]> receiveMessageAsync(string SMSAccount, string SMSPassword) {
-            return base.Channel.receiveMessageAsync(SMSAccount, SMSPassword);
+        public System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.sendMessageResponse> sendMessageAsync(string SMSAccount, string Pwd, string Mobile, string Message) {
+            Dear_Diary.ServiceReference1.sendMessageRequest inValue = new Dear_Diary.ServiceReference1.sendMessageRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.sendMessageRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.Pwd = Pwd;
+            inValue.Body.Mobile = Mobile;
+            inValue.Body.Message = Message;
+            return ((Dear_Diary.ServiceReference1.SMSSoap)(this)).sendMessageAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Dear_Diary.ServiceReference1.receiveMessageResponse Dear_Diary.ServiceReference1.SMSSoap.receiveMessage(Dear_Diary.ServiceReference1.receiveMessageRequest request) {
+            return base.Channel.receiveMessage(request);
+        }
+        
+        public Dear_Diary.ServiceReference1.SMSData[] receiveMessage(string SMSAccount, string SMSPassword) {
+            Dear_Diary.ServiceReference1.receiveMessageRequest inValue = new Dear_Diary.ServiceReference1.receiveMessageRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.receiveMessageRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.SMSPassword = SMSPassword;
+            Dear_Diary.ServiceReference1.receiveMessageResponse retVal = ((Dear_Diary.ServiceReference1.SMSSoap)(this)).receiveMessage(inValue);
+            return retVal.Body.receiveMessageResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.receiveMessageResponse> Dear_Diary.ServiceReference1.SMSSoap.receiveMessageAsync(Dear_Diary.ServiceReference1.receiveMessageRequest request) {
+            return base.Channel.receiveMessageAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.receiveMessageResponse> receiveMessageAsync(string SMSAccount, string SMSPassword) {
+            Dear_Diary.ServiceReference1.receiveMessageRequest inValue = new Dear_Diary.ServiceReference1.receiveMessageRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.receiveMessageRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.SMSPassword = SMSPassword;
+            return ((Dear_Diary.ServiceReference1.SMSSoap)(this)).receiveMessageAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse Dear_Diary.ServiceReference1.SMSSoap.setMessagesStatusToUnread(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest request) {
+            return base.Channel.setMessagesStatusToUnread(request);
         }
         
         public string setMessagesStatusToUnread(string SMSAccount, string SMSPassword) {
-            return base.Channel.setMessagesStatusToUnread(SMSAccount, SMSPassword);
+            Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest inValue = new Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.SMSPassword = SMSPassword;
+            Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse retVal = ((Dear_Diary.ServiceReference1.SMSSoap)(this)).setMessagesStatusToUnread(inValue);
+            return retVal.Body.setMessagesStatusToUnreadResult;
         }
         
-        public System.Threading.Tasks.Task<string> setMessagesStatusToUnreadAsync(string SMSAccount, string SMSPassword) {
-            return base.Channel.setMessagesStatusToUnreadAsync(SMSAccount, SMSPassword);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse> Dear_Diary.ServiceReference1.SMSSoap.setMessagesStatusToUnreadAsync(Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest request) {
+            return base.Channel.setMessagesStatusToUnreadAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse> setMessagesStatusToUnreadAsync(string SMSAccount, string SMSPassword) {
+            Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest inValue = new Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequest();
+            inValue.Body = new Dear_Diary.ServiceReference1.setMessagesStatusToUnreadRequestBody();
+            inValue.Body.SMSAccount = SMSAccount;
+            inValue.Body.SMSPassword = SMSPassword;
+            return ((Dear_Diary.ServiceReference1.SMSSoap)(this)).setMessagesStatusToUnreadAsync(inValue);
         }
     }
 }

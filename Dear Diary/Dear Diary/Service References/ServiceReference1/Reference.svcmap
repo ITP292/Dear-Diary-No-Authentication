@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6634f3a2-f125-46fb-83c9-0923827f6f81" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="29957463-20a3-4531-8c68-49d1a444b90c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="Http://172.20.128.62/SMSWebService/Sms.Asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="Http://Sms.Sit.Nyp.Edu.Sg/SMSWebService/Sms.Asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Sms.wsdl" MetadataType="Wsdl" ID="ea0b0f05-cfb3-49c2-897f-6fb11749917a" SourceId="1" SourceUrl="http://172.20.128.62/SMSWebService/Sms.Asmx?wsdl" />
-    <MetadataFile FileName="Sms.disco" MetadataType="Disco" ID="b140e8d3-df86-4b63-a0eb-72bdc6a9d4c9" SourceId="1" SourceUrl="http://172.20.128.62/SMSWebService/Sms.Asmx?disco" />
+    <MetadataFile FileName="Sms.wsdl" MetadataType="Wsdl" ID="83873bed-d5f3-4ce3-ba85-a559af52e1b7" SourceId="1" SourceUrl="http://sms.sit.nyp.edu.sg/SMSWebService/Sms.Asmx?wsdl" />
+    <MetadataFile FileName="Sms.disco" MetadataType="Disco" ID="d00ff319-3a10-4b82-aef2-6412591eeb59" SourceId="1" SourceUrl="http://sms.sit.nyp.edu.sg/SMSWebService/Sms.Asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

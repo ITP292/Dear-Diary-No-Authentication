@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using Dear_Diary.ServiceReference1;
 
 namespace Dear_Diary.Account
 {
@@ -17,14 +18,15 @@ namespace Dear_Diary.Account
     {
         public static int count = 0;
         public static int timeCounter = 0; //Timer countdown for lockout
-        //public static int timeCounter1 = 0; //Timer countdown for 2FA code
 
         protected void Page_Load(object sender, EventArgs e)
         {
         }
 
         protected void Login_Click(object sender, EventArgs e)
-        {             
+        {
+            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
+
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
@@ -60,7 +62,7 @@ namespace Dear_Diary.Account
                 {
                     dbEmail = reader["Email_Address"].ToString();
                     dbPassword = reader["Password"].ToString();
-                    dbrandomNo = reader["randomNo"].ToString();
+                    //dbrandomNo = reader["randomNo"].ToString();
                     dbMobile = reader["Phone_Number"].ToString();
                     dbCount = reader["counter"].ToString();
                     dbSalt = reader["salt"].ToString();
@@ -74,6 +76,7 @@ namespace Dear_Diary.Account
 
                 if (dbEmail.Equals(inputemail) && dbPassword.Equals(passwordHash))
                 {
+
                     Session["email"] = TextBox1.Text;
 
                     //When successful login, counter reset to 0
@@ -96,9 +99,9 @@ namespace Dear_Diary.Account
                     myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
                     myCommand1.ExecuteNonQuery();
                     myConnection.Close();
-                    //String url = "http://172.20.128.62/SMSWebService/sms.asmx/sendMessage?MobileNo=" + dbMobile + "&Message=" + "Your OTP is: " + dbrandomNo + ". Please enter within 2 minutes. Do not reply to this message." + "&SMSAccount=NSP10&SMSPassword=220867";
-                    //System.Diagnostics.Process.Start(url);
 
+                    string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
+                    //sms.sendMessage("AS1", "637337", dbMobile, message);
                     DateTime startTime = DateTime.Now;
                     myConnection.Open();
                     string query4 = "UPDATE [dbo].[User] SET [TimeGenerateCode] = @start WHERE [Email_Address] = @inputemail";

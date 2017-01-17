@@ -252,7 +252,16 @@
     <Content Include="Global.asax" />
     <Content Include="Security API\Testing Files\testAES.aspx" />
     <Content Include="Security API\Testing Files\testHash.aspx" />
-    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.SMS.datasource">
+    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.receiveMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.sendMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.setMessagesStatusToUnreadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\Dear_Diary.ServiceReference1.SMSData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference1\Sms.disco" />
