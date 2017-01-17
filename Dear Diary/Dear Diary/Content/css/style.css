@@ -1,7 +1,7 @@
 body{
     margin:0 auto;
     text-align:center;
-    background-image: url('../img/background.jpg');
+    background-color: #f4cea7 !important;
     margin-bottom: 50px;
 }
 @font-face {
@@ -33,7 +33,6 @@ body{
 .menu-bar{
     margin:0 auto;
     margin-top:25px;
-    width: 80%;
     border-radius: 10px 10px 0px 0px;
     background: #AF5D5F;
 }
@@ -59,20 +58,16 @@ body{
 .home h2 a{
     text-decoration: none;
     color:#fff;
-    font-style: italic;
-    outline: none;
+    font-size: 20px;
 }
 .home h2{
-    margin:0;
-    margin-left:1%;
-    margin-top:8px;
     width:100%;
 }
 
 .icon-list{
     text-align: right;
     margin-right:3%;
-    margin-top:9px;
+    margin-top:17px;
 }
 .icon-list ul{
     list-style-type:none;
@@ -81,6 +76,7 @@ body{
 .icon-list ul li{
     display: inline;
     padding: 0px 3px;
+    position: relative;
 }
 .icon-list ul li a{
 
@@ -108,9 +104,6 @@ body{
 .main-wrapper{
     margin: 0 auto;
     padding-bottom: 20px;
-    width: 83%;
-    border:1px solid #F5ECE3;
-    border-radius: 10px 10px 10px 10px;
     box-shadow: 1px 0px 2px #F5ECE3;
     background: #fff;
 }
@@ -125,7 +118,10 @@ body{
     width:96%;
 }
 .wrapper{
+    display: inline-block;
     margin-bottom: 15px;
+    max-height: 200px;
+    overflow: hidden;
 }
 .img{
     padding: 5px;
@@ -150,11 +146,14 @@ body{
 .contant p{
     color:#999894;
     text-align: justify;
+    margin: 0;
+    max-height: 160px;
+    overflow: hidden;
 }
 .contibue-btn{
     background: #E4D4BB;
     border:1px solid #CBC3B6;
-    color: #BDB29F;
+    color: #6d665b;
     font-style: italic;
     border-radius: 2px;
     padding: 3px;
@@ -196,8 +195,6 @@ body{
     outline: none;
 }
 .footer{
-    margin:0 auto;
-    width: 80%;
     padding: 10px 0px;
     border-radius: 0px 0px 10px 10px;
     background: #AF5D5F; 
@@ -274,13 +271,14 @@ body{
     resize: none;
     background-image: url('../img/line.PNG'); 
     background-repeat: repeat-y;
-    font-size:17px;
-    line-height: 20.39px;
+    font-size:18px;
+    line-height: 21px;
     height:650px;
     overflow:hidden;
     text-align: justify;
     background-size: 100% auto;
     outline: none;
+    max-width: none;
 }
 .button{
     margin:0 auto;
@@ -674,7 +672,7 @@ body{
 .post-footer {
     color: #D2D2D2;
     margin-bottom: 40px;
-    margin-left: 260px;
+    margin-left: 270px;
     text-align: left;
 }
 
@@ -690,7 +688,7 @@ body{
 }
 .main_dtaft{
       width:90%;
-      margin:0 auto;
+      margin:40px auto 0;
       height: 151px;
 }
 
@@ -702,6 +700,266 @@ body{
       height: 151px;
 }
 
+.post-search{
+    margin: 0 auto;
+    width: 90%;
+    color:white;
+    text-align: right;
+}
 
-/* Diary.html */
+.comment{
+      border-radius: 5px;
+      background: #FEFCF7;
+}
+.comment-heading{
+      margin:0;
+}
+.comment-heading h1{
+      text-align: left;
+      font-weight: normal;
+      padding: 10px 0px 10px 8%;
+      margin:0;
+}
+.comment-body{
+      width:80%;
+      margin:20px auto;
+      margin-bottom: 30px;
+}
+.comment-img{
+      width:20%;
+}
+.comment-img img{
+      width:90%;
+      height: auto;
+}
+.comment-content{
+      margin:0 auto;
+      width:80%;
+      color:black;
+      height: auto;
+      max-height: 255px;
+      background:#f1c6a4;
+      position: relative;
+}
+.comment-content p{
+      width:95%;
+      text-indent: 50px;
+      margin:0 auto;
+      line-height: 24.5px;
+      font-size: 18px;
+      padding-top: 2px;
+      padding-right:10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-height: 100px;
+      max-height: 195px;
+      text-align: justify;
+}
 
+.comment-content-cust{
+      width:95%;
+      text-indent: 50px;
+      margin:0 auto;
+      line-height: 24.5px;
+      font-size: 18px;
+      padding-top: 2px;
+      padding-right:10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-height: 100px;
+      max-height: 195px;
+      text-align: justify;
+}
+
+
+.date{
+      text-align: right;
+      margin:5px 15px;
+}
+.mode{
+      text-align: right;
+      margin:5px 15px;
+}
+.comment-on{
+      margin:0 auto;
+      width:80%; 
+      margin-bottom: 10px;
+      color: #af5d5f;
+}
+.comment-post{
+      margin:15px auto;
+      width:80%;
+      margin-bottom: 15px;
+      position: relative;
+}
+.comment-box{
+      width:98.8%;
+      border: 1px solid #af5d5f;
+      min-height: 25px;
+      text-align: left;
+      line-height: 24.5px;
+      font-size: 18px;
+      padding: 5px 10px;
+      max-height: 50px;
+      overflow-y:auto;
+      color:#4D4A4A;
+
+}
+.comment-posted{
+      padding: 0px 10px;
+      color: #a6a6a6;
+}
+.comment-text{
+      margin:15px auto;
+      width:80%;
+      border: 1px solid #af5d5f;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+}
+.comment-sign-img{
+      padding:5px;
+      width:5%;
+}
+.comment-sign-img img{
+      width:auto;
+}
+.comment-input{
+      width:80%;
+}
+.comment-input input{
+      width:100%;
+      padding:5px 0px;
+      font-size: 17px;
+      border: none;
+}
+.comment-btn{
+      width:10%;
+      margin: 4px 15px 0 0;
+}
+.comment-btn button{
+      border:none;
+      color:#fff;
+      padding: 2px 5px;
+      background:#606372;
+      margin:5px 10px 5px 5px;
+}
+@media screen and (max-width:1000px){
+      .comment-box{
+              width:95%;
+      }
+}
+   .notification-view:hover .notification{
+      display: block;
+
+}
+.notification{
+      display: none;
+      position: absolute;
+      width:275px;
+      z-index: 999;
+      right:0;
+}
+.top-arrow{
+      width: 0; 
+      height: 0; 
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #E0E0E0;
+      margin-right: 10px;
+}
+.notification-box{
+      margin-top:10px;
+      width:100%;
+      box-shadow: 0px 0px 1px 1px #E0E0E0;
+      background: #fff;
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden;
+}
+.notification-box ul{
+      width:100%;
+      margin: 0;
+      padding: 0;
+}
+.notification-box ul li{
+      list-style-type: none;
+      margin:0;
+      padding: 0;
+}
+.notif{
+      width:251px;
+      border: 2px solid transparent;
+      border-bottom: 2px solid #E0E0E0;
+      padding: 10px;
+}
+.notif:hover {
+      border:2px solid #AF5D5F;
+}
+.notif:hover   .btn-notif{
+      display: block;
+}
+.notification-text{
+      width:210px;
+      text-align: justify;
+}
+.notification-text span{
+      margin:0;
+      padding:0;
+}
+.notification-close button{
+      border:none;
+      background: transparent;
+}
+.btn-notif{
+      display: none;
+      margin-right: 15px;
+      width:10px;
+}
+.btn-notif button{
+      border: none;
+      background:transparent;
+      color:#AF5D5F
+}
+
+.home .cust-menu-h2{
+    display: inline-block;
+    width:auto;
+    margin: 12px 0;
+}
+
+.comment-post .delete-comment{
+    position: absolute;
+    right: -26px;
+    top: 10px;
+    width: 20px;
+}
+
+.navbar-header {
+    float: left;
+    margin-top: 40px;
+}
+
+.color-white{
+    color:white;
+    margin-left: 30px;
+    font-weight: bolder;
+}
+
+.p-cust-class {
+    margin: 0 0 11px 10px !important;
+}
+
+.h2, .h2 {
+    font-size: 34px;
+    margin-top: 55px;
+}
+
+.navbar-inverse {
+    background-color: #f4cea7 !important;
+    border-color: #f4cea7 !important;
+}
+
+.cust-footer-color{
+    color: #33333a !important;
+}

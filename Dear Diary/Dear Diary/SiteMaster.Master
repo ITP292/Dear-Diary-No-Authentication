@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    
+
     <script src="~/../../Content/js/jquery-1.11.0.min.js"></script>
     <script src="~/../../Content/js/owl.carousel.min.js"></script>
     <link href="~/Content/css/owl.carousel.min.css" rel="stylesheet" />
@@ -24,14 +24,79 @@
                 <h1><a href="home.aspx">Dear Diary</a></h1>
             </div>
             <div class="left home">
-                <h2><a href="home.aspx" style="padding-left: 40px;">Home</a></h2>
+                <h2 class="cust-menu-h2"><a href="home.aspx" style="padding-left: 40px;">Home</a></h2>
+                <h2 class="cust-menu-h2"><a href="PostEntryList.aspx" style="padding-left: 20px;">MyPostEntry</a></h2>
             </div>
             <div class="icon-list right">
                 <ul>
                     <li><a href="#Friends List" title="Friends List">
                         <img src="../Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
-                    <li><a href="#Notification" title="Notification">
-                        <img src="../Content/img/notify.PNG" alt="Notification" title="Notification" /></a></li>
+                    <li class="notification-view"><a href="#Notification" title="Notification">
+                        <img src="../Content/img/notify.PNG" alt="Notification" title="Notification" /></a>
+                        <div class="notification">
+                            <div class="top-arrow right"></div>
+                            <div class="notification-box">
+                                <ul>
+                                    <li>
+                                        <div class="notif">
+                                            <div class="notification-text left">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                            </div>
+                                            <div class="btn-notif right">
+                                                <button>X</button></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="notif">
+                                            <div class="notification-text left">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                            </div>
+                                            <div class="btn-notif right">
+                                                <button>X</button></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="notif">
+                                            <div class="notification-text left">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                            </div>
+                                            <div class="btn-notif right">
+                                                <button>X</button></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="notif">
+                                            <div class="notification-text left">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                            </div>
+                                            <div class="btn-notif right">
+                                                <button>X</button></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="notif">
+                                            <div class="notification-text left">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                            </div>
+                                            <div class="btn-notif right">
+                                                <button>X</button></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
                     <li><a href="#Add Friends" title="Add Friends">
                         <img src="../Content/img/frslist.PNG" alt="Add Friends" title="Add Friends" /></a></li>
                     <li><a href="NewEntry.aspx" title="Add New Entry">
@@ -47,7 +112,7 @@
         </asp:ContentPlaceHolder>
 
         <div class="footer">
-            <a href="#"> &copy; 2017 ALL RIGHT RESERVED </a>
+            <a href="#">&copy; 2017 ALL RIGHT RESERVED </a>
         </div>
 
         <script>

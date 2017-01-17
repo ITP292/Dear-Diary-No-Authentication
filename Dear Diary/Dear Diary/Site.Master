@@ -10,9 +10,16 @@
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
+        
+        <%--Add CSS and JAVASCRIPT reference for all page--%> 
+        <link href="/Content/css/style.css" rel="stylesheet" />
+        <link href="/Content/css/owl.carousel.min.css" rel="stylesheet" />
+        <link href="/Content/css/owl.theme.default.css" rel="stylesheet" />
+        <script src="../Content/js/jquery-1.11.0.min.js"></script>
+        
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -40,16 +47,111 @@
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
+            <div class="container body-content">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/" id="Logo">Dear Diary</a>
+                    <a class="color-white" runat="server" href="/Default.aspx" id="Logo">Dear Diary</a>
                 </div>
-                <div class="navbar-collapse collapse">
+
+                <div class="navbar-collapse">
+                    <div>
+
+                        <div class="menu-bar">
+                            <%-- For list of all menu --%> 
+                            <div class="left home">
+                                <h2 class="cust-menu-h2"><a href="/NewEntry/MainPage.aspx" style="padding-left: 40px;">Home</a></h2>
+                                <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
+                                <h2 class="cust-menu-h2"><a href="/Contact.aspx" style="padding-left: 20px;">Contact</a></h2>
+                                <h2 class="cust-menu-h2"><a href="/NewEntry/PostEntryList.aspx" style="padding-left: 20px;">MyPostEntry</a></h2>
+                            </div>
+                            <div class="icon-list right">
+                                <ul>
+                                    <li><a href="#Friends List" title="Friends List">
+                                        <img src="/Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
+                                    <li class="notification-view"><a href="#Notification" title="Notification">
+                                        <img src="/Content/img/notify.PNG" alt="Notification" title="Notification" /></a>
+                                        <div class="notification">
+                                            <div class="top-arrow right"></div>
+                                            <div class="notification-box">
+                                                <ul>
+                                                    <li>
+                                                        <div class="notif">
+                                                            <div class="notification-text left">
+                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                </span>
+                                                            </div>
+                                                            <div class="btn-notif right">
+                                                                <button>X</button>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="notif">
+                                                            <div class="notification-text left">
+                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                </span>
+                                                            </div>
+                                                            <div class="btn-notif right">
+                                                                <button>X</button>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="notif">
+                                                            <div class="notification-text left">
+                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                </span>
+                                                            </div>
+                                                            <div class="btn-notif right">
+                                                                <button>X</button>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="notif">
+                                                            <div class="notification-text left">
+                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                </span>
+                                                            </div>
+                                                            <div class="btn-notif right">
+                                                                <button>X</button>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="notif">
+                                                            <div class="notification-text left">
+                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                </span>
+                                                            </div>
+                                                            <div class="btn-notif right">
+                                                                <button>X</button>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li><a href="#Add Friends" title="Add Friends">
+                                        <img src="/Content/img/frslist.PNG" alt="Add Friends" title="Add Friends" /></a></li>
+                                    <li><a href="/NewEntry/NewEntry.aspx" title="Add New Entry">
+                                        <img src="/Content/img/note.PNG" alt="Add New Entry" title="Add New Entry" /></a></li>
+                                    <li><a href="#setting" title="setting">
+                                        <img src="/Content/img/setting.png" alt="setting" title="setting" /></a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                     </div>
+                </div>
+
+                <%-- <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
@@ -59,24 +161,21 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a runat="server" href="~/Account/Login">Get Started</a></li>
                     </ul>
-                </div>
+                </div>--%>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content" style="background-color: white; border-radius: 13px; padding-top: 30px;">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Joanne Programming</p>
-                <p><a runat="server" href="~/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/About.aspx">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/Contact.aspx">Contact</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" href="~/Privacy.aspx">Privacy Policy</a></p>
-            </footer>
-        </div>
-    </form>
-</body>
-</html>
-            </footer>
-        </div>
+            <footer class="clear">
 
+                <div class="footer">
+                    <%--<a href="#">&copy; 2017 ALL RIGHT RESERVED </a>--%>
+                    <p>&copy; <%: DateTime.Now.Year %> - Joanne Programming</p>
+                    <p><a class="cust-footer-color" runat="server" href="~/">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/About.aspx">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/Contact.aspx">Contact</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a runat="server" class="cust-footer-color" href="~/Privacy.aspx">Privacy Policy</a></p>
+                </div>
+            </footer>
+        </div>
     </form>
 </body>
 </html>

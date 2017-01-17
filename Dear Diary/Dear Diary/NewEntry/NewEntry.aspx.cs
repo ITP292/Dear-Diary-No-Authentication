@@ -12,12 +12,20 @@ namespace Dear_Diary.NewEntry
 {
     public partial class NewEntry : System.Web.UI.Page
     {
+        /// <summary>
+        /// page load 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack != true)
             {
-
                 img.Visible = false;
+
+                //check any query string available or not, 
+                //if query string available then get id from query string and fill data and load page
+                //other wise display blank form 
 
                 if (Request.QueryString.AllKeys.Contains("Post_Id"))
                 {
@@ -46,9 +54,15 @@ namespace Dear_Diary.NewEntry
             }
         }
 
+
+        /// <summary>
+        /// for click of draft button , data will save or update in draft mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnDraft_Click(object sender, EventArgs e)
         {
-            var loginEmail = "abc@gmail.com";
+            var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             var post_text = ta.Value;
 
             if (hdPostId.Value != "")
@@ -68,9 +82,14 @@ namespace Dear_Diary.NewEntry
             img.Visible = false;
         }
 
+        /// <summary>
+        /// For post button -> click for i'm done button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnPost_Click(object sender, EventArgs e)
         {
-            var loginEmail = "abc@gmail.com";
+            var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             var post_text = ta.Value;
 
             if (hdPostId.Value != "")
@@ -86,11 +105,23 @@ namespace Dear_Diary.NewEntry
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Post save successfully.');", true);
         }
 
+
+        /// <summary>
+        /// its work when click on draft list button, when click on it then redirect it to draft list page and 
+        /// display all draft list of post
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnDraftList_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/NewEntry/PostDraftList.aspx");
         }
 
+        /// <summary>
+        /// this is for upload images
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Upload(object sender, EventArgs e)
         {
             if (FileUpload1.HasFile)
@@ -102,12 +133,15 @@ namespace Dear_Diary.NewEntry
                 img.Visible = true;
             }
         }
-
-        protected void ddlSetting_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
+        /// <summary>
+        /// this is function for save post, its call from above code
+        /// </summary>
+        /// <param name="loginEmail"></param>
+        /// <param name="post_text"></param>
+        /// <param name="picture"></param>
+        /// <param name="permissionStatus"></param>
+        /// <param name="isPostEntry"></param>
         public void SavePost(string loginEmail, string post_text, string picture, string permissionStatus, bool isPostEntry)
         {
             SqlConnection myConnection;
@@ -120,7 +154,7 @@ namespace Dear_Diary.NewEntry
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                 myCommand.Parameters.AddWithValue("@Author_Email", loginEmail);
-                myCommand.Parameters.AddWithValue("@Date_Added", DateTime.Now.ToString());
+                myCommand.Parameters.AddWithValue("@Date_Added", DateTime.Now.Date);
                 myCommand.Parameters.AddWithValue("@Picture", picture);
                 myCommand.Parameters.AddWithValue("@Post_Text", post_text);
                 myCommand.Parameters.AddWithValue("@Permission_Status", permissionStatus);
@@ -130,6 +164,14 @@ namespace Dear_Diary.NewEntry
             }
         }
 
+        /// <summary>
+        /// this is update post from , this is call from others
+        /// </summary>
+        /// <param name="Post_Id"></param>
+        /// <param name="post_text"></param>
+        /// <param name="picture"></param>
+        /// <param name="permissionStatus"></param>
+        /// <param name="isPostEntry"></param>
         public void UpdatePost(int Post_Id, string post_text, string picture, string permissionStatus, bool isPostEntry)
         {
             SqlConnection myConnection;
@@ -137,7 +179,7 @@ namespace Dear_Diary.NewEntry
             {
                 myConnection.Open();
 
-                var qPicture= "";
+                var qPicture = "";
 
                 if (picture != "")
                     qPicture = ", Picture=@Picture";
@@ -158,6 +200,12 @@ namespace Dear_Diary.NewEntry
             }
         }
 
+        /// <summary>
+        /// IsPostEntry = 1 then its post entry and IsPostEntry = 0 means this is draft entry
+        /// this is for get post details using its post entry or not
+        /// </summary>
+        /// <param name="IsPosted"></param>
+        /// <returns></returns>
         public DataTable GetPostDetails(bool IsPosted)
         {
             DataTable dt = new DataTable();
@@ -176,6 +224,11 @@ namespace Dear_Diary.NewEntry
             }
         }
 
+        /// <summary>
+        /// get post details using post_id
+        /// </summary>
+        /// <param name="post_Id"></param>
+        /// <returns></returns>
         public DataTable GetPostDetailsbyId(int post_Id)
         {
             DataTable dt = new DataTable();

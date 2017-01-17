@@ -15,7 +15,7 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 
@@ -38,8 +38,7 @@ textarea {
 #Logo {
     font-family:precursive;
     font-size:25px;
-    margin-bottom:10px;
-    display:inline-block;
+    padding-top:2px;
 }
 
 h1 {

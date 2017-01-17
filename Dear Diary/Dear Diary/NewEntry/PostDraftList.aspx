@@ -1,14 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" CodeBehind="PostDraftList.aspx.cs" Inherits="Dear_Diary.NewEntry.PostDraftList" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="form1" runat="server">
-
-        <div class="main-wrapper draft">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PostDraftList.aspx.cs" Inherits="Dear_Diary.NewEntry.PostDraftList" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <div class="main-wrapper draft">
             <div class="new-entry">
                 <h1>Drafts</h1>
             </div>
+
+            <%--this is for display all post which has save as draft (draft list) display--%>
+            <%--first display image and post details which has save as draft--%>
             <asp:Repeater ID="rptPostList" runat="server" OnItemCommand="rptPostList_ItemCommand">
                 <ItemTemplate>
                     <a class="draft-post-link" href="NewEntry.aspx?Post_Id=<%# Eval("Post_Id") %>">
@@ -32,5 +30,4 @@
                 </ItemTemplate>
             </asp:Repeater>
         </div>
-    </form>
 </asp:Content>

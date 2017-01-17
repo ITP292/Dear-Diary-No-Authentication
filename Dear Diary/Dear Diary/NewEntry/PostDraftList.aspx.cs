@@ -11,12 +11,23 @@ namespace Dear_Diary.NewEntry
 {
     public partial class PostDraftList : System.Web.UI.Page
     {
+        /// <summary>
+        /// page load event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            //get all post which has save as draft
             rptPostList.DataSource = GetPostDetails(0);
             rptPostList.DataBind();
         }
 
+        /// <summary>
+        /// this is for get post details function , its call from page load
+        /// </summary>
+        /// <param name="IsPosted"></param>
+        /// <returns></returns>
         public DataTable GetPostDetails(int IsPosted)
         {
             DataTable dt = new DataTable();
@@ -35,6 +46,12 @@ namespace Dear_Diary.NewEntry
                 return dt;
             }
         }
+
+        /// <summary>
+        /// this is call when click on delete link on draft list page (for delete post entry)
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         protected void rptPostList_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
