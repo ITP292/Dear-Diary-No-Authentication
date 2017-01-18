@@ -63,14 +63,15 @@ namespace Dear_Diary.NewEntry
                 {
                     myConnection.Open();
 
-                    string query = "INSERT INTO [dbo].[Comment](Post_Id, Author_Email, Comment_Text ,Date_Added)";
-                    query += " VALUES (@Post_Id, @Author_Email, @Comment_Text, @Date_Added)";
+                    string query = "INSERT INTO [dbo].[Comment](Post_Id, Author_Email, Comment_Text ,Date_Added, Seen)";
+                    query += " VALUES (@Post_Id, @Author_Email, @Comment_Text, @Date_Added, @seen)";
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                     myCommand.Parameters.AddWithValue("@Post_Id", post_Id);
                     myCommand.Parameters.AddWithValue("@Author_Email", loginEmail);
                     myCommand.Parameters.AddWithValue("@Comment_Text", txtComment.Value);
                     myCommand.Parameters.AddWithValue("@Date_Added", DateTime.Now.Date);
+                    myCommand.Parameters.AddWithValue("@seen", "false");
                     myCommand.ExecuteNonQuery();
 
                     rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt16(post_Id));

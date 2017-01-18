@@ -149,8 +149,8 @@ namespace Dear_Diary.NewEntry
             {
                 myConnection.Open();
 
-                string query = "INSERT INTO [dbo].[Post](Author_Email, Date_Added, Picture, Post_Text, Permission_Status, IsPostEntry)";
-                query += " VALUES (@Author_Email, @Date_Added, @Picture, @Post_Text, @Permission_Status, @IsPostEntry)";
+                string query = "INSERT INTO [dbo].[Post](Author_Email, Date_Added, Picture, Post_Text, Permission_Status, IsPostEntry, Seen)";
+                query += " VALUES (@Author_Email, @Date_Added, @Picture, @Post_Text, @Permission_Status, @IsPostEntry, @seen)";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                 myCommand.Parameters.AddWithValue("@Author_Email", loginEmail);
@@ -159,6 +159,7 @@ namespace Dear_Diary.NewEntry
                 myCommand.Parameters.AddWithValue("@Post_Text", post_text);
                 myCommand.Parameters.AddWithValue("@Permission_Status", permissionStatus);
                 myCommand.Parameters.AddWithValue("@IsPostEntry", isPostEntry);
+                myCommand.Parameters.AddWithValue("@seen", "false");
 
                 myCommand.ExecuteNonQuery();
             }
