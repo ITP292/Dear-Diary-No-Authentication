@@ -14,36 +14,63 @@ namespace Dear_Diary
 {
     public partial class Notification : System.Web.UI.Page
     {
-        private ArrayList cList = new ArrayList();
-        private ArrayList pList = new ArrayList();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Label2.Text = "Page loaded at: " + DateTime.Now.ToLongTimeString();
-            makeList(retrieveFriends());
+            makeFriendList(retrieveFriends());
+            makePostList(retrievePost());
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             Label1.Text = "Page refreshed at: " + DateTime.Now.ToLongTimeString();
-            makeList(retrieveFriends());
+            makeFriendList(retrieveFriends());
+            makePostList(retrievePost());
         }
 
-        protected void makeList(ArrayList s)
+        protected void makeFriendList(ArrayList s)
         {
             //Remove existing list on the page and replace it with the new one
             tabs.Controls.Clear();
             foreach (var item in s)
             {
-                HtmlGenericControl li = new HtmlGenericControl("li");
-                tabs.Controls.Add(li);
-                HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "/Friends/requestFriend.aspx?User2Email=" +item.ToString());
-                anchor.InnerText = Server.HtmlEncode(item.ToString() + " wants to be your friend");
-                li.Controls.Add(anchor);
+                //Check if fList return null
+                if (!item.Equals(null))
+                {
+                    HtmlGenericControl li = new HtmlGenericControl("li");
+                    tabs.Controls.Add(li);
+                    HtmlGenericControl anchor = new HtmlGenericControl("a");
+                    anchor.Attributes.Add("href", "/Friends/requestFriend.aspx?User2Email=" + item.ToString());
+                    anchor.InnerText = Server.HtmlEncode(item.ToString() + " wants to be your friend");
+                    li.Controls.Add(anchor);
+                }
+                else
+                {
+                    //If fList is null, don't do anything
+                }
             }
-            //Things that need to be solved, count the number of notifications pulled from the database and use that number
-            //to make the list.
+        }
+
+        protected void makePostList(ArrayList s)
+        {
+            foreach (var item in s)
+            {
+                //Check if pList returned null
+                if (!item.Equals(null))
+                {
+                    HtmlGenericControl li = new HtmlGenericControl("li");
+                    tabs.Controls.Add(li);
+                    HtmlGenericControl anchor = new HtmlGenericControl("a");
+                    anchor.Attributes.Add("href", "#");
+                    anchor.InnerText = Server.HtmlEncode(item.ToString() + " just made a post!");
+                    li.Controls.Add(anchor);
+                }
+                else
+                {
+                    //If pList is null, don't do anything
+                }
+            }
         }
 
         protected ArrayList retrieveFriends()
@@ -73,6 +100,31 @@ namespace Dear_Diary
                     }
                     return fList;
                 }
+        }
+
+        protected ArrayList retrievePost()
+        {
+            //pList stores information retrieved from Post table
+            ArrayList pList = new ArrayList();
+            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                String author;
+                String query = "SELECT * FROM Post WHERE Seen = @seen";
+
+                SqlCommand myCommand = new SqlCommand(query, myConnection);
+                myConnection.Open();
+                myCommand.CommandType = CommandType.Text;
+                myCommand.Parameters.AddWithValue("@seen", "false");
+
+                SqlDataReader reader = myCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    author = reader["Author_Email"].ToString();
+                    pList.Add(author);
+                }
+                return pList;
+            }
         }
     }
 }
