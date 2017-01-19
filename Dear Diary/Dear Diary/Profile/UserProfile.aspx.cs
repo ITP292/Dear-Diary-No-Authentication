@@ -43,40 +43,31 @@ namespace Dear_Diary.Profile
                     dbEmail = reader["Email_Address"].ToString();
                     dbFName = reader["FName"].ToString();
                     dbLName = reader["LName"].ToString();
+                    dbProfilePic = reader["displayPic"].ToString();
                     Name = dbFName + " " + dbLName;
                 }
 
-                
-                userName.Text = Name;
-                userEmail.Text = dbEmail;
+                Image1.ImageUrl = dbProfilePic;
+                userName.Text =  Name;
+                userEmail.Text = "(" + dbEmail + ")";
                 
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void noOfPosts_Click(object sender, ImageClickEventArgs e)
         {
-            if (FileUpload1.HasFile)
-            {
-                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Pictures/") + fileName);
-                Session["imagePath"] = "~/Pictures/" + fileName;
-                Image1.ImageUrl = "~/Pictures/" + fileName;
-                Image1.Visible = true;
-            }
-
-            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-            {
-                myConnection.Open();
-
-                string query = "UPDATE [User] SET [displayPic] = @picture WHERE [Email_Address] = @email";
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-
-                myCommand.Parameters.AddWithValue("@picture", Session["imagePath"].ToString());
-                myCommand.Parameters.AddWithValue("@email", email);
-                myCommand.ExecuteNonQuery();
-            }
+            Response.Redirect("/NewEntry/PostEntryList.aspx");
         }
 
+        protected void noOfFriends_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/Friends/viewFriend.aspx");
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -218,6 +218,9 @@
     <Content Include="Pictures\IMG_20160529_144153.jpg" />
     <Content Include="Pictures\PJ.PNG" />
     <Content Include="Pictures\profile-empty-head.gif" />
+    <Content Include="Pictures\Style\friendicon.png" />
+    <Content Include="Pictures\Style\Message_chat_text_bubble_phone.png" />
+    <Content Include="Pictures\Style\Picture1.png" />
     <Content Include="Precursive_1_FREE.otf" />
     <Content Include="Content\font\Heaven Matters Personal Use.ttf" />
     <Content Include="NewEntry.zip" />
