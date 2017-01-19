@@ -11,6 +11,8 @@ namespace Dear_Diary.Profile
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
+        public static String email = "stupid@idiot.com";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -31,10 +33,11 @@ namespace Dear_Diary.Profile
             {
                 myConnection.Open();
 
-                string query = "INSERT INTO [Test] VALUES (@picture)";
+                string query = "UPDATE [User] SET [displayPic] = @picture WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
 
                 myCommand.Parameters.AddWithValue("@picture", Session["imagePath"].ToString());
+                myCommand.Parameters.AddWithValue("@email", email);
 
                 myCommand.ExecuteNonQuery();
             }
