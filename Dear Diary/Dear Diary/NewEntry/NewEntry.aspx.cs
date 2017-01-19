@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dear_Diary.Security_API;
 
 namespace Dear_Diary.NewEntry
 {
@@ -64,15 +65,16 @@ namespace Dear_Diary.NewEntry
         {
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             var post_text = ta.Value;
+            String encrypted_draft = AES.Encrypt(post_text);
 
             if (hdPostId.Value != "")
             {
-                UpdatePost(Convert.ToInt16(hdPostId.Value), post_text, Session["imagePath"].ToString(), ddlSetting.SelectedValue, false);
+                UpdatePost(Convert.ToInt16(hdPostId.Value), encrypted_draft, Session["imagePath"].ToString(), ddlSetting.SelectedValue, false);
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Post update successfully.');", true);
             }
             else
             {
-                SavePost(loginEmail, post_text, Session["imagePath"].ToString(), ddlSetting.SelectedValue, false);
+                SavePost(loginEmail, encrypted_draft, Session["imagePath"].ToString(), ddlSetting.SelectedValue, false);
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Post save as draft successfully.');", true);
             }
 
@@ -92,10 +94,12 @@ namespace Dear_Diary.NewEntry
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             var post_text = ta.Value;
 
+            String encrypted_post = AES.Encrypt(post_text);
+
             if (hdPostId.Value != "")
-                UpdatePost(Convert.ToInt16(hdPostId.Value), post_text, Session["imagePath"].ToString(), ddlSetting.SelectedValue, true);
+                UpdatePost(Convert.ToInt16(hdPostId.Value), encrypted_post, Session["imagePath"].ToString(), ddlSetting.SelectedValue, true);
             else
-                SavePost(loginEmail, post_text, Session["imagePath"].ToString(), ddlSetting.SelectedValue, true);
+                SavePost(loginEmail, encrypted_post, Session["imagePath"].ToString(), ddlSetting.SelectedValue, true);
 
             ta.Value = "Dear Diary, ";
             hdPostId.Value = "";
