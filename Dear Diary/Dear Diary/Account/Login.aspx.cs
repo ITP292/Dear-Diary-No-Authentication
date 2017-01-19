@@ -18,7 +18,7 @@ namespace Dear_Diary.Account
     {
         public static int count = 0;
         public static int timeCounter = 0; //Timer countdown for lockout
-        public static String globalinputemail;
+        //public static String globalinputemail;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Dear_Diary.Account
         protected void Login_Click(object sender, EventArgs e)
         {
             //Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient(); // Commented this out so that it will not trigger sms
-            globalinputemail = TextBox1.Text;
+            //globalinputemail = TextBox1.Text;
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
@@ -177,32 +177,6 @@ namespace Dear_Diary.Account
                 Label8.Text = "";
             }
         }
-
-        //protected void Timer2_Tick(object sender, EventArgs e)
-        //{
-        //    timeCounter1++;
-        //    if (timeCounter1 >= 1)
-        //    {
-        //        SqlConnection myConnection;
-        //        using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-        //        {
-        //            string inputemail = TextBox1.Text;
-        //            string randomNo = null;
-        //            //set randomNo to null once time is up
-        //            myConnection.Open();
-        //            string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
-        //            SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-        //            myCommand1.CommandType = CommandType.Text;
-        //            myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-        //            myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
-        //            myCommand1.ExecuteNonQuery();
-        //            myConnection.Close();
-        //        }
-        //            Timer2.Enabled = false;
-        //    }
-        //}
-
-        //generate otp code method
         private string GenerateRandomOTP(int iOTPLength, string[] saAllowedCharacters)
 
         {
