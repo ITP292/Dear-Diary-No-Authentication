@@ -18,7 +18,7 @@ namespace Dear_Diary.Account
     {
         public static int count = 0;
         public static int timeCounter = 0; //Timer countdown for lockout
-        public static String globalinputemail;
+        //public static String globalinputemail;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Dear_Diary.Account
         protected void Login_Click(object sender, EventArgs e)
         {
             //Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient(); // Commented this out so that it will not trigger sms
-            globalinputemail = TextBox1.Text;
+            //globalinputemail = TextBox1.Text;
             //DATABASE
             //Pull out and compare
             SqlConnection myConnection;
