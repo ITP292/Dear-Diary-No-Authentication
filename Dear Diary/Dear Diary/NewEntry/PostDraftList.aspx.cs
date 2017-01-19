@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dear_Diary.Security_API;
 
 namespace Dear_Diary.NewEntry
 {
@@ -36,12 +37,22 @@ namespace Dear_Diary.NewEntry
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                String encrypted_post;
+                String plain_post;
+
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@isposted", IsPosted);
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    encrypted_post = row[4].ToString();
+                    plain_post = AES.Decrypt(encrypted_post);
+                    row.SetField(4, plain_post);
+                }
 
                 return dt;
             }

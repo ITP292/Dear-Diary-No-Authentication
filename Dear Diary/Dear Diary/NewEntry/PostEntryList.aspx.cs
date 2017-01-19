@@ -20,7 +20,7 @@ namespace Dear_Diary.NewEntry
         protected void Page_Load(object sender, EventArgs e)
         {
             //check login user session, if not found then set test login 'test123@gmail.com'
-            var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
+            var loginEmail = Session["email"] != null ? Session["email"].ToString() : "stupid@idiot.com";
             rptPostEntryList.DataSource = GetPostDetails(1, loginEmail);
             rptPostEntryList.DataBind();
 
@@ -51,6 +51,13 @@ namespace Dear_Diary.NewEntry
                 myCommand.CommandType = CommandType.Text;
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    encrypted_post = row[4].ToString();
+                    plain_post = AES.Decrypt(encrypted_post);
+                    row.SetField(4, plain_post);
+                }
 
                 return dt;
             }
@@ -111,11 +118,21 @@ namespace Dear_Diary.NewEntry
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                String encrypted_post;
+                String plain_post;
+
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    encrypted_post = row[4].ToString();
+                    plain_post = AES.Decrypt(encrypted_post);
+                    row.SetField(4, plain_post);
+                }
 
                 rptPostEntryList.DataSource = dt;
                 rptPostEntryList.DataBind();
