@@ -23,6 +23,10 @@ namespace Dear_Diary.NewEntry
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             rptPostEntryList.DataSource = GetPostDetails(1, loginEmail);
             rptPostEntryList.DataBind();
+
+            //String encrypted_post = lblpostEntrytext.Text;
+            //String plain_post = AES.Decrypt(encrypted_post);
+            //lblpostEntrytext.Text = plain_post;
         }
 
         /// <summary>
@@ -39,21 +43,12 @@ namespace Dear_Diary.NewEntry
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                String encrypted_post = "";
+                String encrypted_post;
+                String plain_post;
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-
-
-                SqlDataReader reader = myCommand.ExecuteReader();
-                if (reader.Read())
-                {
-                    encrypted_post = reader["Post_Text"].ToString();
-                }
-
-                String plain_post = AES.Decrypt(encrypted_post);
-
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
 
