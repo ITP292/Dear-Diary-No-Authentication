@@ -10,7 +10,7 @@
         <div class="main left">
             <div class="contant-diary">
                 <asp:HiddenField ID="hdPostId" runat="server" />
-                <textarea id="ta" class="text-line" runat="server" maxlength="2800" clientidmode="Static" onkeypress="coutrows(event)" cols="65">dear dairy,</textarea>
+                <textarea id="ta" class="text-line" runat="server" maxlength="2800" clientidmode="Static" onkeypress="coutrows(event)" cols="65">Dear Diary,</textarea>
             </div>
         </div>
 
