@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dear_Diary.Security_API;
 
 namespace Dear_Diary.NewEntry
 {
@@ -25,6 +26,8 @@ namespace Dear_Diary.NewEntry
                 if (Request.QueryString.AllKeys.Contains("Post_Id"))
                 {
                     var post_Id = Request.QueryString["Post_Id"].ToString();
+                    String encrypted_post;
+                    String plain_post;
 
                     if (post_Id != "")
                     {
@@ -32,11 +35,13 @@ namespace Dear_Diary.NewEntry
 
                         foreach (DataRow item in dt.Rows)
                         {
-                            ta.InnerHtml = item["Post_Text"].ToString();
+                            encrypted_post = item["Post_Text"].ToString();
                             img.ImageUrl = item["Picture"].ToString() == "" ? "~/Pictures/" + "default-thumbnail.jpg" : item["Picture"].ToString();
                             lblPostBy.Text = item["Post_By"].ToString();
                             lblPermission.Text = item["Permission_Status"].ToString();
                             lblPostOn.Text = Convert.ToDateTime(item["Date_Added"]).ToString("dd MMM yyyy");
+                            plain_post = AES.Decrypt(encrypted_post);
+                            ta.InnerHtml = plain_post;
                         }
 
                         rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt16(post_Id));
@@ -55,6 +60,7 @@ namespace Dear_Diary.NewEntry
         {
             var post_Id = Request.QueryString["Post_Id"].ToString();
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
+            String encrypted_comment;
 
             if (txtComment.Value != "")
             {
@@ -67,9 +73,11 @@ namespace Dear_Diary.NewEntry
                     query += " VALUES (@Post_Id, @Author_Email, @Comment_Text, @Date_Added, @seen)";
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
 
+                    encrypted_comment = AES.Encrypt(txtComment.Value);
+
                     myCommand.Parameters.AddWithValue("@Post_Id", post_Id);
                     myCommand.Parameters.AddWithValue("@Author_Email", loginEmail);
-                    myCommand.Parameters.AddWithValue("@Comment_Text", txtComment.Value);
+                    myCommand.Parameters.AddWithValue("@Comment_Text", encrypted_comment);
                     myCommand.Parameters.AddWithValue("@Date_Added", DateTime.Now.Date);
                     myCommand.Parameters.AddWithValue("@seen", "false");
                     myCommand.ExecuteNonQuery();
