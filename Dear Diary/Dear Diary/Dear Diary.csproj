@@ -227,9 +227,7 @@
     <Content Include="Friends\requestFriend.aspx" />
     <Content Include="Friends\viewFriend.aspx" />
     <Content Include="Privacy.aspx" />
-    <Content Include="Profile\Profile.aspx" />
     <Content Include="Profile\UserProfile.aspx" />
-    <Content Include="Profile\WebForm2.aspx" />
     <Content Include="Profile\UploadPicture.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -545,26 +543,12 @@
     <Compile Include="Privacy.aspx.designer.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\Profile.aspx.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Profile\Profile.aspx.designer.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Profile\UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Profile\WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Profile\WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\UploadPicture.aspx.cs">
       <DependentUpon>UploadPicture.aspx</DependentUpon>

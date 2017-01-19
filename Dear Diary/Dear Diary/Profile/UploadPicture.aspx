@@ -19,6 +19,8 @@
     </style>
     <label class="file-upload"><asp:FileUpload ID="FileUpload1" runat="server" /></label>
     <br />
+    <br />
+    <br />
     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Upload" Style="text-align: center;"/>
     <br />
     <asp:Image ID="Image1" runat="server" Height="118px" Width="104px" />
