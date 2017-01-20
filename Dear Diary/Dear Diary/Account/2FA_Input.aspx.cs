@@ -59,7 +59,7 @@ namespace Dear_Diary.Account
                     if (difference.TotalSeconds < 60) //10 seconds for testing
                     {
                         Session["email"] = inputemail;
-                        Response.Redirect("/Account/AccountPage.aspx");
+                        Response.Redirect("/Profile/UserProfile.aspx");
                     }
                     else
                         Label5.Text = "Your code has expired. Please request for another code.";
