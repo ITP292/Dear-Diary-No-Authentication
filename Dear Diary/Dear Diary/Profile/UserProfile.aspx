@@ -45,6 +45,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Pictures/Style/Message_chat_text_bubble_phone.png" OnClick="ImageButton1_Click" />
     <br />
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     <br />
     <asp:TextBox ID="TextBox1" runat="server" CssClass="auto-style2" Height="208px" ReadOnly="True" TextMode="MultiLine" Width="1086px"></asp:TextBox>
     <br />
