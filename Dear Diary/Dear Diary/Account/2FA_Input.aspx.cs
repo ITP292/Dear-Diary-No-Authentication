@@ -26,9 +26,9 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 string inputCode = TextBox1.Text;
-                string inputemail = Session["email"].ToString(); 
+                //string inputemail = Session["email"].ToString(); 
 
-                //String inputemail = Login.globalinputemail;
+                String inputemail = Login.globalinputemail;
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
@@ -114,7 +114,7 @@ namespace Dear_Diary.Account
 
                 //Send new message
                 string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                //sms.sendMessage("AS1", "637337", dbMobile, message);
+                sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;
