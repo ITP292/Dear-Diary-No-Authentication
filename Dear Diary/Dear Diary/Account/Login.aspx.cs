@@ -22,6 +22,7 @@ namespace Dear_Diary.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["email"] = "";
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace Dear_Diary.Account
                 if (dbEmail.Equals(inputemail) && dbPassword.Equals(passwordHash))
                 {
 
-                    Session["email"] = TextBox1.Text;
+                    //Session["email"] = TextBox1.Text;
 
                     //When successful login, counter reset to 0
                     myConnection.Open();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using Dear_Diary.Account;
 
 namespace Dear_Diary
 {
@@ -14,16 +14,14 @@ namespace Dear_Diary
             NotLoggedIn.Visible = false;
             LoggedIn.Visible = false;
 
-            String user = Session["email"].ToString();
-
-            if (String.IsNullOrEmpty(user) == true)
-            {
-                NotLoggedIn.Visible = true;
-            }
-            else
-            {
-                LoggedIn.Visible = true;
-            }
+                if (Session["email"].ToString().Equals(""))
+                {
+                    NotLoggedIn.Visible = true;
+                }
+                else
+                {
+                    LoggedIn.Visible = true;
+                }
         }
     }
 }
