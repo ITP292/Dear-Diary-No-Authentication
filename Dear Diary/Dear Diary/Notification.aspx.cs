@@ -82,7 +82,7 @@ namespace Dear_Diary
                     String User2_Email;
                     //String User1_Email = Session["email"].ToString();
                     String User1_Email = "lrh@gmail.com";
-                    String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User1_Email = @user1email";
+                    String query = "SELECT * FROM Friendship WHERE Se1en = @seen AND User1_Email = @user1email";
 
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();

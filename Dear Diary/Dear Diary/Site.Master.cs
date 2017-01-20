@@ -11,7 +11,19 @@ namespace Dear_Diary
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            NotLoggedIn.Visible = false;
+            LoggedIn.Visible = false;
 
+            String user = Session["email"].ToString();
+
+            if (String.IsNullOrEmpty(user) == true)
+            {
+                NotLoggedIn.Visible = true;
+            }
+            else
+            {
+                LoggedIn.Visible = true;
+            }
         }
     }
 }

@@ -22,6 +22,24 @@ namespace Dear_Diary {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Logo;
         
         /// <summary>
+        /// NotLoggedIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NotLoggedIn;
+        
+        /// <summary>
+        /// LoggedIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedIn;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

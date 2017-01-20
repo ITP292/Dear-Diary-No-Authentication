@@ -56,8 +56,19 @@
                     <div>
 
                         <div class="menu-bar">
-                            <%-- For list of all menu --%> 
+                            <%-- For list of all menu --%>
+                            <div id="NotLoggedIn" runat="server"> 
                                     <div class="left home">
+                                        <h2 class="cust-menu-h2"><a href="/Default.aspx" style="padding-left: 40px;">Home</a></h2>
+                                        <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
+                                        <h2 class="cust-menu-h2"><a href="/Contact.aspx" style="padding-left: 20px;">Contact</a></h2>
+                                    </div>
+                                    <div class="icon-list right">
+                                        <p>You are not logged in</p>
+                                     </div>
+                             </div>
+                            <div id="LoggedIn" runat="server">
+                                <div class="left home">
                                         <h2 class="cust-menu-h2"><a href="/Default.aspx" style="padding-left: 40px;">Home</a></h2>
                                         <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
                                         <h2 class="cust-menu-h2"><a href="/Profile/UserProfile.aspx" style="padding-left: 20px;">Profile</a></h2>
@@ -146,7 +157,7 @@
                                         <img src="/Content/img/setting.png" alt="setting" title="setting" /></a></li>
                                 </ul>
                             </div>
-                             
+                            </div>
                             <div class="clear"></div>
                         </div>
                      </div>
