@@ -57,8 +57,6 @@
 
                         <div class="menu-bar">
                             <%-- For list of all menu --%> 
-                            <asp:LoginView ID="LoginView1" Runat="server">
-                                <LoggedInTemplate>
                                     <div class="left home">
                                         <h2 class="cust-menu-h2"><a href="/Default.aspx" style="padding-left: 40px;">Home</a></h2>
                                         <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
@@ -148,19 +146,7 @@
                                         <img src="/Content/img/setting.png" alt="setting" title="setting" /></a></li>
                                 </ul>
                             </div>
-                                </LoggedInTemplate>
-                                <AnonymousTemplate>
-                                    <div class="left home">
-                                        <h2 class="cust-menu-h2"><a href="/Default.aspx" style="padding-left: 40px;">Home</a></h2>
-                                        <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
-                                        <h2 class="cust-menu-h2"><a href="/Contact.aspx" style="padding-left: 20px;">Contact</a></h2>
-                                    </div>
-                                    <div class="icon-list right">
-                                        <p>You are not logged in</p>
-                                    </div>
-                                </AnonymousTemplate>
-                            </asp:LoginView>
-                            
+                             
                             <div class="clear"></div>
                         </div>
                      </div>

@@ -26,9 +26,9 @@ namespace Dear_Diary.Account
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 string inputCode = TextBox1.Text;
-                string inputemail = Session["email"].ToString(); 
+                //string inputemail = Session["email"].ToString(); 
 
-                //String inputemail = Login.globalinputemail;
+                String inputemail = Login.globalinputemail;
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
@@ -59,7 +59,7 @@ namespace Dear_Diary.Account
                     if (difference.TotalSeconds < 60) //10 seconds for testing
                     {
                         Session["email"] = inputemail;
-                        Response.Redirect("/Account/AccountPage.aspx");
+                        Response.Redirect("/Profile/UserProfile.aspx");
                     }
                     else
                         Label5.Text = "Your code has expired. Please request for another code.";
@@ -83,7 +83,8 @@ namespace Dear_Diary.Account
             {
                 string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
-                string inputemail = Session["email"].ToString(); 
+                //string inputemail = Session["email"].ToString(); 
+                string inputemail = Login.globalinputemail;
 
                 string randomNo = GenerateRandomOTP(6, saAllowedCharacters);
                 //Once resend code, need to update randomNo
@@ -114,7 +115,7 @@ namespace Dear_Diary.Account
 
                 //Send new message
                 string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                //sms.sendMessage("AS1", "637337", dbMobile, message);
+                sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;
