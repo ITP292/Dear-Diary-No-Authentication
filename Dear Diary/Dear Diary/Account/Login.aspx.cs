@@ -26,7 +26,7 @@ namespace Dear_Diary.Account
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient(); // Commented this out so that it will not trigger sms
+            //Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient(); // Commented this out so that it will not trigger sms
             globalinputemail = TextBox1.Text;
             //DATABASE
             //Pull out and compare
@@ -102,7 +102,7 @@ namespace Dear_Diary.Account
                     myConnection.Close();
 
                     string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                    sms.sendMessage("AS1", "637337", dbMobile, message);
+                    //sms.sendMessage("AS1", "637337", dbMobile, message);
                     DateTime startTime = DateTime.Now;
                     myConnection.Open();
                     string query4 = "UPDATE [dbo].[User] SET [TimeGenerateCode] = @start WHERE [Email_Address] = @inputemail";
