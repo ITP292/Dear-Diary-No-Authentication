@@ -15,4 +15,7 @@
         Unless you ask not to, we may contact you via email in the future to tell you about our new speicals,
         new products or services, or changes to this privacy policy.
     </p>
+    <p>
+        By using our website, you fully agree to this. Joanne Programming reserves the right to change any of these policies at any time.
+    </p>
 </asp:Content>
