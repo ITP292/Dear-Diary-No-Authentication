@@ -82,7 +82,7 @@ namespace Dear_Diary.Profile
                         String permission = "";
                         String dbPostText = "";
 
-                        String query3 = "SELECT [Post_Text] FROM [Post], [Permission_Status] WHERE [Author_Email] = @email";
+                        String query3 = "SELECT [Post_Text], [Permission_Status] FROM [Post] WHERE [Author_Email] = @email";
                         //AND[Permission] = @permission
                         SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
 
