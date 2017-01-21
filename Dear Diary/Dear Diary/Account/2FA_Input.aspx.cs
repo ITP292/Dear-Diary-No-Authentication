@@ -56,7 +56,7 @@ namespace Dear_Diary.Account
 
                     TimeSpan difference = endTime.Subtract(dbstartTime);
 
-                    if (difference.TotalSeconds < 60) //10 seconds for testing
+                    if (difference.TotalSeconds < 30) //10 seconds for testing
                     {
                         Session["email"] = inputemail;
                         Response.Redirect("/Profile/UserProfile.aspx");
@@ -77,7 +77,8 @@ namespace Dear_Diary.Account
         //Resending Code
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
+            Label5.Text = "A new code has been sent. Please check your phone.";
+            //Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -115,7 +116,7 @@ namespace Dear_Diary.Account
 
                 //Send new message
                 string message = "Your OTP is: " + randomNo + ". Please enter within 2 minutes. Do not reply to this message.";
-                sms.sendMessage("AS1", "637337", dbMobile, message);
+                //sms.sendMessage("AS1", "637337", dbMobile, message);
                 myConnection.Close();
 
                 DateTime startTime = DateTime.Now;
@@ -151,18 +152,3 @@ namespace Dear_Diary.Account
 
         }
     }
-
-//IF TIME's UP
-//SqlConnection myConnection;
-//using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-//{
-//    string inputemail = Session["email"].ToString();
-//    string randomNo = "1";
-//    myConnection.Open();
-//    string query1 = "UPDATE [dbo].[User] SET [randomNo] = @randomNo WHERE [Email_Address] = @inputemail";
-//    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-//    myCommand1.CommandType = CommandType.Text;
-//    myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-//    myCommand1.Parameters.AddWithValue("@randomNo", randomNo);
-//    myConnection.Close();
-//}
