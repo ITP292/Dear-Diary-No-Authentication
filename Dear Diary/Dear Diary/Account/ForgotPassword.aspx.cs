@@ -93,50 +93,5 @@ namespace Dear_Diary.Account
             }
         }
 
-        //protected void RegisterUser(object sender, EventArgs e)
-        //{
-        //    string userId = TextBox1.Text;
-        //    string message = string.Empty;
-        //    SendActivationEmail(userId);
-
-        //}
-
-        //private void SendActivationEmail(string userId)
-        //{
-        //    string inputemail = TextBox1.Text;
-        //    string resetCode = Guid.NewGuid().ToString();
-        //    SqlConnection myConnection;
-        //    using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-        //    {
-        //        myConnection.Open();
-
-        //        string query1 = "UPDATE [dbo].[User] SET [resetCode] = @resetCode WHERE [Email_Address] = @inputemail";
-        //        SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-        //        myCommand1.CommandType = CommandType.Text;
-        //        myCommand1.Parameters.AddWithValue("@inputemail", inputemail);
-        //        myCommand1.Parameters.AddWithValue("@resetCode", resetCode);
-        //        myCommand1.ExecuteNonQuery();
-        //        myConnection.Close();
-        //    }
-        //    using (MailMessage mm = new MailMessage("sender@gmail.com", txtEmail.Text))
-        //    {
-        //        mm.Subject = "Account Activation";
-        //        string body = "Hello " + txtUsername.Text.Trim() + ",";
-        //        body += "<br /><br />Please click the following link to activate your account";
-        //        body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("CS.aspx", "CS_Activation.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
-        //        body += "<br /><br />Thanks";
-        //        mm.Body = body;
-        //        mm.IsBodyHtml = true;
-        //        SmtpClient smtp = new SmtpClient();
-        //        smtp.Host = "smtp.gmail.com";
-        //        smtp.EnableSsl = true;
-        //        NetworkCredential NetworkCred = new NetworkCredential("sender@gmail.com", "<password>");
-        //        smtp.UseDefaultCredentials = true;
-        //        smtp.Credentials = NetworkCred;
-        //        smtp.Port = 587;
-        //        smtp.Send(mm);
-        //    }
-        //}
-
     }
 }
