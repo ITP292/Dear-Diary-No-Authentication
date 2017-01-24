@@ -78,7 +78,7 @@
                                 <ul>
                                     <li><a href="/Friends/viewFriend.aspx" title="Friends List">
                                         <img src="/Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
-                                    <li class="notification-view"><a href="Notification.aspx" title="Notification">
+                                    <li class="notification-view"><a href="/Notification.aspx" title="Notification">
                                         <img src="/Content/img/notify.PNG" alt="Notification" title="Notification" /></a>
                                         
                                     </li>
