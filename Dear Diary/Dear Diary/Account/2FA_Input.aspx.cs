@@ -58,7 +58,7 @@ namespace Dear_Diary.Account
 
                     if (difference.TotalSeconds < 30) //10 seconds for testing
                     {
-                        Session["email"] = inputemail;
+                        Session["email"] = Login.globalinputemail;
                         Response.Redirect("/Profile/UserProfile.aspx");
                     }
                     else
