@@ -23,6 +23,7 @@
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" Text="Go Back" CssClass="btn btn-default" OnClick="Button1_Click" />
                             &nbsp;
+                            <asp:Button runat="server" Text="Remove Friend" CssClass="btn btn-default" OnClick="Unnamed4_Click" />
                             </div>
                     </div>
                         <br />

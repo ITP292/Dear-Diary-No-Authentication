@@ -20,7 +20,6 @@
                                     <asp:BoundField DataField="Date_Added" HeaderText="Date Added" SortExpression="Date_Added" />
                                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
                                     <asp:ButtonField Text="Select" CommandName="Select" />
-                                    <asp:ButtonField Text="Remove" CommandName="Remove" />
                                 </Columns>
                             </asp:GridView>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:localdbConnectionString1 %>" DeleteCommand="DELETE FROM [Friendship] WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email" InsertCommand="INSERT INTO [Friendship] ([User1_Email], [User2_Email], [Date_Added], [Status], [Read]) VALUES (@User1_Email, @User2_Email, @Date_Added, @Status, @Read)" SelectCommand="SELECT [User2_Email], [Date_Added], [Status] FROM [Friendship] WHERE User1_Email = @email" UpdateCommand="UPDATE [Friendship] SET [Date_Added] = @Date_Added, [Status] = @Status, [Friendship_id] = @Friendship_id, [Read] = @Read WHERE [User1_Email] = @User1_Email AND [User2_Email] = @User2_Email">
