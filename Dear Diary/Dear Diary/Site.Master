@@ -78,75 +78,9 @@
                                 <ul>
                                     <li><a href="/Friends/viewFriend.aspx" title="Friends List">
                                         <img src="/Content/img/fr.PNG" alt="Friends List" title="Friends List" /></a></li>
-                                    <li class="notification-view"><a href="#Notification" title="Notification">
+                                    <li class="notification-view"><a href="/Notification.aspx" title="Notification">
                                         <img src="/Content/img/notify.PNG" alt="Notification" title="Notification" /></a>
-                                        <div class="notification">
-                                            <div class="top-arrow right"></div>
-                                            <div class="notification-box">
-                                                <ul>
-                                                    <li>
-                                                        <div class="notif">
-                                                            <div class="notification-text left">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                </span>
-                                                            </div>
-                                                            <div class="btn-notif right">
-                                                                <button>X</button>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="notif">
-                                                            <div class="notification-text left">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                </span>
-                                                            </div>
-                                                            <div class="btn-notif right">
-                                                                <button>X</button>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="notif">
-                                                            <div class="notification-text left">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                </span>
-                                                            </div>
-                                                            <div class="btn-notif right">
-                                                                <button>X</button>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="notif">
-                                                            <div class="notification-text left">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                </span>
-                                                            </div>
-                                                            <div class="btn-notif right">
-                                                                <button>X</button>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="notif">
-                                                            <div class="notification-text left">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                </span>
-                                                            </div>
-                                                            <div class="btn-notif right">
-                                                                <button>X</button>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        
                                     </li>
 
                                     <li><a href="/Friends/addFriend.aspx" title="Add Friends">

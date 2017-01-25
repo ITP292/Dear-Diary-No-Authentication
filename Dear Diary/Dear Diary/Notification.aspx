@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Notifications" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Notification.aspx.cs" Inherits="Dear_Diary.Notification" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <link rel="stylesheet" href="NotificationStyle.css" />
     <h1><%:Title %></h1>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>

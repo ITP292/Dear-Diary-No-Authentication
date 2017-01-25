@@ -82,7 +82,7 @@ namespace Dear_Diary.NewEntry
                     myCommand.Parameters.AddWithValue("@seen", "false");
                     myCommand.ExecuteNonQuery();
 
-                    rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt16(post_Id));
+                    rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt32(post_Id));
                     rptCommentList.DataBind();
 
                     txtComment.Value = "";
@@ -119,7 +119,7 @@ namespace Dear_Diary.NewEntry
                 myCommand.ExecuteNonQuery();
             }
 
-            rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt16(post_Id));
+            rptCommentList.DataSource = GetCommentDetailsbyPostId(Convert.ToInt32(post_Id));
             rptCommentList.DataBind();
         }
 
@@ -161,11 +161,21 @@ namespace Dear_Diary.NewEntry
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                String encrypted_post;
+                String plain_post;
+
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
                 SqlDataAdapter da = new SqlDataAdapter(myCommand);
                 da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    encrypted_post = row[3].ToString();
+                    plain_post = AES.Decrypt(encrypted_post);
+                    row.SetField(3, plain_post);
+                }
 
                 return dt;
             }
