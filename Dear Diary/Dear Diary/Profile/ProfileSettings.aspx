@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UploadPicture.aspx.cs" Inherits="Dear_Diary.Profile.WebForm3" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProfileSettings.aspx.cs" Inherits="Dear_Diary.Profile.WebForm3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -32,9 +32,16 @@
                 ControlToValidate="FileUpload1"> 
             </asp:RegularExpressionValidator>
             </center>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Upload" Style="text-align: center;" />
+    <br />
+    <br />
+    <asp:Label ID="lblFName" runat="server" Text="First Name:"></asp:Label>
+    <asp:TextBox ID="editFName" runat="server"></asp:TextBox>
+    <br />
+    <asp:Label ID="lblLName" runat="server" Text="Last Name:"></asp:Label>
+    <asp:TextBox ID="editLName" runat="server"></asp:TextBox>
     <br />
     <hr />
-    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Upload" Style="text-align: center;" />
     <br />
 
 </asp:Content>

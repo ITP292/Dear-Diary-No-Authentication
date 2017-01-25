@@ -231,7 +231,7 @@
     <Content Include="Friends\viewFriend.aspx" />
     <Content Include="Privacy.aspx" />
     <Content Include="Profile\UserProfile.aspx" />
-    <Content Include="Profile\UploadPicture.aspx" />
+    <Content Include="Profile\ProfileSettings.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -553,12 +553,12 @@
     <Compile Include="Profile\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\UploadPicture.aspx.cs">
-      <DependentUpon>UploadPicture.aspx</DependentUpon>
+    <Compile Include="Profile\ProfileSettings.aspx.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Profile\UploadPicture.aspx.designer.cs">
-      <DependentUpon>UploadPicture.aspx</DependentUpon>
+    <Compile Include="Profile\ProfileSettings.aspx.designer.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security API\AES.cs" />
