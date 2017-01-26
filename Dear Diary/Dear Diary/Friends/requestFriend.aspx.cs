@@ -17,29 +17,36 @@ namespace Dear_Diary.Friends
         private String Name;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //On page load, I will get data from Aidil's notification page and modify the header and the email Textbox
-            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            if (Session["email"].ToString().Equals(""))
             {
-                String requestEmail = Request.QueryString["User2Email"];
-                String query = "SELECT * FROM [User] WHERE [Email_Address] = @user2email";
-
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@user2email", requestEmail);
-
-                SqlDataReader reader = myCommand.ExecuteReader();
-
-                if (reader.Read())
+                Response.Redirect("/Account/Login.aspx");
+            }
+            else
+            {
+                //On page load, I will get data from Aidil's notification page and modify the header and the email Textbox
+                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
-                    dbEmail = reader["Email_Address"].ToString();
-                    dbFName = reader["FName"].ToString();
-                    dbLName = reader["LName"].ToString();
-                    Name = dbFName + " " + dbLName;
-                }
+                    String requestEmail = Request.QueryString["User2Email"];
+                    String query = "SELECT * FROM [User] WHERE [Email_Address] = @user2email";
 
-                Header.Text = Name;
-                FriendEmail.Text = dbEmail;
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    myConnection.Open();
+                    myCommand.CommandType = CommandType.Text;
+                    myCommand.Parameters.AddWithValue("@user2email", requestEmail);
+
+                    SqlDataReader reader = myCommand.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        dbEmail = reader["Email_Address"].ToString();
+                        dbFName = reader["FName"].ToString();
+                        dbLName = reader["LName"].ToString();
+                        Name = dbFName + " " + dbLName;
+                    }
+
+                    Header.Text = Name;
+                    FriendEmail.Text = dbEmail;
+                }
             }
         }
 

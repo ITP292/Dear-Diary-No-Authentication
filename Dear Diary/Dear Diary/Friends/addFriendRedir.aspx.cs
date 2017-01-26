@@ -15,8 +15,15 @@ namespace Dear_Diary.Friends
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FriendEmail.Text = WebUtility.HtmlEncode(addFriend.dbEmail);
-            Header.Text = WebUtility.HtmlEncode(addFriend.Name);
+            if (Session["email"].ToString().Equals(""))
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }
+            else
+            {
+                FriendEmail.Text = WebUtility.HtmlEncode(addFriend.dbEmail);
+                Header.Text = WebUtility.HtmlEncode(addFriend.Name);
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

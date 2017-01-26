@@ -17,7 +17,10 @@ namespace Dear_Diary.Friends
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["email"].ToString().Equals(""))
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }
         }
 
         protected void Unnamed3_Click(object sender, EventArgs e)

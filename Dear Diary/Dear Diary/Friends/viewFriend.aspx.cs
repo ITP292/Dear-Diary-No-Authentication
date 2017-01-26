@@ -14,7 +14,12 @@ namespace Dear_Diary.Friends
         public static String FriendEmail;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["email"] = "lrh@gmail.com";
+            //Session["email"] = "lrh@gmail.com";
+
+            if (Session["email"].ToString().Equals(""))
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
