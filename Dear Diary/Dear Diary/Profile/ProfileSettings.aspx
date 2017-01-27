@@ -41,6 +41,8 @@
     <asp:Label ID="lblLName" runat="server" Text="Last Name:"></asp:Label>
     <asp:TextBox ID="editLName" runat="server"></asp:TextBox>
     <br />
+    <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Update" />
+    <br />
     <hr />
     <br />
 

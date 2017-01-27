@@ -87,7 +87,7 @@
                                         <img src="/Content/img/frslist.PNG" alt="Add Friends" title="Add Friends" /></a></li>
                                     <li><a href="/NewEntry/NewEntry.aspx" title="Add New Entry">
                                         <img src="/Content/img/note.PNG" alt="Add New Entry" title="Add New Entry" /></a></li>
-                                    <li><a href="/Profile/UserProfile.aspx" title="setting">
+                                    <li><a href="/Profile/ProfileSettings.aspx" title="setting">
                                         <img src="/Content/img/setting.png" alt="setting" title="setting" /></a></li>
                                 </ul>
                             </div>
