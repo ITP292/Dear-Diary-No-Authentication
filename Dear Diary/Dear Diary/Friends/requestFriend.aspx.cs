@@ -44,8 +44,8 @@ namespace Dear_Diary.Friends
                         Name = dbFName + " " + dbLName;
                     }
 
-                    Header.Text = Name;
-                    FriendEmail.Text = dbEmail;
+                    Header.Text = HttpUtility.HtmlEncode(Name);
+                    FriendEmail.Text = HttpUtility.HtmlEncode(dbEmail);
                 }
             }
         }
