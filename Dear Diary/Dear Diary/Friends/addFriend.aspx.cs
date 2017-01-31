@@ -25,6 +25,7 @@ namespace Dear_Diary.Friends
 
         protected void Unnamed3_Click(object sender, EventArgs e)
         {
+            //Test
             String friendemail = Email.Text;
 
             SqlConnection myConnection;
