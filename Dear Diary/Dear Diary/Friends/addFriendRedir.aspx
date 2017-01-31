@@ -11,7 +11,7 @@
                     <hr />
                     <div class="form-group">
                         <asp:Label runat="server" CssClass="col-md-2 control-label">Profile Picture:</asp:Label>
-                        <%--Insert Picture Here --%>
+                        &nbsp;<%--Insert Picture Here --%><asp:Image ID="Image1" runat="server" />
                         <br />
                     </div>
                     <div class="form-group">

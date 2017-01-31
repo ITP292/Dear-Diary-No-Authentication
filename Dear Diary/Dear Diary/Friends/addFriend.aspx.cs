@@ -46,6 +46,7 @@ namespace Dear_Diary.Friends
                     dbEmail = reader["Email_Address"].ToString();
                     dbFName = reader["FName"].ToString();
                     dbLName = reader["LName"].ToString();
+                    dbProfilePic = reader["displayPic"].ToString();
                     Name = dbFName + " " + dbLName;
                 }
 

@@ -23,6 +23,7 @@ namespace Dear_Diary.Friends
             {
                 FriendEmail.Text = WebUtility.HtmlEncode(addFriend.dbEmail);
                 Header.Text = WebUtility.HtmlEncode(addFriend.Name);
+                Image1.ImageUrl = WebUtility.HtmlEncode(addFriend.dbProfilePic);
             }
         }
 
@@ -31,8 +32,8 @@ namespace Dear_Diary.Friends
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                //String UserEmail = Session["email"].ToString();
-                String UserEmail = "lrh@gmail.com";
+                String UserEmail = Session["email"].ToString();
+                //String UserEmail = "lrh@gmail.com";
                 DateTime today = DateTime.Today;
                 String Date = today.ToString("dd/MM/yyyy");
                 String query = "SELECT * FROM Friendship WHERE User2_Email = @FriendEMail";

@@ -30,6 +30,7 @@ namespace Dear_Diary.Friends
                     String dbFName = "";
                     String dbLName = "";
                     String Name = "";
+                    String dbProfilePic = "";
 
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();
@@ -43,11 +44,13 @@ namespace Dear_Diary.Friends
                         dbEmail = reader["Email_Address"].ToString();
                         dbFName = reader["FName"].ToString();
                         dbLName = reader["LName"].ToString();
+                        dbProfilePic = reader["displayPic"].ToString();
                         Name = dbFName + " " + dbLName;
                     }
 
                     Header.Text = HttpUtility.HtmlEncode(Name);
                     FriendEmail.Text = HttpUtility.HtmlEncode(dbEmail);
+                    Image1.ImageUrl = HttpUtility.HtmlEncode(dbProfilePic);
                 }
             }
         }
