@@ -20,10 +20,10 @@ namespace Dear_Diary.NewEntry
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["email"].ToString().Equals(""))
-            {
-                Response.Redirect("/Account/Login.aspx");
-            }
+            //if (Session["email"].ToString().Equals(""))
+            //{
+            //    Response.Redirect("/Account/Login.aspx");
+            //}
 
             if (Page.IsPostBack != true)
             {
