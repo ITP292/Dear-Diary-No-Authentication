@@ -90,7 +90,7 @@
                 <asp:Label ID="Label12" runat="server" CssClass="text-danger"></asp:Label>
 
          <%--JOANNE THIS LABEL FOR WHAT AH????--%> 
-                <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
+                <%--<asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>--%>
             </div>
 
              <div class="form-group">

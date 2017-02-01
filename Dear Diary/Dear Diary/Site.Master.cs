@@ -14,7 +14,7 @@ namespace Dear_Diary
             NotLoggedIn.Visible = false;
             LoggedIn.Visible = false;
 
-                if (Session["email"].ToString().Equals(""))
+                if (Session["email"].ToString().Equals(null))
                 {
                     NotLoggedIn.Visible = true;
                 }

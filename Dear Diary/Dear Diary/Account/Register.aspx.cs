@@ -50,7 +50,7 @@ namespace Dear_Diary.Account
 
                 bool result = IsValid(password);
 
-                Label11.Text = "(PASSWORD REQUIREMENT) " + result.ToString() + ", (PHONE ALL DIGITS?) " + phoneresult.ToString();
+                //Label11.Text = "(PASSWORD REQUIREMENT) " + result.ToString() + ", (PHONE ALL DIGITS?) " + phoneresult.ToString();
                 //TRUE/FALSE shown - if fulfill password requirements = TRUE, if never = FALSE
 
                 //Checking - cannot use same email or phone number to register
