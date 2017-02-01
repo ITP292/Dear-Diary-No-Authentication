@@ -14,13 +14,13 @@ namespace Dear_Diary
             NotLoggedIn.Visible = false;
             LoggedIn.Visible = false;
 
-                if (Session["email"].ToString().Equals(null))
+                if (Session["email"] != null)
                 {
-                    NotLoggedIn.Visible = true;
+                    LoggedIn.Visible = true;
                 }
                 else
                 {
-                    LoggedIn.Visible = true;
+                    NotLoggedIn.Visible = true;
                 }
         }
     }

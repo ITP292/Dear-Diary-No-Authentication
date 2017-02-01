@@ -22,7 +22,7 @@ namespace Dear_Diary.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["email"] = "";
+            //Session["email"] = "";
         }
 
         protected void Login_Click(object sender, EventArgs e)

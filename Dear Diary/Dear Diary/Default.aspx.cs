@@ -11,7 +11,7 @@ namespace Dear_Diary
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["email"] = "";
+            Session["email"] = null;
         }
     }
 }
