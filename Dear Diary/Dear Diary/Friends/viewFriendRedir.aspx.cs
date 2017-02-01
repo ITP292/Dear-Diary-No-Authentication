@@ -65,15 +65,15 @@ namespace Dear_Diary.Friends
             //Use global variable from previous page and modify the header and textbox
             String friendemail = WebUtility.HtmlEncode(viewFriend.FriendEmail);
 
-            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            using (SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                String query = "DELETE FROM [User] WHERE Email_Address = @email";
+                String query1 = "DELETE FROM [Friendship] WHERE User2_Email = @email";
 
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@email", friendemail);
-                myCommand.ExecuteNonQuery();
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
+                myConnection1.Open();
+                myCommand1.CommandType = CommandType.Text;
+                myCommand1.Parameters.AddWithValue("@email", friendemail);
+                myCommand1.ExecuteNonQuery();
             }
 
             Response.Redirect("viewFriend.aspx");
