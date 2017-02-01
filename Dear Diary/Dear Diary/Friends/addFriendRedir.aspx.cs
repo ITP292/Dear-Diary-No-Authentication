@@ -59,7 +59,7 @@ namespace Dear_Diary.Friends
                 {
                     String query1 = "INSERT INTO Friendship VALUES (@UserEmail, @FriendEmail, @Date, @Status, @Read)";
 
-                    SqlCommand myCommand1 = new SqlCommand(query, myConnection);
+                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
                     //myConnection.Open();
                     myCommand1.CommandType = CommandType.Text;
                     myCommand1.Parameters.AddWithValue("@UserEmail", UserEmail);
