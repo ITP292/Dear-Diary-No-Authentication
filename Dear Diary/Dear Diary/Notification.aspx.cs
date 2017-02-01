@@ -18,17 +18,23 @@ namespace Dear_Diary
         protected void Page_Load(object sender, EventArgs e)
         {
             Label2.Text = "Page loaded at: " + DateTime.Now.ToLongTimeString();
-            makeFriendList(retrieveFriends());
-            makePostList(retrievePost());
-            makeCommentList(retrieveComments());
+            methodMain();
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             Label1.Text = "Page refreshed at: " + DateTime.Now.ToLongTimeString();
+            methodMain();
+        }
+
+        //This is the method that calls all the other method for the Notification page to function
+        protected void methodMain()
+        {
             makeFriendList(retrieveFriends());
-            makePostList(retrievePost());
-            makeCommentList(retrieveComments());
+            ArrayList acceptedFriends = checkFriends();
+            makePostList(retrievePost(acceptedFriends));
+            makeCommentList(retrieveComments(acceptedFriends));
+
         }
 
         protected void makeFriendList(ArrayList s)
@@ -126,55 +132,92 @@ namespace Dear_Diary
                 }
         }
 
-        protected ArrayList retrievePost()
+        protected ArrayList retrievePost(ArrayList s)
         {
             //pList stores the information retrieved from Post table
             ArrayList pList = new ArrayList();
-            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            foreach (var item in s)
             {
-                String author;
-                String postID;
-                String query = "SELECT * FROM Post WHERE Seen = @seen";
-
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@seen", "false");
-
-                SqlDataReader reader = myCommand.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
-                    postID = reader["Post_ID"].ToString();
-                    author = reader["Author_Email"].ToString();
-                    pList.Add(postID + '|' + author);
+                    String author;
+                    String postID;
+                    String query = "SELECT * FROM Post WHERE Seen = @seen AND Author_Email = @author_email";
+
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    myConnection.Open();
+                    myCommand.CommandType = CommandType.Text;
+                    myCommand.Parameters.AddWithValue("@seen", "false");
+                    myCommand.Parameters.AddWithValue("@author_email", item.ToString());
+
+                    SqlDataReader reader = myCommand.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        postID = reader["Post_ID"].ToString();
+                        author = reader["Author_Email"].ToString();
+                        pList.Add(postID + '|' + author);
+                    }
                 }
-                return pList;
             }
+            return pList;
         }
 
-        protected ArrayList retrieveComments()
+        protected ArrayList retrieveComments(ArrayList s)
         {
             //cList stores the information retrieved from Comment table
             ArrayList cList = new ArrayList();
+            foreach (var item in s)
+            {
+                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                {
+                    String commentID;
+                    String query = "SELECT * FROM Comment WHERE Seen = @seen AND Author_Email = @author_email";
+
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    myConnection.Open();
+                    myCommand.CommandType = CommandType.Text;
+                    myCommand.Parameters.AddWithValue("@seen", "false");
+                    myCommand.Parameters.AddWithValue("@author_email", item.ToString());
+
+                    SqlDataReader reader = myCommand.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        commentID = reader["Comment_Id"].ToString();
+                        cList.Add(commentID);
+                    }
+                }
+            }
+            return cList;
+        }
+
+        protected ArrayList checkFriends()
+        {
+            //fList stores information retrieved from Friends table
+            ArrayList fList = new ArrayList();
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                String commentID;
-                String query = "SELECT * FROM Comment WHERE Seen = @seen";
+                String User2_Email;
+                String User1_Email = Session["email"].ToString();
+                //String User1_Email = "lrh@gmail.com";
+                String query = "SELECT * FROM Friendship WHERE User1_Email = @user1email AND status = @status";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@seen", "false");
+                myCommand.Parameters.AddWithValue("@user1email", User1_Email);
+                myCommand.Parameters.AddWithValue("@status", "Accepted");
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    commentID = reader["Comment_Id"].ToString();
-                    cList.Add(commentID);
+                    User2_Email = reader["User2_Email"].ToString();
+                    fList.Add(User2_Email);
+                    //fList.Add(User2_Email + " wants to add you as a friend!");
                 }
-                return cList;
+                return fList;
             }
         }
     }
