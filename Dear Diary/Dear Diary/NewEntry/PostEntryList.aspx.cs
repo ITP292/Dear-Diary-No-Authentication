@@ -114,12 +114,16 @@ namespace Dear_Diary.NewEntry
         {
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
             DataTable dt = new DataTable();
-            String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = 1 and Author_Email = '" + loginEmail + "' and Post_Text like '%" + txtSearchPostEntry.Text + "%'";
+            
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 String encrypted_post;
                 String plain_post;
+
+                String encrypted_search = AES.Encrypt(txtSearchPostEntry.Text);
+
+                String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = 1 and Author_Email = '" + loginEmail + "' and Post_Text like '%" + encrypted_search + "%'";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
