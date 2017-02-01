@@ -110,8 +110,8 @@ namespace Dear_Diary
                 using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
                     String User2_Email;
-                    //String User1_Email = Session["email"].ToString();
-                    String User1_Email = "lrh@gmail.com";
+                    String User1_Email = Session["email"].ToString();
+                    //String User1_Email = "lrh@gmail.com";
                     String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User1_Email = @user1email";
 
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
