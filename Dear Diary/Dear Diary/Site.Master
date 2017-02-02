@@ -73,6 +73,7 @@
                                         <h2 class="cust-menu-h2"><a href="/About.aspx" style="padding-left: 20px;">About</a></h2>
                                         <h2 class="cust-menu-h2"><a href="/Profile/UserProfile.aspx" style="padding-left: 20px;">Profile</a></h2>
                                         <h2 class="cust-menu-h2"><a href="/NewEntry/PostEntryList.aspx" style="padding-left: 20px;">My Posts</a></h2>
+                                        <h2 class="cust-menu-h2"><a href="/Profile/NewsFeed.aspx" style="padding-left: 20px;">News Feed</a></h2>
                                     </div>
                                     <div class="icon-list right">
                                 <ul>
