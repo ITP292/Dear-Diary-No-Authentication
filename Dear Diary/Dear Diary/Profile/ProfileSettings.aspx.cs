@@ -30,38 +30,45 @@ namespace Dear_Diary.Profile
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["email"] = "stupid@idiot.com";
+            //Session["email"] = "stupid@idiot.com";
 
-            if (!IsPostBack)
+            if (Session["email"] == null)
             {
-                SqlConnection myConnection;
-                using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                Response.Redirect("/Account/Login.aspx");
+            }
+            else
+            {
+                if (!IsPostBack)
                 {
-                    String dbFName = "";
-                    String dbLName = "";
-                    String query = "SELECT [FName], [LName], [Email_Address], [displayPic] FROM [User] WHERE [Email_Address] = @email";
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
-
-                    myConnection.Open();
-                    myCommand.CommandType = CommandType.Text;
-                    myCommand.Parameters.AddWithValue("@email", "stupid@idiot.com");
-
-                    SqlDataReader reader = myCommand.ExecuteReader();
-
-                    if (reader.Read())
+                    SqlConnection myConnection;
+                    using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                     {
-                        dbEmail = reader["Email_Address"].ToString();
-                        dbFName = reader["FName"].ToString();
-                        dbLName = reader["LName"].ToString();
-                        dbProfilePic = reader["displayPic"].ToString();
+                        String dbFName = "";
+                        String dbLName = "";
+                        String query = "SELECT [FName], [LName], [Email_Address], [displayPic] FROM [User] WHERE [Email_Address] = @email";
+                        SqlCommand myCommand = new SqlCommand(query, myConnection);
 
+                        myConnection.Open();
+                        myCommand.CommandType = CommandType.Text;
+                        myCommand.Parameters.AddWithValue("@email", "stupid@idiot.com");
+
+                        SqlDataReader reader = myCommand.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            dbEmail = reader["Email_Address"].ToString();
+                            dbFName = reader["FName"].ToString();
+                            dbLName = reader["LName"].ToString();
+                            dbProfilePic = reader["displayPic"].ToString();
+
+                        }
+
+                        Image1.ImageUrl = dbProfilePic;
+                        editFName.Text = dbFName;
+                        editLName.Text = dbLName;
+
+                        myConnection.Close();
                     }
-
-                    Image1.ImageUrl = dbProfilePic;
-                    editFName.Text = dbFName;
-                    editLName.Text = dbLName;
-
-                    myConnection.Close();
                 }
             }
         }

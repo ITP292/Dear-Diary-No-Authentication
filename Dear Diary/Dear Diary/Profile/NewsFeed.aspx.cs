@@ -16,9 +16,18 @@ namespace Dear_Diary.Profile
         protected void Page_Load(object sender, EventArgs e)
         {
             //var loginEmail = Session["email"] != null ? Session["email"].ToString() : "stupid@idiot.com";
-            string loginEmail = "stupid@idiot.com";
-            Repeater1.DataSource = GetPostDetails(1, loginEmail);
-            Repeater1.DataBind();
+            //string loginEmail = "stupid@idiot.com";
+            
+            if (Session["email"] == null)
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }
+            else
+            {
+                String loginEmail = Session["email"].ToString();
+                Repeater1.DataSource = GetPostDetails(1, loginEmail);
+                Repeater1.DataBind();
+            }
         }
 
         // to get post details
