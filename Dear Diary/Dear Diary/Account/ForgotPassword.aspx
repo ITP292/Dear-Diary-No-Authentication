@@ -8,6 +8,7 @@
     <br />
     <asp:Label Font-Size="20px" ID="Label3" runat="server" Text="Email"></asp:Label>
     <asp:TextBox ID="TextBox1" runat="server" Height="30px" Width="180px" TextMode="Email"></asp:TextBox>
+    <br />
     <asp:Label ID="Label4" runat="server" CssClass="text-danger"></asp:Label>
     <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
         CssClass="text-danger" ErrorMessage="The email field is required." />

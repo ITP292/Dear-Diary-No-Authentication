@@ -29,10 +29,10 @@ namespace Dear_Diary.Account
                 //string inputemail = Session["email"].ToString(); 
 
                 String inputemail = Login.globalinputemail;
+                myConnection.Open();
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
                 myCommand.Parameters.AddWithValue("@email", inputemail);
 
@@ -56,7 +56,7 @@ namespace Dear_Diary.Account
 
                     TimeSpan difference = endTime.Subtract(dbstartTime);
 
-                    if (difference.TotalSeconds < 30) //10 seconds for testing
+                    if (difference.TotalSeconds < 30) //30 seconds for testing
                     {
                         Session["email"] = Login.globalinputemail;
                   
