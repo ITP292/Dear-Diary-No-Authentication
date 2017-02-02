@@ -32,9 +32,24 @@ namespace Dear_Diary
         {
             makeFriendList(retrieveFriends());
             ArrayList acceptedFriends = checkFriends();
-            makePostList(retrievePost(acceptedFriends));
-            makeCommentList(retrieveComments(acceptedFriends));
+            ArrayList postList = checkPost();
+            if(!acceptedFriends.Contains(null))
+            {
+                makePostList(retrievePost(acceptedFriends));
+            }
+            else
+            {
+                //Do nothing
+            }
 
+            if (!postList.Contains(null))
+            {
+                makeCommentList(retrieveComments(postList));
+            }
+            else
+            {
+                //Do nothing
+            }
         }
 
         protected void makeFriendList(ArrayList s)
@@ -173,13 +188,13 @@ namespace Dear_Diary
                 using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
                     String commentID;
-                    String query = "SELECT * FROM Comment WHERE Seen = @seen AND Author_Email = @author_email";
+                    String query = "SELECT * FROM Comment WHERE Seen = @seen AND Post_Id = @post_id";
 
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();
                     myCommand.CommandType = CommandType.Text;
                     myCommand.Parameters.AddWithValue("@seen", "false");
-                    myCommand.Parameters.AddWithValue("@author_email", item.ToString());
+                    myCommand.Parameters.AddWithValue("@post_id", item.ToString());
 
                     SqlDataReader reader = myCommand.ExecuteReader();
 
@@ -220,6 +235,32 @@ namespace Dear_Diary
                 }
                 return fList;
             }
+        }
+
+        protected ArrayList checkPost()
+        {
+            //store information from Post table
+            ArrayList pList = new ArrayList();
+            using(SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                int postID;
+                String User1_Email = Session["email"].ToString();
+                String query = "SELECT * FROM Post where Author_Email = @author_email AND Permission_Status = @permission";
+
+                SqlCommand myCommand = new SqlCommand(query, myConnection);
+                myConnection.Open();
+                myCommand.Parameters.AddWithValue("@author_email", User1_Email);
+                myCommand.Parameters.AddWithValue("@permission", "Public");
+
+                SqlDataReader reader = myCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    postID = (int) reader["Post_Id"];
+                    pList.Add(postID);
+                }
+            }
+            return pList;
         }
     }
 }
