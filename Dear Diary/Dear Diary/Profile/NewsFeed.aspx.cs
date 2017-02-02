@@ -16,7 +16,8 @@ namespace Dear_Diary.Profile
         protected void Page_Load(object sender, EventArgs e)
         {
             var loginEmail = Session["email"] != null ? Session["email"].ToString() : "stupid@idiot.com";
-            
+            Repeater1.DataSource = GetPostDetails(1, loginEmail);
+            Repeater1.DataBind();
         }
 
         // to get post details
@@ -24,7 +25,7 @@ namespace Dear_Diary.Profile
         {
             String permission = "Public";
             DataTable dt = new DataTable();
-            String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = " + IsPosted + " and Author_Email = '" + loginEmail + "' AND Permission_Status = @Permission";
+            String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = " + IsPosted + " AND [Author_Email] = '" + loginEmail + "' ";
 
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
