@@ -16,7 +16,7 @@ namespace Dear_Diary.Friends
         {
             //Session["email"] = "lrh@gmail.com";
 
-            if (Session["email"].ToString().Equals(""))
+            if (Session["email"] == null)
             {
                 Response.Redirect("/Account/Login.aspx");
             }

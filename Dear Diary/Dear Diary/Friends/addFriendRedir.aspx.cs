@@ -15,7 +15,7 @@ namespace Dear_Diary.Friends
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["email"].ToString().Equals(""))
+            if (Session["email"] == null)
             {
                 Response.Redirect("/Account/Login.aspx");
             }
