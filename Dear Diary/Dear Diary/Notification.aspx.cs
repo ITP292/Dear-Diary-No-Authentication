@@ -142,13 +142,14 @@ namespace Dear_Diary
                 {
                     String author;
                     String postID;
-                    String query = "SELECT * FROM Post WHERE Seen = @seen AND Author_Email = @author_email";
+                    String query = "SELECT * FROM Post WHERE Seen = @seen AND Author_Email = @author_email AND Permission_Status = @permission";
 
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();
                     myCommand.CommandType = CommandType.Text;
                     myCommand.Parameters.AddWithValue("@seen", "false");
                     myCommand.Parameters.AddWithValue("@author_email", item.ToString());
+                    myCommand.Parameters.AddWithValue("@permission", "Public");
 
                     SqlDataReader reader = myCommand.ExecuteReader();
 
