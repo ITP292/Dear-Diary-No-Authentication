@@ -15,7 +15,10 @@ namespace Dear_Diary.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           /* if (Session["email"] == null)
+            {
+                Response.Redirect("/Account/Login.aspx");
+            }*/
         }
 
         //Confirm Code

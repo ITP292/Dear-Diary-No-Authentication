@@ -36,11 +36,29 @@
     <br />
     <br />
     <asp:Label ID="lblFName" runat="server" Text="First Name:"></asp:Label>
+    &nbsp;&nbsp;&nbsp;
     <asp:TextBox ID="editFName" runat="server"></asp:TextBox>
     <br />
     <asp:Label ID="lblLName" runat="server" Text="Last Name:"></asp:Label>
+    &nbsp;&nbsp;&nbsp;
     <asp:TextBox ID="editLName" runat="server"></asp:TextBox>
     <br />
+    <br />
+    <br />
+    <asp:Label ID="lblPassword" runat="server" Text="  New Password:"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+    &nbsp;&nbsp;
+    <br />
+    <asp:Label ID="lblCfmPassword" runat="server" Text="Confirm Password:"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:TextBox ID="txtCfmPassword" runat="server" TextMode="Password"></asp:TextBox>
+    <br />
+    <asp:CompareValidator runat="server" ControlToCompare="txtPassword" ControlToValidate="txtCfmPassword"
+        CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
+    <asp:Label ID="Label5" runat="server" CssClass="text-danger"></asp:Label>
+    <br />
+
     <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Update" />
     <br />
     <hr />

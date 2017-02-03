@@ -16,7 +16,7 @@ namespace Dear_Diary.Profile
         public static String dbEmail = "";
         public static String dbProfilePic = "";
         public static String Name = "";
-        public static String email = "stupid@idiot.com";
+     
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -62,10 +62,7 @@ namespace Dear_Diary.Profile
                     myConnection.Close();
 
 
-                    //{
-                    //String email2 = Session["email"].ToString();
 
-                    //String email2 = "stupid@idiot.com";
                     String dbUser2Email;
 
                     String query2 = "SELECT [User2_Email] FROM [Friendship] WHERE [User1_Email] = @email";
@@ -84,8 +81,7 @@ namespace Dear_Diary.Profile
                     }
                     myConnection.Close();
 
-                    //{
-                    //String email2 = Session["email"].ToString();
+                  
 
                     String permission = "";
                     String dbPostText = "";

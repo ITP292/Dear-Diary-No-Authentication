@@ -150,13 +150,6 @@
     <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\ResetPasswordSuccess.aspx" />
     <Content Include="Account\SuccessfulRegistration.aspx" />
-    <Content Include="Account\Testing.aspx" />
-    <Content Include="Account\Testing1.aspx" />
-    <Content Include="Account\Testing2.aspx" />
-    <Content Include="Account\Testing3.aspx" />
-    <Content Include="Account\Testing4.aspx" />
-    <Content Include="Account\Testing5.aspx" />
-    <Content Include="Account\Testing6.aspx" />
     <Content Include="Account\Timer1.aspx" />
     <Content Include="App_Data\Database.mdf" />
     <Content Include="App_Data\Database_log.ldf">
@@ -366,55 +359,6 @@
     </Compile>
     <Compile Include="Account\SuccessfulRegistration.aspx.designer.cs">
       <DependentUpon>SuccessfulRegistration.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing.aspx.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing.aspx.designer.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing1.aspx.cs">
-      <DependentUpon>Testing1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing1.aspx.designer.cs">
-      <DependentUpon>Testing1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing2.aspx.cs">
-      <DependentUpon>Testing2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing2.aspx.designer.cs">
-      <DependentUpon>Testing2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing3.aspx.cs">
-      <DependentUpon>Testing3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing3.aspx.designer.cs">
-      <DependentUpon>Testing3.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing4.aspx.cs">
-      <DependentUpon>Testing4.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing4.aspx.designer.cs">
-      <DependentUpon>Testing4.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing5.aspx.cs">
-      <DependentUpon>Testing5.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing5.aspx.designer.cs">
-      <DependentUpon>Testing5.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Testing6.aspx.cs">
-      <DependentUpon>Testing6.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Testing6.aspx.designer.cs">
-      <DependentUpon>Testing6.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Timer1.aspx.cs">
       <DependentUpon>Timer1.aspx</DependentUpon>
