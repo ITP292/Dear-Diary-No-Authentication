@@ -29,6 +29,10 @@ namespace Dear_Diary.Account
                 //string inputemail = Session["email"].ToString(); 
 
                 String inputemail = Login.globalinputemail;
+                if (inputemail == null || inputemail == "")
+                {
+                    //inputemail = 
+                }
                 myConnection.Open();
 
                 string query = "SELECT * FROM [User] WHERE [Email_Address] = @email";
