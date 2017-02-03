@@ -21,18 +21,19 @@ using Dear_Diary.Security_API;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 
+
 namespace Dear_Diary.Profile
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
-        
+
         public static String Name = "";
         public static String dbEmail = "";
         public static String dbProfilePic = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-  
+
             if (Session["email"] == null)
             {
                 Response.Redirect("/Account/Login.aspx");
@@ -90,18 +91,18 @@ namespace Dear_Diary.Profile
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
 
+                if (Session["imagePath"] != null)
+                {
+                    myConnection.Open();
+                    // update user profile photo based on email
+                    string query = "UPDATE [User] SET [displayPic] = @picture WHERE [Email_Address] = @email";
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    myCommand.Parameters.AddWithValue("@picture", Session["imagePath"].ToString());
+                    myCommand.Parameters.AddWithValue("@email", Session["email"].ToString());
 
-
-                // update user profile photo based on email
-                string query = "UPDATE [User] SET [displayPic] = @picture WHERE [Email_Address] = @email";
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.Parameters.AddWithValue("@picture", Session["imagePath"].ToString());
-                myCommand.Parameters.AddWithValue("@email", Session["email"].ToString());
-
-                myCommand.ExecuteNonQuery();
-
-
+                    myCommand.ExecuteNonQuery();
+                    myConnection.Close();
+                }
             }
         }
 
@@ -109,30 +110,27 @@ namespace Dear_Diary.Profile
         {
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                
+                    String newFName = editFName.Text;
+                    String newLName = editLName.Text;
 
-
-                String newFName = editFName.Text;
-                String newLName = editLName.Text;
-
-                myConnection.Open();
-
-
-
-                // update user data based on text typed in textbox
-                string query3 = "UPDATE [User] SET [FName]=@FName, [LName]=@LName WHERE [Email_Address]=@email";
-                SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
+                    myConnection.Open();
+                    // update user data based on text typed in textbox
+                    string query3 = "UPDATE [User] SET [FName]=@FName, [LName]=@LName WHERE [Email_Address]=@email";
+                    SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
 
 
 
-                myCommand3.Parameters.AddWithValue("@FName", newFName);
-                myCommand3.Parameters.AddWithValue("@LName", newLName);
-                myCommand3.Parameters.AddWithValue("@email", Session["email"].ToString());
-                myCommand3.ExecuteNonQuery();
+                    myCommand3.Parameters.AddWithValue("@FName", newFName);
+                    myCommand3.Parameters.AddWithValue("@LName", newLName);
+                    myCommand3.Parameters.AddWithValue("@email", Session["email"].ToString());
+                    myCommand3.ExecuteNonQuery();
 
-                //PASSWORD RESET
-                Byte[] salt = new byte[8];
+                    myConnection.Close();
+                    //PASSWORD RESET
+                    //Byte[] salt = new byte[8];
 
-                string inputpassword = txtPassword.Text;
+                    string inputpassword = txtPassword.Text;
 
                     myConnection.Open();
                     string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
@@ -194,9 +192,9 @@ namespace Dear_Diary.Profile
 
                         }
                     }
-                }
-
+            }
         }
+
 
         public static string ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
         {
@@ -217,7 +215,6 @@ namespace Dear_Diary.Profile
         private static int Lower_Case_length = 1;
         private static int NonAlpha_length = 1;
         private static int Numeric_length = 1;
-
         public static bool IsValid(string Password)
         {
             if (Password.Length < Minimum_Length)
