@@ -89,11 +89,12 @@ namespace Dear_Diary
                 //Check if cList returned null
                 if (!item.Equals(null))
                 {
+                    string[] a = item.ToString().Split('|');
                     HtmlGenericControl li = new HtmlGenericControl("li");
                     tabs.Controls.Add(li);
                     HtmlGenericControl anchor = new HtmlGenericControl("a");
-                    anchor.Attributes.Add("href", "/NewEntry/PostEntryList.aspx?Comment_Id=" + item.ToString());
-                    anchor.InnerText = Server.HtmlEncode("Someone made a comment on your post!");
+                    anchor.Attributes.Add("href", "/NewEntry/PostDetails.aspx?Post_Id=" + a[0]);
+                    anchor.InnerText = Server.HtmlEncode(a[1] + " made a comment on your post!");
                     li.Controls.Add(anchor);
                 }
                 else
@@ -171,21 +172,23 @@ namespace Dear_Diary
             {
                 using (SqlConnection myConnection2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
-                    String commentID;
+                    String postID;
+                    String author_email;
                     String query2 = "SELECT * FROM Comment WHERE Seen = @seen AND Post_Id = @post_id";
 
                     SqlCommand myCommand2 = new SqlCommand(query2, myConnection2);
                     myConnection2.Open();
                     myCommand2.CommandType = CommandType.Text;
                     myCommand2.Parameters.AddWithValue("@seen", "false");
-                    myCommand2.Parameters.AddWithValue("@post_id", item.ToString());
+                    myCommand2.Parameters.AddWithValue("@post_id", item);
 
                     SqlDataReader reader = myCommand2.ExecuteReader();
 
                     if (reader.Read())
                     {
-                        commentID = reader["Comment_Id"].ToString();
-                        cList.Add(commentID);
+                        postID = reader["Post_Id"].ToString();
+                        author_email = reader["Author_Email"].ToString();
+                        cList.Add(postID + '|' + author_email);
                     }
                 }
             }
@@ -243,6 +246,20 @@ namespace Dear_Diary
                 }
             }
             return pList;
+        }
+
+        protected void deleteComment(string postID)
+        {
+            using(SqlConnection myConnection5 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                String query5 = "DELETE * FROM Comment WHERE Post_Id = @post_id";
+
+                SqlCommand myCommand5 = new SqlCommand(query5, myConnection5);
+                myConnection5.Open();
+                myCommand5.CommandType = CommandType.Text;
+                myCommand5.ExecuteNonQuery();
+            }
+            Page_Load(null, null);
         }
     }
 }
