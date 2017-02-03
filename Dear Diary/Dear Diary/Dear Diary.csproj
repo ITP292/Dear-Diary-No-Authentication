@@ -199,6 +199,7 @@
     <Content Include="NewEntry\PostDetails.aspx" />
     <Content Include="NewEntry\PostDraftList.aspx" />
     <Content Include="NewEntry\PostEntryList.aspx" />
+    <Content Include="NewEntry\PostEntryRedirect.aspx" />
     <Content Include="Notification.aspx" />
     <Content Include="NotificationStyle.css" />
     <Content Include="Pictures\5.png" />
@@ -476,6 +477,13 @@
     </Compile>
     <Compile Include="NewEntry\PostEntryList.aspx.designer.cs">
       <DependentUpon>PostEntryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewEntry\PostEntryRedirect.aspx.cs">
+      <DependentUpon>PostEntryRedirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEntry\PostEntryRedirect.aspx.designer.cs">
+      <DependentUpon>PostEntryRedirect.aspx</DependentUpon>
     </Compile>
     <Compile Include="Notification.aspx.cs">
       <DependentUpon>Notification.aspx</DependentUpon>

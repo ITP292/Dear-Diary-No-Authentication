@@ -71,7 +71,7 @@ namespace Dear_Diary
                     HtmlGenericControl li = new HtmlGenericControl("li");
                     tabs.Controls.Add(li);
                     HtmlGenericControl anchor = new HtmlGenericControl("a");
-                    anchor.Attributes.Add("href", "/NewEntry/PostEntryList.aspx?Post_Id=" + a[0]);
+                    anchor.Attributes.Add("href", "/NewEntry/PostEntryRedirect.aspx?Post_Id=" + a[0]);
                     anchor.InnerText = Server.HtmlEncode(a[1] + " just made a post!");
                     li.Controls.Add(anchor);
                 }
@@ -111,7 +111,6 @@ namespace Dear_Diary
             {
                 String User1_Email;
                 String User2_Email = Session["email"].ToString();
-                //String User1_Email = Session["email"].ToString();
                 String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User2_Email = @user2email AND Status = @status";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
