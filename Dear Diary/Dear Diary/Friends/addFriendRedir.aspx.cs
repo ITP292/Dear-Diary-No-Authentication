@@ -70,6 +70,15 @@ namespace Dear_Diary.Friends
                     myCommand1.ExecuteNonQuery();
                     //myConnection.Close();
 
+                    SqlCommand myCommand2 = new SqlCommand(query1, myConnection);
+                    myCommand2.CommandType = CommandType.Text;
+                    myCommand2.Parameters.AddWithValue("@UserEmail", FriendEmail.Text);
+                    myCommand2.Parameters.AddWithValue("@FriendEmail", UserEmail);
+                    myCommand2.Parameters.AddWithValue("@Date", Date);
+                    myCommand2.Parameters.AddWithValue("@Status", "Pending");
+                    myCommand2.Parameters.AddWithValue("@Read", "false");
+                    myCommand2.ExecuteNonQuery();
+
                     Response.Redirect("addFriend.aspx");
                 }
             }

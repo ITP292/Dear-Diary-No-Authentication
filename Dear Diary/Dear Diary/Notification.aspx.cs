@@ -33,23 +33,8 @@ namespace Dear_Diary
             makeFriendList(retrieveFriends());
             ArrayList acceptedFriends = checkFriends();
             ArrayList postList = checkPost();
-            if(!acceptedFriends.Contains(null))
-            {
-                makePostList(retrievePost(acceptedFriends));
-            }
-            else
-            {
-                //Do nothing
-            }
-
-            if (!postList.Contains(null))
-            {
-                makeCommentList(retrieveComments(postList));
-            }
-            else
-            {
-                //Do nothing
-            }
+            makePostList(retrievePost(acceptedFriends));
+            makeCommentList(retrieveComments(postList));
         }
 
         protected void makeFriendList(ArrayList s)
@@ -120,31 +105,31 @@ namespace Dear_Diary
 
         protected ArrayList retrieveFriends()
         {
-                //fList stores information retrieved from Friends table
-                ArrayList fList = new ArrayList();
-                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            //fList stores information retrieved from Friends table
+            ArrayList fList = new ArrayList();
+            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            {
+                String User1_Email;
+                String User2_Email = Session["email"].ToString();
+                //String User1_Email = Session["email"].ToString();
+                String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User2_Email = @user2email AND Status = @status";
+
+                SqlCommand myCommand = new SqlCommand(query, myConnection);
+                myConnection.Open();
+                myCommand.CommandType = CommandType.Text;
+                myCommand.Parameters.AddWithValue("@user2email", User2_Email);
+                myCommand.Parameters.AddWithValue("@status", "Pending");
+                myCommand.Parameters.AddWithValue("@seen", "false");
+
+                SqlDataReader reader = myCommand.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    String User2_Email;
-                    String User1_Email = Session["email"].ToString();
-                    //String User1_Email = "lrh@gmail.com";
-                    String query = "SELECT * FROM Friendship WHERE Seen = @seen AND User1_Email = @user1email";
-
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
-                    myConnection.Open();
-                    myCommand.CommandType = CommandType.Text;
-                    myCommand.Parameters.AddWithValue("@seen", "false");
-                    myCommand.Parameters.AddWithValue("@user1email", User1_Email);
-
-                    SqlDataReader reader = myCommand.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        User2_Email = reader["User2_Email"].ToString();
-                        fList.Add(User2_Email);
-                        //fList.Add(User2_Email + " wants to add you as a friend!");
-                    }
-                    return fList;
+                    User1_Email = reader["User1_Email"].ToString();
+                    fList.Add(User1_Email);
                 }
+                return fList;
+            }
         }
 
         protected ArrayList retrievePost(ArrayList s)

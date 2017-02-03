@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="requestFriend.aspx.cs" Inherits="Dear_Diary.Friends.requestFriend" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <h2>
+    <h2>
         <asp:Label ID="Header" runat="server" Text="Friend Name Here"></asp:Label>
     </h2>
 
@@ -12,6 +12,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" CssClass="col-md-2 control-label">Profile Picture:</asp:Label>
                         <%--Insert Picture Here --%>
+                        <asp:Image ID="Image1" runat="server" />
                         <br />
                     </div>
                     <div class="form-group">
