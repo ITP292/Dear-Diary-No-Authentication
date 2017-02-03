@@ -71,7 +71,7 @@ namespace Dear_Diary
                     HtmlGenericControl li = new HtmlGenericControl("li");
                     tabs.Controls.Add(li);
                     HtmlGenericControl anchor = new HtmlGenericControl("a");
-                    anchor.Attributes.Add("href", "/NewEntry/PostEntryList.aspx?Author_Email=" + a[0]);
+                    anchor.Attributes.Add("href", "/NewEntry/PostEntryList.aspx?Post_Id=" + a[0]);
                     anchor.InnerText = Server.HtmlEncode(a[1] + " just made a post!");
                     li.Controls.Add(anchor);
                 }
@@ -138,20 +138,20 @@ namespace Dear_Diary
             ArrayList pList = new ArrayList();
             foreach (var item in s)
             {
-                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                using (SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
                     String author;
                     String postID;
-                    String query = "SELECT * FROM Post WHERE Seen = @seen AND Author_Email = @author_email AND Permission_Status = @permission";
+                    String query1 = "SELECT * FROM Post WHERE Seen = @seen AND Author_Email = @author_email AND Permission_Status = @permission";
 
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
-                    myConnection.Open();
-                    myCommand.CommandType = CommandType.Text;
-                    myCommand.Parameters.AddWithValue("@seen", "false");
-                    myCommand.Parameters.AddWithValue("@author_email", item.ToString());
-                    myCommand.Parameters.AddWithValue("@permission", "Public");
+                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
+                    myConnection1.Open();
+                    myCommand1.CommandType = CommandType.Text;
+                    myCommand1.Parameters.AddWithValue("@seen", "false");
+                    myCommand1.Parameters.AddWithValue("@author_email", item.ToString());
+                    myCommand1.Parameters.AddWithValue("@permission", "Public");
 
-                    SqlDataReader reader = myCommand.ExecuteReader();
+                    SqlDataReader reader = myCommand1.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -170,18 +170,18 @@ namespace Dear_Diary
             ArrayList cList = new ArrayList();
             foreach (var item in s)
             {
-                using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+                using (SqlConnection myConnection2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
                 {
                     String commentID;
-                    String query = "SELECT * FROM Comment WHERE Seen = @seen AND Post_Id = @post_id";
+                    String query2 = "SELECT * FROM Comment WHERE Seen = @seen AND Post_Id = @post_id";
 
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
-                    myConnection.Open();
-                    myCommand.CommandType = CommandType.Text;
-                    myCommand.Parameters.AddWithValue("@seen", "false");
-                    myCommand.Parameters.AddWithValue("@post_id", item.ToString());
+                    SqlCommand myCommand2 = new SqlCommand(query2, myConnection2);
+                    myConnection2.Open();
+                    myCommand2.CommandType = CommandType.Text;
+                    myCommand2.Parameters.AddWithValue("@seen", "false");
+                    myCommand2.Parameters.AddWithValue("@post_id", item.ToString());
 
-                    SqlDataReader reader = myCommand.ExecuteReader();
+                    SqlDataReader reader = myCommand2.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -197,26 +197,24 @@ namespace Dear_Diary
         {
             //fList stores information retrieved from Friends table
             ArrayList fList = new ArrayList();
-            using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            using (SqlConnection myConnection3 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 String User2_Email;
                 String User1_Email = Session["email"].ToString();
-                //String User1_Email = "lrh@gmail.com";
-                String query = "SELECT * FROM Friendship WHERE User1_Email = @user1email AND status = @status";
+                String query3 = "SELECT * FROM Friendship WHERE User1_Email = @user1email AND status = @status";
 
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@user1email", User1_Email);
-                myCommand.Parameters.AddWithValue("@status", "Accepted");
+                SqlCommand myCommand3 = new SqlCommand(query3, myConnection3);
+                myConnection3.Open();
+                myCommand3.CommandType = CommandType.Text;
+                myCommand3.Parameters.AddWithValue("@user1email", User1_Email);
+                myCommand3.Parameters.AddWithValue("@status", "Accepted");
 
-                SqlDataReader reader = myCommand.ExecuteReader();
+                SqlDataReader reader = myCommand3.ExecuteReader();
 
                 if (reader.Read())
                 {
                     User2_Email = reader["User2_Email"].ToString();
                     fList.Add(User2_Email);
-                    //fList.Add(User2_Email + " wants to add you as a friend!");
                 }
                 return fList;
             }
@@ -226,18 +224,18 @@ namespace Dear_Diary
         {
             //store information from Post table
             ArrayList pList = new ArrayList();
-            using(SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
+            using(SqlConnection myConnection4 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 int postID;
                 String User1_Email = Session["email"].ToString();
-                String query = "SELECT * FROM Post where Author_Email = @author_email AND Permission_Status = @permission";
+                String query4 = "SELECT * FROM Post where Author_Email = @author_email AND Permission_Status = @permission";
 
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.Parameters.AddWithValue("@author_email", User1_Email);
-                myCommand.Parameters.AddWithValue("@permission", "Public");
+                SqlCommand myCommand4 = new SqlCommand(query4, myConnection4);
+                myConnection4.Open();
+                myCommand4.Parameters.AddWithValue("@author_email", User1_Email);
+                myCommand4.Parameters.AddWithValue("@permission", "Public");
 
-                SqlDataReader reader = myCommand.ExecuteReader();
+                SqlDataReader reader = myCommand4.ExecuteReader();
 
                 if (reader.Read())
                 {
