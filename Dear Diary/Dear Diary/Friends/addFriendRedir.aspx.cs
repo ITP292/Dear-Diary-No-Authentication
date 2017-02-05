@@ -13,6 +13,9 @@ namespace Dear_Diary.Friends
 {
     public partial class addFriendRedir : System.Web.UI.Page
     {
+        private String dbEmail;
+        private String dbFriendEmail;
+        private String dbUserEmail;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["email"] == null)
@@ -21,6 +24,7 @@ namespace Dear_Diary.Friends
             }
             else
             {
+                dbEmail = addFriend.dbEmail;
                 FriendEmail.Text = WebUtility.HtmlEncode(addFriend.dbEmail);
                 Header.Text = WebUtility.HtmlEncode(addFriend.Name);
                 Image1.ImageUrl = WebUtility.HtmlEncode(addFriend.dbProfilePic);
@@ -33,29 +37,25 @@ namespace Dear_Diary.Friends
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
                 String UserEmail = Session["email"].ToString();
-                //String UserEmail = "lrh@gmail.com";
                 DateTime today = DateTime.Today;
                 String Date = today.ToString("dd/MM/yyyy");
-                String query = "SELECT * FROM Friendship WHERE User2_Email = @FriendEMail";
-                String dbEmail = "";
+                String query = "SELECT * FROM Friendship WHERE User2_Email = @FriendEMail AND User1_Email = @UserEmail";
 
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@FriendEmail", FriendEmail.Text);
+                myCommand.Parameters.AddWithValue("@FriendEmail", dbEmail);
+                myCommand.Parameters.AddWithValue("@UserEmail", UserEmail);
 
                 SqlDataReader reader = myCommand.ExecuteReader();
                 if (reader.Read())
                 {
-                    dbEmail = reader["User2_Email"].ToString();
+                    dbFriendEmail = reader["User2_Email"].ToString();
+                    dbUserEmail = reader["User1_Email"].ToString();
                 }
                 reader.Close();
 
-                if (FriendEmail.Text.Equals(dbEmail))
-                {
-                    Response.Redirect("error.aspx");
-                }
-                else
+                if (dbFriendEmail == null)
                 {
                     String query1 = "INSERT INTO Friendship VALUES (@UserEmail, @FriendEmail, @Date, @Status, @Read)";
 
@@ -80,6 +80,10 @@ namespace Dear_Diary.Friends
                     myCommand2.ExecuteNonQuery();
 
                     Response.Redirect("addFriend.aspx");
+                }
+                else
+                {
+                    Response.Redirect("error.aspx");
                 }
             }
         }
