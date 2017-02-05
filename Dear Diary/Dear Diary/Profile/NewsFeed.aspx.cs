@@ -16,8 +16,7 @@ namespace Dear_Diary.Profile
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //var loginEmail = Session["email"] != null ? Session["email"].ToString() : "stupid@idiot.com";
-            //string loginEmail = "stupid@idiot.com";
+       
             
             if (Session["email"] == null)
             {
@@ -37,15 +36,16 @@ namespace Dear_Diary.Profile
             String FriendEmail = "";
             //List<String> FriendsEmail = new List<String>();
             ArrayList FriendsEmail = new ArrayList();
-
+            String status = "Accepted";
             using (SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                String query1 = "SELECT * FROM [Friendship] Where [User1_Email] = @email";
+                String query1 = "SELECT * FROM [Friendship] Where [User1_Email] = @email AND [Status] = @status";
 
                 SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
                 myConnection1.Open();
                 myCommand1.CommandType = CommandType.Text;
                 myCommand1.Parameters.AddWithValue("@email", loginEmail);
+                myCommand1.Parameters.AddWithValue("@status", status);
 
                 SqlDataReader reader = myCommand1.ExecuteReader();
 
