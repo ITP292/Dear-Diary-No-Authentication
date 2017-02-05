@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Dear_Diary.Security_API;
+using System.Collections;
 
 namespace Dear_Diary.Profile
 {
@@ -34,6 +35,8 @@ namespace Dear_Diary.Profile
         public DataTable GetPostDetails(int IsPosted, string loginEmail)
         {
             String FriendEmail = "";
+            //List<String> FriendsEmail = new List<String>();
+            ArrayList FriendsEmail = new ArrayList();
 
             using (SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
@@ -46,29 +49,33 @@ namespace Dear_Diary.Profile
 
                 SqlDataReader reader = myCommand1.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                    FriendEmail = reader["User2_Email"].ToString();
+                    FriendsEmail.Add(FriendEmail);
                 }
             }
 
             
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
+                DataTable dt = new DataTable();
+                myConnection.Open();
                 String encrypted_post;
                 String plain_post;
-                DataTable dt = new DataTable();
-                String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = @posted AND [Author_Email] = @email AND Permission_Status = @Permission";
+                for (int i = 0; i < FriendsEmail.Count; i++)
+                {   
+                    String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = @posted AND [Author_Email] = @email AND Permission_Status = @Permission";
 
-                SqlCommand myCommand = new SqlCommand(query, myConnection);
-                myConnection.Open();
-                myCommand.CommandType = CommandType.Text;
-                myCommand.Parameters.AddWithValue("@Permission", "Public");
-                myCommand.Parameters.AddWithValue("@email", FriendEmail);
-                myCommand.Parameters.AddWithValue("@posted", 1);
-                SqlDataAdapter da = new SqlDataAdapter(myCommand);
-                da.Fill(dt);
-
+                    SqlCommand myCommand = new SqlCommand(query, myConnection);
+                    
+                    myCommand.CommandType = CommandType.Text;
+                    myCommand.Parameters.AddWithValue("@Permission", "Public");
+                    myCommand.Parameters.AddWithValue("@email", FriendsEmail[i]);
+                    myCommand.Parameters.AddWithValue("@posted", 1);
+                    SqlDataAdapter da = new SqlDataAdapter(myCommand);
+                    da.Fill(dt);
+                }
                 foreach (DataRow row in dt.Rows)
                 {
                     encrypted_post = row[4].ToString();
