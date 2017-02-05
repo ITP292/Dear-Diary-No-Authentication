@@ -34,16 +34,16 @@ namespace Dear_Diary.Profile
         public DataTable GetPostDetails(int IsPosted, string loginEmail)
         {
             String FriendEmail = "";
-
+            String status = "Accepted";
             using (SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                String query1 = "SELECT * FROM [Friendship] Where [User1_Email] = @email";
-
+                //String query1 = "SELECT * FROM [Friendship] Where [User1_Email] = @email AND [Status] = @status";
+                String query1 = "SELECT * FROM[Friendship] Where[User1_Email] = @email";
                 SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
                 myConnection1.Open();
                 myCommand1.CommandType = CommandType.Text;
                 myCommand1.Parameters.AddWithValue("@email", loginEmail);
-
+                myCommand1.Parameters.AddWithValue("@status", status);
                 SqlDataReader reader = myCommand1.ExecuteReader();
 
                 if (reader.Read())
@@ -58,8 +58,9 @@ namespace Dear_Diary.Profile
                 String encrypted_post;
                 String plain_post;
                 DataTable dt = new DataTable();
+                //String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = @posted AND Permission_Status = @Permission";
                 String query = "SELECT * FROM [Post] WHERE [IsPostEntry] = @posted AND [Author_Email] = @email AND Permission_Status = @Permission";
-
+                // AND [Author_Email] = @email
                 SqlCommand myCommand = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 myCommand.CommandType = CommandType.Text;
