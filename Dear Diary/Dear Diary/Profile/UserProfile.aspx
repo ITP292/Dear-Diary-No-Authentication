@@ -41,37 +41,13 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:ImageButton ID="noOfFriends" runat="server" CssClass="auto-style1" ImageUrl="~/Pictures/Style/friendicon.png" OnClick="noOfFriends_Click" />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Pictures/Style/Message_chat_text_bubble_phone.png" OnClick="ImageButton1_Click" />
+    <asp:ImageButton ID="newsFeed" runat="server" ImageUrl="~/Pictures/Style/Message_chat_text_bubble_phone.png" OnClick="newsFeed_Click" />
     <br />
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="lblPosts" runat="server" Text="Posts so far: "></asp:Label>
+    <asp:Label ID="lblPostsCount" runat="server" Text="Label"></asp:Label>
     <br />
-
-    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1" OnItemCommand="Repeater1_ItemCommand"></asp:Repeater>
-    <itemtemplate>
-                           <a class="draft-post-link" href="/NewEntry/PostDetails.aspx?Post_Id=<%# Eval("Post_Id") %>">
-                        <div class="main_dtaft">
-                            <div class="img_draft left">
-                                <asp:Image ImageUrl='<%# Eval("Picture") %>' ID="img" runat="server" />
-                            </div>
-                            <div class="draft-content right">
-                                <p>
-                                    <asp:Label ID="lblpostEntrytext" runat="server" Text='<%# Eval("Post_Text") %>' />
-                                </p>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </a>
-        <div class="post-footer">
-                        Posted on :
-                        <asp:Label ID="lblPostEntryOn" runat="server" Text='<%# Eval("Date_Added","{0:dd MMM yyyy}") %>' />
-                        <asp:LinkButton CssClass="draft-post-delete" CommandName="Delete" CommandArgument='<%# Eval("Post_Id") %>' Text="Delete Post" ID="lnkPostDelete" runat="server" />
-                    </div>
-    </itemtemplate>
-
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:localdbConnectionString1 %>" SelectCommand="SELECT [Permission_Status], [Date_Added], [Post_Text], [Picture] FROM [Post] WHERE ([Permission_Status] = @Permission_Status)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="public" Name="Permission_Status" Type="String" />
-        </SelectParameters>
-    </asp:SqlDataSource>
+    <asp:Label ID="lblFriends" runat="server" Text="Friends since joined: "></asp:Label>
+    <asp:Label ID="lblFriendsCount" runat="server" Text="Label"></asp:Label>
+    <br />
 
 </asp:Content>
