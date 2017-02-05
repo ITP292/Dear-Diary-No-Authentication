@@ -10,7 +10,9 @@ using System.Data.SqlClient;
 using System.Data;
 
 // Author: Aidil Irfan (153297Z)
-// Constraints: Notifications are not ordered in order of date and time. This is due to the method used to perform the function [Polling].
+// Constraints: 
+// (1) Notifications are not ordered in order of date and time. This is due to the method used to perform the function [Polling].
+// (2) Cannot delete notifications.
 namespace Dear_Diary
 {
     public partial class Notification : System.Web.UI.Page
