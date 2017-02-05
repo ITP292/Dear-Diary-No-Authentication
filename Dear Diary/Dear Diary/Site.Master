@@ -90,6 +90,9 @@
                                         <img src="/Content/img/note.PNG" alt="Add New Entry" title="Add New Entry" /></a></li>
                                     <li><a href="/Profile/ProfileSettings.aspx" title="setting">
                                         <img src="/Content/img/setting.png" alt="setting" title="setting" /></a></li>
+                                    <li><a href="/Default.aspx" title="Logout" alt="Logout" />
+                                        <img src="/Content/img/logout-small.png" alt="Logout" title="Logout" />
+                                    </li>
                                 </ul>
                             </div>
                             </div>

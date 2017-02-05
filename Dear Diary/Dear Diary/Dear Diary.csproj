@@ -170,6 +170,8 @@
     <Content Include="Content\img\line-draft.png" />
     <Content Include="Content\img\line.PNG" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logout-small.png" />
+    <Content Include="Content\img\logout.png" />
     <Content Include="Content\img\mian_back.png" />
     <Content Include="Content\img\note.PNG" />
     <Content Include="Content\img\notify.PNG" />
