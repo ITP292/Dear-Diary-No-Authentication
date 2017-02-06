@@ -86,7 +86,7 @@ namespace Dear_Diary.Account
         protected void Button2_Click(object sender, EventArgs e)
         {
             Label5.Text = "A new code has been sent. Please check your phone.";
-            //Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
+            Dear_Diary.ServiceReference1.SMSSoapClient sms = new SMSSoapClient();
             SqlConnection myConnection;
             using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
