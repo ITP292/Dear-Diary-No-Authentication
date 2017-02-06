@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="error.aspx.cs" Inherits="Dear_Diary.Friends.error" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Ooops!</h2>
+    <h2>Oops!</h2>
 
     <div class="row">
         <div class="col-md-8">

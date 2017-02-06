@@ -42,16 +42,22 @@ namespace Dear_Diary.Friends
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
-                if (reader.Read())
+                if (reader.HasRows)
                 {
-                    dbEmail = reader["Email_Address"].ToString();
-                    dbFName = reader["FName"].ToString();
-                    dbLName = reader["LName"].ToString();
-                    dbProfilePic = reader["displayPic"].ToString();
-                    Name = dbFName + " " + dbLName;
+                    if (reader.Read())
+                    {
+                        dbEmail = reader["Email_Address"].ToString();
+                        dbFName = reader["FName"].ToString();
+                        dbLName = reader["LName"].ToString();
+                        dbProfilePic = reader["displayPic"].ToString();
+                        Name = dbFName + " " + dbLName;
+                    }
+                    Response.Redirect("addFriendRedir");
                 }
-
-                Response.Redirect("addFriendRedir");
+                else
+                {
+                    Response.Redirect("usererror.aspx");
+                }
             }
         }
     }

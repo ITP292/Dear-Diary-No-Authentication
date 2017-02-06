@@ -195,6 +195,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Friends\error.aspx" />
+    <Content Include="Friends\usererror.aspx" />
     <Content Include="Friends\viewFriendRedir.aspx" />
     <Content Include="NewEntry\MainPage.aspx" />
     <Content Include="NewEntry\NewEntry.aspx" />
@@ -427,6 +428,13 @@
     </Compile>
     <Compile Include="Friends\requestFriend.aspx.designer.cs">
       <DependentUpon>requestFriend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends\usererror.aspx.cs">
+      <DependentUpon>usererror.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends\usererror.aspx.designer.cs">
+      <DependentUpon>usererror.aspx</DependentUpon>
     </Compile>
     <Compile Include="Friends\viewFriend.aspx.cs">
       <DependentUpon>viewFriend.aspx</DependentUpon>
