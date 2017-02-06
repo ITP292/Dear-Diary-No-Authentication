@@ -125,7 +125,7 @@ namespace Dear_Diary
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     User1_Email = reader["User1_Email"].ToString();
                     fList.Add(User1_Email);
@@ -155,7 +155,7 @@ namespace Dear_Diary
 
                     SqlDataReader reader = myCommand1.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         postID = reader["Post_ID"].ToString();
                         author = reader["Author_Email"].ToString();
@@ -186,7 +186,7 @@ namespace Dear_Diary
 
                     SqlDataReader reader = myCommand2.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         postID = reader["Post_Id"].ToString();
                         author_email = reader["Author_Email"].ToString();
@@ -215,7 +215,7 @@ namespace Dear_Diary
 
                 SqlDataReader reader = myCommand3.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     User2_Email = reader["User2_Email"].ToString();
                     fList.Add(User2_Email);
@@ -241,7 +241,7 @@ namespace Dear_Diary
 
                 SqlDataReader reader = myCommand4.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     postID = (int) reader["Post_Id"];
                     pList.Add(postID);

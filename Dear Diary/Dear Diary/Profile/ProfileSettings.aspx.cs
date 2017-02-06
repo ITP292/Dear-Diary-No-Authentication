@@ -110,87 +110,91 @@ namespace Dear_Diary.Profile
         {
             using (SqlConnection myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                
-                    String newFName = editFName.Text;
-                    String newLName = editLName.Text;
 
-                    myConnection.Open();
-                    // update user data based on text typed in textbox
-                    string query3 = "UPDATE [User] SET [FName]=@FName, [LName]=@LName WHERE [Email_Address]=@email";
-                    SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
+                String newFName = editFName.Text;
+                String newLName = editLName.Text;
+
+                myConnection.Open();
+                // update user data based on text typed in textbox
+                string query3 = "UPDATE [User] SET [FName]=@FName, [LName]=@LName WHERE [Email_Address]=@email";
+                SqlCommand myCommand3 = new SqlCommand(query3, myConnection);
 
 
 
-                    myCommand3.Parameters.AddWithValue("@FName", newFName);
-                    myCommand3.Parameters.AddWithValue("@LName", newLName);
-                    myCommand3.Parameters.AddWithValue("@email", Session["email"].ToString());
-                    myCommand3.ExecuteNonQuery();
+                myCommand3.Parameters.AddWithValue("@FName", newFName);
+                myCommand3.Parameters.AddWithValue("@LName", newLName);
+                myCommand3.Parameters.AddWithValue("@email", Session["email"].ToString());
+                myCommand3.ExecuteNonQuery();
 
-                    myConnection.Close();
-                    //PASSWORD RESET
-                    //Byte[] salt = new byte[8];
+                myConnection.Close();
+                //PASSWORD RESET
+                //Byte[] salt = new byte[8];
 
-                    string inputpassword = txtPassword.Text;
+                string inputpassword = txtPassword.Text;
 
-                    myConnection.Open();
-                    string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
-                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
-                    myCommand1.Parameters.AddWithValue("@Email", Session["email"].ToString());
+                myConnection.Open();
+                string query1 = "SELECT * FROM [dbo].[User] WHERE Email_Address = @Email";
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection);
+                myCommand1.Parameters.AddWithValue("@Email", Session["email"].ToString());
 
-                    SqlDataReader reader1 = myCommand1.ExecuteReader();
+                SqlDataReader reader1 = myCommand1.ExecuteReader();
 
-                    string dbPassword = "";
-                    string dbSalt = "";
+                string dbPassword = "";
+                string dbSalt = "";
 
-                    if (reader1.Read())
+                if (reader1.Read())
+                {
+                    dbPassword = reader1["Password"].ToString();
+                    dbSalt = reader1["salt"].ToString();
+                }
+
+                myConnection.Close();
+                string hashpassword = ComputeHash(inputpassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
+
+                //Checking if the new password is the same as the old password
+
+                //if (txtPassword == null && txtCfmPassword == null)
+                //{
+                //    Label5.Visible = false;
+                //}
+                //if (dbPassword.Equals(inputpassword))
+                if (dbPassword.Equals(hashpassword))
+                {
+                    Label5.Text = "You cannot use the same password again. Please change your password.";
+                }
+
+                //if hashresult == false, then means the new password is different from the old password, hence can change password
+                else if (!dbPassword.Equals(hashpassword))
+                {
+
+                    bool result = IsValid(inputpassword);
+                    Label5.Text = "";
+
+                    if (result == false)
                     {
-                        dbPassword = reader1["Password"].ToString();
-                        dbSalt = reader1["salt"].ToString();
+                        Label5.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+                        //Label5.Text = "";
                     }
-
-                    myConnection.Close();
-                    string hashpassword = ComputeHash(inputpassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
-
-                    //Checking if the new password is the same as the old password
-
-
-                    //if (dbPassword.Equals(inputpassword))
-                    if (dbPassword.Equals(hashpassword))
+                    
+                    else
                     {
-                        Label5.Text = "You cannot use the same password again. Please change your password.";
-                    }
-
-                    //if hashresult == false, then means the new password is different from the old password, hence can change password
-                    else if (!dbPassword.Equals(hashpassword))
-                    {
-
-                        bool result = IsValid(inputpassword);
                         Label5.Text = "";
+                        //Byte[] salt = new byte[8];
+                        //string pwdHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
+                        /*string email = "limruoqijoanne54@gmail.com";*/ //test only - actual is when clicked on link, application should know which EMAIL it is from. 
+                                                                         //ASK: i don't know how to do link 
 
-                        if (result == false)
-                        {
-                            Label5.Text = "Weak Password. Your password should be at least 8 characters in length: 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
-                            //Label5.Text = "";
-                        }
-                        else
-                        {
-                            Label5.Text = "";
-                            //Byte[] salt = new byte[8];
-                            //string pwdHash = SimpleHash.ComputeHash(inputpassword, "SHA512", salt);
-                            /*string email = "limruoqijoanne54@gmail.com";*/ //test only - actual is when clicked on link, application should know which EMAIL it is from. 
-                                                                             //ASK: i don't know how to do link 
+                        myConnection.Open();
 
-                            myConnection.Open();
+                        string query = "UPDATE [dbo].[User] SET Password=@Password WHERE Email_Address ='" + Session["email"].ToString() + "'";
+                        SqlCommand myCommand = new SqlCommand(query, myConnection);
 
-                            string query = "UPDATE [dbo].[User] SET Password=@Password WHERE Email_Address ='" + Session["email"].ToString() + "'";
-                            SqlCommand myCommand = new SqlCommand(query, myConnection);
+                        myCommand.Parameters.AddWithValue("@Password", hashpassword);
 
-                            myCommand.Parameters.AddWithValue("@Password", hashpassword);
+                        myCommand.ExecuteNonQuery();
+                        myConnection.Close();
 
-                            myCommand.ExecuteNonQuery();
-                            myConnection.Close();
-
-                        }
+                    }
                     }
             }
         }

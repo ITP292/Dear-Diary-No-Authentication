@@ -8,7 +8,7 @@
             </div>
 
             <%-- this is for display list of post entry, this is repeater control for repeat post entry details --%>
-            <asp:Repeater ID="rptPostEntryList" runat="server" OnItemCommand="rptPostEntryList_ItemCommand">
+            <asp:Repeater ID="rptPostEntryList" runat="server">
                 <ItemTemplate>
                     <a class="draft-post-link" href="PostDetails.aspx?Post_Id=<%# Eval("Post_Id") %>">
                         <div class="main_dtaft">
@@ -26,7 +26,6 @@
                     <div class="post-footer">
                         Posted on :
                         <asp:Label ID="lblPostEntryOn" runat="server" Text='<%# Eval("Date_Added","{0:dd MMM yyyy}") %>' />
-                        <asp:LinkButton CssClass="draft-post-delete" CommandName="Delete" CommandArgument='<%# Eval("Post_Id") %>' Text="Delete Post" ID="lnkPostDelete" runat="server" />
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

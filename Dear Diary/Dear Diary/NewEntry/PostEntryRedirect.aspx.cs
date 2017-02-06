@@ -16,6 +16,7 @@ namespace Dear_Diary.NewEntry
         {
             rptPostEntryList.DataSource = getPostRedir();
             rptPostEntryList.DataBind();
+            updateSeen();
         }
         protected DataTable getPostRedir()
         {
@@ -44,38 +45,21 @@ namespace Dear_Diary.NewEntry
                 return dt;
             }
         }
-        protected void rptPostEntryList_ItemCommand(object source, RepeaterCommandEventArgs e)
+
+        protected void updateSeen()
         {
-            if (e.CommandName == "Delete")
+            using(SqlConnection myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
             {
-                var id = e.CommandArgument.ToString();
-                string query = "Delete FROM [Comment] WHERE [Post_Id] = " + id;
-                var loginEmail = Session["email"] != null ? Session["email"].ToString() : "test123@gmail.com";
+                String q = Request.QueryString["Post_Id"];
+                String query1 = "UPDATE Post SET Seen = @seen WHERE Post_Id = @post_id";
 
-                SqlConnection myConnection;
-                using (myConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-                {
-                    SqlCommand myCommand = new SqlCommand(query, myConnection);
-                    myConnection.Open();
-                    myCommand.CommandType = CommandType.Text;
-                    myCommand.ExecuteNonQuery();
-                }
+                SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
+                myConnection1.Open();
+                myCommand1.CommandType = CommandType.Text;
+                myCommand1.Parameters.AddWithValue("@post_id", q);
+                myCommand1.Parameters.AddWithValue("@seen", "true");
 
-                string query1 = "Delete FROM [Post] WHERE [Post_Id] = " + id;
-
-                SqlConnection myConnection1;
-                using (myConnection1 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localdbConnectionString1"].ConnectionString))
-                {
-                    SqlCommand myCommand1 = new SqlCommand(query1, myConnection1);
-                    myConnection1.Open();
-                    myCommand1.CommandType = CommandType.Text;
-                    myCommand1.ExecuteNonQuery();
-                }
-
-                rptPostEntryList.DataSource = getPostRedir();
-                rptPostEntryList.DataBind();
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Post Entry deleted successfully.');", true);
+                myCommand1.ExecuteNonQuery();
             }
         }
     }
